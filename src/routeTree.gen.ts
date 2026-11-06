@@ -10,33 +10,180 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ComoTrabajamosRouteImport } from './routes/como-trabajamos'
+import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as ParaComprasYPmRouteImport } from './routes/para-compras-y-pm'
+import { Route as ParaDisenadoresRouteImport } from './routes/para-disenadores'
+import { Route as ServiciosFfeRouteImport } from './routes/servicios-ffe'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SobreEfilogicRouteImport } from './routes/sobre-efilogic'
+import { Route as ProyectosIndexRouteImport } from './routes/proyectos.index'
+import { Route as ProyectosSlugRouteImport } from './routes/proyectos.$slug'
+import { Route as RecursosIndexRouteImport } from './routes/recursos.index'
+import { Route as RecursosSlugRouteImport } from './routes/recursos.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComoTrabajamosRoute = ComoTrabajamosRouteImport.update({
+  id: '/como-trabajamos',
+  path: '/como-trabajamos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParaComprasYPmRoute = ParaComprasYPmRouteImport.update({
+  id: '/para-compras-y-pm',
+  path: '/para-compras-y-pm',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParaDisenadoresRoute = ParaDisenadoresRouteImport.update({
+  id: '/para-disenadores',
+  path: '/para-disenadores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiciosFfeRoute = ServiciosFfeRouteImport.update({
+  id: '/servicios-ffe',
+  path: '/servicios-ffe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreEfilogicRoute = SobreEfilogicRouteImport.update({
+  id: '/sobre-efilogic',
+  path: '/sobre-efilogic',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProyectosIndexRoute = ProyectosIndexRouteImport.update({
+  id: '/proyectos/',
+  path: '/proyectos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProyectosSlugRoute = ProyectosSlugRouteImport.update({
+  id: '/proyectos/$slug',
+  path: '/proyectos/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecursosIndexRoute = RecursosIndexRouteImport.update({
+  id: '/recursos/',
+  path: '/recursos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecursosSlugRoute = RecursosSlugRouteImport.update({
+  id: '/recursos/$slug',
+  path: '/recursos/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/como-trabajamos': typeof ComoTrabajamosRoute
+  '/contacto': typeof ContactoRoute
+  '/para-compras-y-pm': typeof ParaComprasYPmRoute
+  '/para-disenadores': typeof ParaDisenadoresRoute
+  '/servicios-ffe': typeof ServiciosFfeRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sobre-efilogic': typeof SobreEfilogicRoute
+  '/proyectos/$slug': typeof ProyectosSlugRoute
+  '/recursos/$slug': typeof RecursosSlugRoute
+  '/proyectos/': typeof ProyectosIndexRoute
+  '/recursos/': typeof RecursosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/como-trabajamos': typeof ComoTrabajamosRoute
+  '/contacto': typeof ContactoRoute
+  '/para-compras-y-pm': typeof ParaComprasYPmRoute
+  '/para-disenadores': typeof ParaDisenadoresRoute
+  '/servicios-ffe': typeof ServiciosFfeRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sobre-efilogic': typeof SobreEfilogicRoute
+  '/proyectos/$slug': typeof ProyectosSlugRoute
+  '/recursos/$slug': typeof RecursosSlugRoute
+  '/proyectos': typeof ProyectosIndexRoute
+  '/recursos': typeof RecursosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/como-trabajamos': typeof ComoTrabajamosRoute
+  '/contacto': typeof ContactoRoute
+  '/para-compras-y-pm': typeof ParaComprasYPmRoute
+  '/para-disenadores': typeof ParaDisenadoresRoute
+  '/servicios-ffe': typeof ServiciosFfeRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sobre-efilogic': typeof SobreEfilogicRoute
+  '/proyectos/$slug': typeof ProyectosSlugRoute
+  '/recursos/$slug': typeof RecursosSlugRoute
+  '/proyectos/': typeof ProyectosIndexRoute
+  '/recursos/': typeof RecursosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/como-trabajamos'
+    | '/contacto'
+    | '/para-compras-y-pm'
+    | '/para-disenadores'
+    | '/servicios-ffe'
+    | '/sitemap.xml'
+    | '/sobre-efilogic'
+    | '/proyectos/$slug'
+    | '/recursos/$slug'
+    | '/proyectos/'
+    | '/recursos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/como-trabajamos'
+    | '/contacto'
+    | '/para-compras-y-pm'
+    | '/para-disenadores'
+    | '/servicios-ffe'
+    | '/sitemap.xml'
+    | '/sobre-efilogic'
+    | '/proyectos/$slug'
+    | '/recursos/$slug'
+    | '/proyectos'
+    | '/recursos'
+  id:
+    | '__root__'
+    | '/'
+    | '/como-trabajamos'
+    | '/contacto'
+    | '/para-compras-y-pm'
+    | '/para-disenadores'
+    | '/servicios-ffe'
+    | '/sitemap.xml'
+    | '/sobre-efilogic'
+    | '/proyectos/$slug'
+    | '/recursos/$slug'
+    | '/proyectos/'
+    | '/recursos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ComoTrabajamosRoute: typeof ComoTrabajamosRoute
+  ContactoRoute: typeof ContactoRoute
+  ParaComprasYPmRoute: typeof ParaComprasYPmRoute
+  ParaDisenadoresRoute: typeof ParaDisenadoresRoute
+  ServiciosFfeRoute: typeof ServiciosFfeRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SobreEfilogicRoute: typeof SobreEfilogicRoute
+  ProyectosSlugRoute: typeof ProyectosSlugRoute
+  RecursosSlugRoute: typeof RecursosSlugRoute
+  ProyectosIndexRoute: typeof ProyectosIndexRoute
+  RecursosIndexRoute: typeof RecursosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +195,99 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/como-trabajamos': {
+      id: '/como-trabajamos'
+      path: '/como-trabajamos'
+      fullPath: '/como-trabajamos'
+      preLoaderRoute: typeof ComoTrabajamosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/para-compras-y-pm': {
+      id: '/para-compras-y-pm'
+      path: '/para-compras-y-pm'
+      fullPath: '/para-compras-y-pm'
+      preLoaderRoute: typeof ParaComprasYPmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/para-disenadores': {
+      id: '/para-disenadores'
+      path: '/para-disenadores'
+      fullPath: '/para-disenadores'
+      preLoaderRoute: typeof ParaDisenadoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicios-ffe': {
+      id: '/servicios-ffe'
+      path: '/servicios-ffe'
+      fullPath: '/servicios-ffe'
+      preLoaderRoute: typeof ServiciosFfeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre-efilogic': {
+      id: '/sobre-efilogic'
+      path: '/sobre-efilogic'
+      fullPath: '/sobre-efilogic'
+      preLoaderRoute: typeof SobreEfilogicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/proyectos/': {
+      id: '/proyectos/'
+      path: '/proyectos'
+      fullPath: '/proyectos/'
+      preLoaderRoute: typeof ProyectosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/proyectos/$slug': {
+      id: '/proyectos/$slug'
+      path: '/proyectos/$slug'
+      fullPath: '/proyectos/$slug'
+      preLoaderRoute: typeof ProyectosSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recursos/': {
+      id: '/recursos/'
+      path: '/recursos'
+      fullPath: '/recursos/'
+      preLoaderRoute: typeof RecursosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recursos/$slug': {
+      id: '/recursos/$slug'
+      path: '/recursos/$slug'
+      fullPath: '/recursos/$slug'
+      preLoaderRoute: typeof RecursosSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ComoTrabajamosRoute: ComoTrabajamosRoute,
+  ContactoRoute: ContactoRoute,
+  ParaComprasYPmRoute: ParaComprasYPmRoute,
+  ParaDisenadoresRoute: ParaDisenadoresRoute,
+  ServiciosFfeRoute: ServiciosFfeRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SobreEfilogicRoute: SobreEfilogicRoute,
+  ProyectosSlugRoute: ProyectosSlugRoute,
+  RecursosSlugRoute: RecursosSlugRoute,
+  ProyectosIndexRoute: ProyectosIndexRoute,
+  RecursosIndexRoute: RecursosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
