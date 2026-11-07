@@ -15,6 +15,44 @@ export const NAV = [
   { to: "/recursos", label: "Recursos" },
 ] as const;
 
+type MenuItem = { label: string; to: string; children?: { label: string; to: string }[] };
+
+export const MENU: MenuItem[] = [
+  {
+    label: "Soluciones",
+    to: "/servicios-ffe",
+    children: [
+      { label: "Servicios FF&E", to: "/servicios-ffe" },
+      { label: "Cómo trabajamos", to: "/como-trabajamos" },
+      { label: "Para diseñadores", to: "/para-disenadores" },
+      { label: "Para compras y PM", to: "/para-compras-y-pm" },
+    ],
+  },
+  { label: "Proyectos", to: "/proyectos" },
+  {
+    label: "Nosotros",
+    to: "/sobre-efilogic",
+    children: [
+      { label: "Sobre Efilogic", to: "/sobre-efilogic" },
+      { label: "Recursos", to: "/recursos" },
+    ],
+  },
+  { label: "Contacto", to: "/contacto" },
+];
+
+export const SEARCH_PAGES = [
+  ...NAV.map((n) => ({ label: n.label, to: n.to as string })),
+  { label: "Contacto", to: "/contacto" },
+];
+
+// Sustituir "#" por las URLs reales de cada red.
+export const SOCIALS = [
+  { key: "linkedin", label: "LinkedIn", href: "#" },
+  { key: "instagram", label: "Instagram", href: "#" },
+  { key: "facebook", label: "Facebook", href: "#" },
+  { key: "youtube", label: "YouTube", href: "#" },
+] as const;
+
 export const PILLARS = [
   {
     title: "Custodia del diseño",
