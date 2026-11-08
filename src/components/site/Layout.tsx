@@ -2,7 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { ChevronDown, Facebook, Instagram, Linkedin, Menu, Search, X, Youtube } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
-import { ENTITY, MENU, SOCIALS, SEARCH_PAGES } from "@/content/site";
+import { MENU, SOCIALS, SEARCH_PAGES } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 const SOCIAL_ICONS = { linkedin: Linkedin, instagram: Instagram, facebook: Facebook, youtube: Youtube } as const;
@@ -37,18 +37,18 @@ export function Header() {
         transparent ? "bg-transparent text-blanco" : "border-b border-line bg-blanco text-grafito",
       )}
     >
-      <div className="wrap flex h-24 items-center justify-between gap-6">
-        <Link to="/" aria-label="Efilogic, inicio" className="py-4">
-          <Logo variant={transparent ? "white" : "graphite"} className="h-10 md:h-12" />
+      <div className="wrap flex h-[72px] items-center justify-between gap-4">
+        <Link to="/" aria-label="Efilogic, inicio" className="py-2">
+          <Logo variant={transparent ? "white" : "graphite"} className="h-8 md:h-9" />
         </Link>
 
         <nav aria-label="Principal" className="hidden lg:block">
-          <ul className="flex items-center gap-10">
+            <ul className="flex items-center gap-8">
             {MENU.map((m) => (
               <li key={m.label} className="group relative">
                 <Link
                   to={m.to}
-                  className="flex items-center gap-1.5 py-8 text-[14px] font-semibold uppercase tracking-[0.06em]"
+                  className="flex items-center gap-1.5 py-6 text-[13px] font-semibold uppercase"
                   activeProps={{ className: "underline decoration-ambar decoration-2 underline-offset-8" }}
                   activeOptions={{ exact: m.to === "/" }}
                 >
@@ -151,14 +151,14 @@ export function Footer() {
         <div className="grid gap-14 md:grid-cols-12">
           <div className="md:col-span-5">
             <Logo variant="white" className="h-10 md:h-12" />
-            <p className="mt-8 max-w-md text-[15px] leading-relaxed">{ENTITY}</p>
+            <p className="mt-8 max-w-sm text-[15px] leading-relaxed">FF&E y equipamiento contract para proyectos hoteleros.</p>
           </div>
           <nav aria-label="Pie de página" className="grid grid-cols-2 gap-10 md:col-span-5 md:col-start-7">
             {MENU.filter((m) => m.children).map((m) => (
               <div key={m.label}>
                 <p className="t-eyebrow mb-5">{m.label}</p>
                 <ul className="space-y-3 text-[15px]">
-                  {m.children!.map((c) => (
+                  {m.children?.map((c) => (
                     <li key={c.to}><Link to={c.to} className="hover:underline hover:decoration-ambar hover:underline-offset-4">{c.label}</Link></li>
                   ))}
                 </ul>
@@ -173,7 +173,7 @@ export function Footer() {
               const Icon = SOCIAL_ICONS[s.key];
               return (
                 <li key={s.key}>
-                  <a href={s.href} aria-label={s.label} target="_blank" rel="noopener noreferrer" className="flex h-11 w-11 items-center justify-center border border-line-inverse transition-colors duration-300 hover:border-blanco">
+                  <a href={s.href} aria-label={s.label} target="_blank" rel="noopener noreferrer" className="flex h-11 w-11 items-center justify-center transition-colors duration-300 hover:text-ambar">
                     <Icon strokeWidth={1.5} className="h-5 w-5" />
                   </a>
                 </li>

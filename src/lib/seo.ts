@@ -40,6 +40,7 @@ export function seo({
       { property: "og:url", content: path },
       { name: "twitter:title", content: title },
       { name: "twitter:description", content: description },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: path }],
     scripts: scripts.map((s) => ({ type: "application/ld+json", children: JSON.stringify(s) })),

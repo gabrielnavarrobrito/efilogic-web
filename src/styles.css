@@ -57,6 +57,7 @@
   --line: rgba(27, 31, 41, 0.12);
   --line-strong: rgba(27, 31, 41, 0.15);
   --line-inverse: rgba(255, 255, 255, 0.18);
+  --hero-shade: linear-gradient(90deg, color-mix(in srgb, var(--grafito) 70%, transparent), color-mix(in srgb, var(--grafito) 12%, transparent));
 
   --background: var(--blanco);
   --foreground: var(--grafito);
@@ -117,44 +118,57 @@
 /* Typography */
 @utility t-h1 {
   font-weight: 600;
-  font-size: clamp(2.5rem, 1.6rem + 3.4vw, 4.5rem);
+  font-size: 2.5rem;
   line-height: 1.1;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 @utility t-h2 {
   font-weight: 600;
-  font-size: clamp(1.9rem, 1.5rem + 1.4vw, 2.75rem);
+  font-size: 1.9rem;
   line-height: 1.2;
 }
 @utility t-h3 {
   font-weight: 500;
-  font-size: clamp(1.35rem, 1.2rem + 0.5vw, 1.75rem);
+  font-size: 1.35rem;
   line-height: 1.3;
 }
 @utility t-eyebrow {
   font-weight: 600;
   font-size: 12.5px;
   line-height: 1.4;
-  letter-spacing: 0.12em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 @utility t-lead {
   font-weight: 300;
-  font-size: clamp(1.2rem, 1.1rem + 0.3vw, 1.375rem);
+  font-size: 1.2rem;
   line-height: 1.6;
 }
 @utility t-quote {
   font-weight: 300;
-  font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.25rem);
+  font-size: 1.6rem;
   line-height: 1.35;
 }
 @utility t-figure {
   font-weight: 300;
-  font-size: clamp(3rem, 2rem + 3vw, 5rem);
+  font-size: 3rem;
   line-height: 1;
 }
 @utility measure {
   max-width: 68ch;
+}
+
+@media (min-width: 768px) {
+  .t-h1 { font-size: 3.75rem; }
+  .t-h2 { font-size: 2.75rem; }
+  .t-h3 { font-size: 1.75rem; }
+  .t-figure { font-size: 4rem; }
+}
+
+.home-hero { height: min(640px, 82svh); min-height: 500px; }
+.hero-shade { background: var(--hero-shade); }
+@media (max-width: 767px) {
+  .home-hero { height: min(600px, 85svh); min-height: 480px; }
 }
 
 /* Layout */
