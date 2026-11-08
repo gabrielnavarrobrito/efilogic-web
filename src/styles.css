@@ -57,7 +57,7 @@
   --line: rgba(27, 31, 41, 0.12);
   --line-strong: rgba(27, 31, 41, 0.15);
   --line-inverse: rgba(255, 255, 255, 0.18);
-  --hero-shade: linear-gradient(90deg, color-mix(in srgb, var(--grafito) 70%, transparent), color-mix(in srgb, var(--grafito) 12%, transparent));
+  --hero-shade: linear-gradient(180deg, color-mix(in srgb, var(--grafito) 38%, transparent), color-mix(in srgb, var(--grafito) 18%, transparent) 45%, color-mix(in srgb, var(--grafito) 76%, transparent));
 
   --background: var(--blanco);
   --foreground: var(--grafito);

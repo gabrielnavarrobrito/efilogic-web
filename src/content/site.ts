@@ -5,6 +5,21 @@ export const ENTITY =
 
 export const CTA_LABEL = "Hablemos de tu proyecto";
 
+export const HOME_INTRO = {
+  title: "Líderes en proyectos contract",
+  paragraphs: [
+    "Durante más de 25 años, Efilogic ha acompañado a profesionales de la hostelería y el diseño para dar forma a espacios únicos.",
+    "Hoy, reunimos experiencia, creatividad y una visión multidisciplinar para desarrollar soluciones contract a medida. Del mobiliario a la instalación, conectamos cada especialidad para hacer realidad tu proyecto.",
+  ],
+};
+
+export const HOME_SOLUTIONS = [
+  { title: "Mobiliario contract", anchor: "suministro-ffe" },
+  { title: "Logística internacional", anchor: "consolidacion-y-custodia" },
+  { title: "FF&E y equipamiento integral", anchor: "suministro-ffe" },
+  { title: "Equipamiento hotelero", anchor: "instalacion-mobiliario-hotelero" },
+] as const;
+
 export const NAV = [
   { to: "/servicios-ffe", label: "Servicios FF&E" },
   { to: "/como-trabajamos", label: "Cómo trabajamos" },
