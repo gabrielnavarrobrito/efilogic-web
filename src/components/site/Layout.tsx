@@ -46,9 +46,15 @@ export function Header() {
             <ul className="flex items-center gap-8">
             {MENU.map((m) => (
               <li key={m.label} className="group relative">
+                {m.label === "Contacto" ? (
+                  <Link to={m.to} className="ml-2 inline-flex items-center bg-ambar px-6 py-3 text-[14px] font-semibold text-grafito transition-colors duration-300 hover:bg-grafito hover:text-blanco">
+                    {m.label}
+                  </Link>
+                ) : (
+                <>
                 <Link
                   to={m.to}
-                  className="flex items-center gap-1.5 py-6 text-[13px] font-semibold uppercase"
+                  className="flex items-center gap-1.5 py-6 text-[14px] font-semibold capitalize"
                   activeProps={{ className: "underline decoration-ambar decoration-2 underline-offset-8" }}
                   activeOptions={{ exact: m.to === "/" }}
                 >
@@ -65,6 +71,8 @@ export function Header() {
                       </li>
                     ))}
                   </ul>
+                )}
+                </>
                 )}
               </li>
             ))}

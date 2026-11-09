@@ -7,3 +7,7 @@
 - [x] Pie: quitar sede y "Tu visión, instalada"; añadir iconos de redes
 - [x] Últimos ajustes: cabecera compacta, siete secciones con FAQ y contacto, redes sin cuadrados
 - [x] Portada: nuevo título y subtexto, presentación con dos fotos superpuestas y soluciones visuales según referencia
+- [x] Hero más alto, sin «Somos expertos…», título «Solución a medida para proyectos contract.»
+- [x] Soluciones más compacta; proyectos a ancho completo con nombre y flechas sobre la imagen
+- [x] Cómo trabajamos con imagen a la derecha; secciones más bajas
+- [x] Navegación en minúsculas (solo inicial mayúscula) y botón Contacto naranja en desktop

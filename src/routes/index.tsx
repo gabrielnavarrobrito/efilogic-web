@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
-import { ENTITY, FAQ, HOME_INTRO, HOME_SOLUTIONS } from "@/content/site";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import { useState } from "react";
+import { ENTITY, FAQ, HOME_INTRO, HOME_SOLUTIONS, PROJECTS } from "@/content/site";
 import { Eyebrow, Reveal, SectionHeader } from "@/components/site/primitives";
 import { ContactForm, FaqList } from "@/components/site/blocks";
 import { faqLd, seo } from "@/lib/seo";
@@ -24,11 +25,8 @@ function Home() {
         <img src={heroSuite} alt="Interior de una suite de hotel con mobiliario a medida" width={1376} height={768} fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover" />
         <div aria-hidden className="hero-shade absolute inset-0 -z-10" />
         <div className="wrap flex h-full flex-col justify-between gap-8 pb-12 pt-36 md:pb-14 md:pt-40">
-          <h1 className="max-w-[560px] text-[36px] font-semibold leading-[1.15] lg:text-[52px]">Solución contract a medida para proyectos.</h1>
-          <div className="max-w-[380px] self-end">
-            <p className="text-[21px] font-medium leading-snug lg:text-[25px]">Convertimos tus ideas en realidad, sin poner límites a la creatividad.</p>
-            <p className="mt-4 text-[15px] font-light leading-relaxed lg:text-[17px]">Somos expertos en crear entornos únicos.</p>
-          </div>
+          <h1 className="max-w-[560px] text-[36px] font-semibold leading-[1.15] lg:text-[52px]">Solución a medida para proyectos contract.</h1>
+          <p className="max-w-[380px] self-end text-[21px] font-medium leading-snug lg:text-[25px]">Convertimos tus ideas en realidad, sin poner límites a la creatividad.</p>
         </div>
       </section>
 
@@ -47,20 +45,20 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-blanco pb-20 md:pb-32" aria-labelledby="home-solutions">
-        <div className="wrap grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
-          <div className="relative isolate aspect-[4/5] overflow-hidden bg-grafito text-blanco">
+      <section className="bg-blanco pb-14 md:pb-20" aria-labelledby="home-solutions">
+        <div className="wrap grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
+          <div className="relative isolate aspect-[5/4] overflow-hidden bg-grafito text-blanco">
             <img src={hotelLobby} alt="Espacio hotelero con mobiliario contract" loading="lazy" width={1536} height={1024} className="absolute inset-0 -z-20 h-full w-full object-cover" />
             <div aria-hidden className="hero-shade absolute inset-0 -z-10" />
-            <h2 id="home-solutions" className="absolute bottom-10 left-6 right-6 text-center text-[28px] font-semibold leading-snug md:bottom-14 md:text-[34px]">Soluciones a medida<br />para cada proyecto</h2>
+            <h2 id="home-solutions" className="absolute bottom-8 left-6 right-6 text-center text-[24px] font-semibold leading-snug md:bottom-10 md:text-[28px]">Soluciones a medida<br />para cada proyecto</h2>
           </div>
-          <ol className="flex flex-col gap-8 md:gap-12">
+          <ol className="flex flex-col gap-6 md:gap-8">
             {HOME_SOLUTIONS.map((solution, i) => (
               <li key={solution.title} className="flex items-baseline gap-4 md:gap-5">
-                <span className="shrink-0 text-[24px] font-light md:text-[30px]">{i + 1}.</span>
-                <Link to="/servicios-ffe" hash={solution.anchor} className="group text-[24px] font-semibold leading-snug md:text-[30px]">
+                <span className="shrink-0 text-[20px] font-light md:text-[24px]">{i + 1}.</span>
+                <Link to="/servicios-ffe" hash={solution.anchor} className="group text-[20px] font-semibold leading-snug md:text-[24px]">
                   <span className="link-text">{solution.title}</span>{" "}
-                  <ArrowUpRight aria-hidden className="ml-2 inline h-7 w-7 text-ambar transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 md:h-9 md:w-9" strokeWidth={1.5} />
+                  <ArrowUpRight aria-hidden className="ml-2 inline h-6 w-6 text-ambar transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 md:h-7 md:w-7" strokeWidth={1.5} />
                 </Link>
               </li>
             ))}
@@ -68,25 +66,18 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-blanco pb-20 md:pb-32">
-        <div className="wrap">
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
-            <SectionHeader eyebrow="Proyectos" title="Espacios que cobran vida." />
-            <Link to="/proyectos" className="link-text inline-flex items-center gap-3 text-[14px] font-medium">Ver proyectos <ArrowUpRight aria-hidden className="h-5 w-5" /></Link>
-          </div>
-          <img src={hotelLobby} alt="Mobiliario e iluminación en un interior hotelero contemporáneo" loading="lazy" width={1536} height={1024} className="aspect-[4/3] w-full object-cover md:aspect-[16/8]" />
-        </div>
-      </section>
+      <ProjectsShowcase />
 
       <section className="section-y bg-grafito text-blanco">
-        <div className="wrap grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-7">
+        <div className="wrap grid items-center gap-10 md:grid-cols-12">
+          <div className="md:col-span-5">
             <Eyebrow>Cómo trabajamos</Eyebrow>
             <h2 className="t-h2 mt-6 max-w-xl">Tu apertura tiene fecha. Nuestro plan empieza en ella.</h2>
-          </div>
-          <div className="md:col-span-4 md:col-start-9 md:self-end">
-            <p className="max-w-sm text-[17px] font-light leading-relaxed">Compra, fabricación, consolidación e instalación. Un proceso conectado, de principio a fin.</p>
+            <p className="mt-6 max-w-sm text-[17px] font-light leading-relaxed">Compra, fabricación, consolidación e instalación. Un proceso conectado, de principio a fin.</p>
             <Link to="/como-trabajamos" className="link-text mt-8 inline-flex items-center gap-3 text-[14px] font-medium">Conocer el proceso <ArrowUpRight aria-hidden className="h-5 w-5" /></Link>
+          </div>
+          <div className="md:col-span-6 md:col-start-7">
+            <img src={heroSuite} alt="Suite de hotel terminada e instalada" loading="lazy" width={1376} height={768} className="aspect-[3/2] w-full object-cover" />
           </div>
         </div>
       </section>
@@ -109,5 +100,38 @@ function Home() {
         </div>
       </section>
     </>
+  );
+}
+
+const PROJECT_IMAGES = [hotelLobby, heroSuite, hotelLobby];
+
+function ProjectsShowcase() {
+  const [index, setIndex] = useState(0);
+  const project = PROJECTS[index]!;
+  const go = (step: number) => setIndex((i) => (i + step + PROJECTS.length) % PROJECTS.length);
+
+  return (
+    <section className="bg-blanco pb-14 md:pb-20" aria-label="Proyectos destacados">
+      <div className="wrap mb-8 flex flex-wrap items-end justify-between gap-6">
+        <SectionHeader eyebrow="Proyectos" title="Espacios que cobran vida." />
+        <Link to="/proyectos" className="link-text inline-flex items-center gap-3 text-[14px] font-medium">Ver proyectos <ArrowUpRight aria-hidden className="h-5 w-5" /></Link>
+      </div>
+      <div className="relative isolate aspect-[4/3] w-full overflow-hidden bg-grafito text-blanco md:aspect-[16/7]">
+        <img key={project.slug} src={PROJECT_IMAGES[index % PROJECT_IMAGES.length]} alt={`Proyecto ${project.name} en ${project.location}`} loading="lazy" width={1536} height={1024} className="absolute inset-0 -z-20 h-full w-full object-cover" />
+        <div aria-hidden className="hero-shade absolute inset-0 -z-10" />
+        <div className="absolute bottom-0 left-0 p-6 md:p-12">
+          <p className="t-eyebrow text-blanco/80">{project.location} · {project.year}</p>
+          <Link to="/proyectos/$slug" params={{ slug: project.slug }} className="mt-2 block text-[24px] font-semibold leading-snug md:text-[34px]">{project.name}</Link>
+        </div>
+        <div className="absolute bottom-6 right-6 flex gap-2 md:bottom-12 md:right-12">
+          <button type="button" onClick={() => go(-1)} aria-label="Proyecto anterior" className="flex h-12 w-12 cursor-pointer items-center justify-center border border-blanco/60 transition-colors duration-300 hover:bg-blanco hover:text-grafito">
+            <ArrowLeft strokeWidth={1.5} className="h-5 w-5" />
+          </button>
+          <button type="button" onClick={() => go(1)} aria-label="Proyecto siguiente" className="flex h-12 w-12 cursor-pointer items-center justify-center border border-blanco/60 transition-colors duration-300 hover:bg-blanco hover:text-grafito">
+            <ArrowRight strokeWidth={1.5} className="h-5 w-5" />
+          </button>
+        </div>
+      </div>
+    </section>
   );
 }

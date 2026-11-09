@@ -165,10 +165,10 @@
   .t-figure { font-size: 4rem; }
 }
 
-.home-hero { height: min(640px, 82svh); min-height: 500px; }
+.home-hero { height: min(780px, 90svh); min-height: 560px; }
 .hero-shade { background: var(--hero-shade); }
 @media (max-width: 767px) {
-  .home-hero { height: min(600px, 85svh); min-height: 480px; }
+  .home-hero { height: min(640px, 88svh); min-height: 520px; }
 }
 
 /* Layout */
@@ -179,7 +179,7 @@
   padding-inline: clamp(24px, 6vw, 96px);
 }
 @utility section-y {
-  padding-block: clamp(64px, 9vw, 144px);
+  padding-block: clamp(48px, 6vw, 88px);
 }
 
 /* Buttons */
