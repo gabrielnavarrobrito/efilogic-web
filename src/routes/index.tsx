@@ -119,9 +119,14 @@ function ProjectsShowcase() {
       <div className="relative isolate aspect-[4/3] w-full overflow-hidden bg-grafito text-blanco md:aspect-[16/7]">
         <img key={project.slug} src={PROJECT_IMAGES[index % PROJECT_IMAGES.length]} alt={`Proyecto ${project.name} en ${project.location}`} loading="lazy" width={1536} height={1024} className="absolute inset-0 -z-20 h-full w-full object-cover" />
         <div aria-hidden className="hero-shade absolute inset-0 -z-10" />
-        <div className="absolute bottom-0 left-0 p-6 md:p-12">
-          <p className="t-eyebrow text-blanco/80">{project.location} · {project.year}</p>
-          <Link to="/proyectos/$slug" params={{ slug: project.slug }} className="mt-2 block text-[24px] font-semibold leading-snug md:text-[34px]">{project.name}</Link>
+        <div className="absolute left-0 top-0 p-6 md:p-12">
+          <h3 className="text-[26px] font-semibold leading-snug md:text-[38px]">{project.name}</h3>
+          <p className="mt-2 text-[15px] lowercase text-blanco/80 md:text-[17px]">{project.location} · {project.year}</p>
+        </div>
+        <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12">
+          <Link to="/proyectos/$slug" params={{ slug: project.slug }} className="inline-flex items-center gap-3 border border-blanco/60 px-6 py-3 text-[14px] font-medium transition-colors duration-300 hover:bg-blanco hover:text-grafito">
+            Ver este proyecto <ArrowUpRight aria-hidden className="h-5 w-5" />
+          </Link>
         </div>
         <div className="absolute bottom-6 right-6 flex gap-2 md:bottom-12 md:right-12">
           <button type="button" onClick={() => go(-1)} aria-label="Proyecto anterior" className="flex h-12 w-12 cursor-pointer items-center justify-center border border-blanco/60 transition-colors duration-300 hover:bg-blanco hover:text-grafito">
