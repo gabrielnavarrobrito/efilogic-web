@@ -6,10 +6,10 @@ export const ENTITY =
 export const CTA_LABEL = "Hablemos de tu proyecto";
 
 export const HOME_INTRO = {
-  title: "Líderes en proyectos contract",
+  title: "El diseño llega intacto hasta la apertura.",
   paragraphs: [
     "Durante más de 25 años, Efilogic ha acompañado a profesionales de la hostelería y el diseño para dar forma a espacios únicos.",
-    "Hoy, reunimos experiencia, creatividad y una visión multidisciplinar para desarrollar soluciones contract a medida. Del mobiliario a la instalación, conectamos cada especialidad para hacer realidad tu proyecto.",
+    "Hoy unimos criterio, creatividad y una mirada multidisciplinar. Del mobiliario a la instalación, cada especialidad responde a un mismo estándar.",
   ],
 };
 
