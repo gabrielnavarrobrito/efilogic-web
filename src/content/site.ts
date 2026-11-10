@@ -6,7 +6,7 @@ export const ENTITY =
 export const CTA_LABEL = "Hablemos de tu proyecto";
 
 export const HOME_INTRO = {
-  title: "El diseño llega intacto hasta la apertura.",
+  title: "Líderes en FF&E hotelero con más de 25 años de oficio.",
   paragraphs: [
     "Durante más de 25 años, Efilogic ha acompañado a profesionales de la hostelería y el diseño para dar forma a espacios únicos.",
     "Hoy unimos criterio, creatividad y una mirada multidisciplinar. Del mobiliario a la instalación, cada especialidad responde a un mismo estándar.",
