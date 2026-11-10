@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
-import { useState } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { useEffect, useState } from "react";
 import { ENTITY, FAQ, HOME_INTRO, HOME_SOLUTIONS, PROJECTS } from "@/content/site";
 import { Eyebrow, Reveal, SectionHeader } from "@/components/site/primitives";
 import { ContactForm, FaqList } from "@/components/site/blocks";
@@ -68,13 +68,13 @@ function Home() {
 
       <ProjectsShowcase />
 
-      <section className="section-y bg-grafito text-blanco">
+      <section className="section-y bg-blanco" aria-labelledby="home-process">
         <div className="wrap grid items-center gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
             <Eyebrow>Cómo trabajamos</Eyebrow>
-            <h2 className="t-h2 mt-6 max-w-xl">Tu apertura tiene fecha. Nuestro plan empieza en ella.</h2>
-            <p className="mt-6 max-w-sm text-[17px] font-light leading-relaxed">Compra, fabricación, consolidación e instalación. Un proceso conectado, de principio a fin.</p>
-            <Link to="/como-trabajamos" className="link-text mt-8 inline-flex items-center gap-3 text-[14px] font-medium">Conocer el proceso <ArrowUpRight aria-hidden className="h-5 w-5" /></Link>
+            <h2 id="home-process" className="t-h2 mt-6 max-w-xl">Planificamos desde el día de apertura hacia atrás.</h2>
+            <p className="mt-6 max-w-sm text-[16px] leading-relaxed">Cada pieza tiene su fecha y cada fecha, su responsable. Fábrica, almacén y montaje siguen el mismo calendario: el de tu hotel.</p>
+            <Link to="/como-trabajamos" className="link-text mt-8 inline-flex items-center gap-3 text-[14px] font-semibold">Ver cómo dirigimos un proyecto <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" /></Link>
           </div>
           <div className="md:col-span-6 md:col-start-7">
             <img src={heroSuite} alt="Suite de hotel terminada e instalada" loading="lazy" width={1376} height={768} className="aspect-[3/2] w-full object-cover" />
@@ -105,10 +105,17 @@ function Home() {
 
 const PROJECT_IMAGES = [hotelLobby, heroSuite, hotelLobby];
 
+const SLIDE_INTERVAL_MS = 6000;
+
 function ProjectsShowcase() {
   const [index, setIndex] = useState(0);
-  const project = PROJECTS[index]!;
-  const go = (step: number) => setIndex((i) => (i + step + PROJECTS.length) % PROJECTS.length);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setTimeout(() => setIndex((i) => (i + 1) % PROJECTS.length), SLIDE_INTERVAL_MS);
+    return () => window.clearTimeout(id);
+  }, [index, paused]);
 
   return (
     <section className="bg-blanco pb-14 md:pb-20" aria-label="Proyectos destacados">
@@ -116,25 +123,37 @@ function ProjectsShowcase() {
         <SectionHeader eyebrow="Proyectos" title="Espacios que cobran vida." />
         <Link to="/proyectos" className="link-text inline-flex items-center gap-3 text-[14px] font-medium">Ver proyectos <ArrowUpRight aria-hidden className="h-5 w-5" /></Link>
       </div>
-      <div className="relative isolate aspect-[4/3] w-full overflow-hidden bg-grafito text-blanco md:aspect-[16/7]">
-        <img key={project.slug} src={PROJECT_IMAGES[index % PROJECT_IMAGES.length]} alt={`Proyecto ${project.name} en ${project.location}`} loading="lazy" width={1536} height={1024} className="absolute inset-0 -z-20 h-full w-full object-cover" />
-        <div aria-hidden className="hero-shade absolute inset-0 -z-10" />
-        <div className="absolute left-0 top-0 p-6 md:p-12">
-          <h3 className="text-[26px] font-semibold leading-snug md:text-[38px]">{project.name}</h3>
-          <p className="mt-2 text-[15px] lowercase text-blanco/80 md:text-[17px]">{project.location} · {project.year}</p>
+      <div
+        className="relative aspect-[4/3] w-full overflow-hidden bg-grafito text-blanco md:aspect-[16/7]"
+        aria-roledescription="carrusel"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocus={() => setPaused(true)}
+        onBlur={() => setPaused(false)}
+      >
+        <div className="flex h-full transition-transform duration-700 ease-out" style={{ transform: `translateX(-${index * 100}%)` }}>
+          {PROJECTS.map((project, i) => (
+            <div key={project.slug} className="relative isolate h-full w-full shrink-0" aria-roledescription="diapositiva" aria-label={`${i + 1} de ${PROJECTS.length}`} aria-hidden={i !== index} inert={i !== index}>
+              <img src={PROJECT_IMAGES[i % PROJECT_IMAGES.length]} alt={`Proyecto ${project.name} en ${project.location}`} loading="lazy" width={1536} height={1024} className="absolute inset-0 -z-20 h-full w-full object-cover" />
+              <div aria-hidden className="hero-shade absolute inset-0 -z-10" />
+              <div className="absolute left-0 top-0 p-6 md:p-12">
+                <h3 className="text-[26px] font-semibold leading-snug md:text-[38px]">{project.name}</h3>
+                <p className="mt-2 text-[15px] text-blanco/80 md:text-[17px]">{project.location} · {project.year}</p>
+              </div>
+              <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12">
+                <Link to="/proyectos/$slug" params={{ slug: project.slug }} className="inline-flex items-center gap-3 border border-blanco/60 px-6 py-3 text-[14px] font-medium transition-colors duration-300 hover:bg-blanco hover:text-grafito">
+                  Ver este proyecto <ArrowUpRight aria-hidden className="h-5 w-5" />
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12">
-          <Link to="/proyectos/$slug" params={{ slug: project.slug }} className="inline-flex items-center gap-3 border border-blanco/60 px-6 py-3 text-[14px] font-medium transition-colors duration-300 hover:bg-blanco hover:text-grafito">
-            Ver este proyecto <ArrowUpRight aria-hidden className="h-5 w-5" />
-          </Link>
-        </div>
-        <div className="absolute bottom-6 right-6 flex gap-2 md:bottom-12 md:right-12">
-          <button type="button" onClick={() => go(-1)} aria-label="Proyecto anterior" className="flex h-12 w-12 cursor-pointer items-center justify-center border border-blanco/60 transition-colors duration-300 hover:bg-blanco hover:text-grafito">
-            <ArrowLeft strokeWidth={1.5} className="h-5 w-5" />
-          </button>
-          <button type="button" onClick={() => go(1)} aria-label="Proyecto siguiente" className="flex h-12 w-12 cursor-pointer items-center justify-center border border-blanco/60 transition-colors duration-300 hover:bg-blanco hover:text-grafito">
-            <ArrowRight strokeWidth={1.5} className="h-5 w-5" />
-          </button>
+        <div className="absolute bottom-6 right-4 flex md:bottom-12 md:right-10">
+          {PROJECTS.map((project, i) => (
+            <button key={project.slug} type="button" onClick={() => setIndex(i)} aria-label={`Ver ${project.name}`} aria-current={i === index} className="group flex h-10 w-8 cursor-pointer items-center justify-center">
+              <span className={`slider-dot block h-2.5 w-2.5 border border-blanco transition-colors duration-300 ${i === index ? "bg-blanco" : "bg-transparent group-hover:bg-blanco/60"}`} />
+            </button>
+          ))}
         </div>
       </div>
     </section>

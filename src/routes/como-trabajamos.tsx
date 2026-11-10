@@ -20,8 +20,8 @@ function Page() {
       <div className="bg-crema"><Breadcrumbs items={[{ label: "Cómo trabajamos" }]} /></div>
       <PageHero
         eyebrow="Cómo trabajamos"
-        title="Tu apertura tiene fecha. Nuestro plan empieza en ella."
-        lead="Planificamos hacia atrás desde el día de apertura. Seis fases, un único responsable y trazabilidad completa en cada pieza."
+        title="Planificamos desde el día de apertura hacia atrás."
+        lead="Cada pieza tiene su fecha y cada fecha, su responsable. Así sabes en qué punto está tu proyecto sin tener que preguntarlo."
       >
         <PrimaryCTA />
       </PageHero>
