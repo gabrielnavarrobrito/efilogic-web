@@ -2,7 +2,6 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { ChevronDown, Facebook, Instagram, Linkedin, Menu, Search, X, Youtube } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
-import { GlobeMark } from "./primitives";
 import { MENU, SOCIALS, SEARCH_PAGES } from "@/content/site";
 import { cn } from "@/lib/utils";
 
@@ -156,7 +155,6 @@ export function Header() {
 export function Footer() {
   return (
     <footer className="relative isolate overflow-hidden bg-grafito text-blanco">
-      <GlobeMark className="pointer-events-none absolute -bottom-48 -right-40 -z-10 h-[560px] w-[560px] text-blanco/[0.05] md:-bottom-64 md:-right-24 md:h-[720px] md:w-[720px]" />
       <div className="wrap py-20 md:py-24">
         <div className="grid gap-14 md:grid-cols-12">
           <div className="md:col-span-5">

@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ENTITY, FAQ, HOME_INTRO, HOME_SOLUTIONS, PROJECTS } from "@/content/site";
-import { Eyebrow, GlobeMark, Reveal, SectionHeader, Signed } from "@/components/site/primitives";
+import { Eyebrow, Reveal, SectionHeader } from "@/components/site/primitives";
 import { ContactForm, FaqList } from "@/components/site/blocks";
 import { faqLd, seo } from "@/lib/seo";
 import heroSuite from "@/assets/hero-hotel-suite.jpg";
@@ -25,16 +25,8 @@ function Home() {
         <img src={heroSuite} alt="Interior de una suite de hotel con mobiliario a medida" width={1376} height={768} fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover" />
         <div aria-hidden className="hero-shade absolute inset-0 -z-10" />
         <div className="wrap flex h-full flex-col justify-between gap-8 pb-12 pt-36 md:pb-14 md:pt-40">
-          <h1 className="max-w-[560px] text-[36px] font-semibold leading-[1.15] lg:text-[52px]"><Signed>Solución a medida para proyectos contract.</Signed></h1>
-          <div className="flex flex-col-reverse gap-8 md:flex-row md:items-end md:justify-between">
-            <p className="flex items-center gap-3 text-[12.5px] font-medium tracking-[0.08em] text-blanco/85">
-              <GlobeMark className="h-4 w-4 text-ambar" />
-              <span className="tabular-nums">28°08′N · 15°25′O</span>
-              <span aria-hidden className="h-px w-6 bg-blanco/50" />
-              <span>Gran Canaria</span>
-            </p>
-            <p className="max-w-[380px] text-[21px] font-medium leading-snug lg:text-[25px]">Convertimos tus ideas en realidad, sin poner límites a la creatividad.</p>
-          </div>
+          <h1 className="max-w-[560px] text-[36px] font-semibold leading-[1.15] lg:text-[52px]">Solución a medida para proyectos contract.</h1>
+          <p className="ml-auto max-w-[380px] text-[21px] font-medium leading-snug lg:text-[25px]">Convertimos tus ideas en realidad, sin poner límites a la creatividad.</p>
         </div>
       </section>
 
@@ -42,7 +34,7 @@ function Home() {
         <div className="wrap grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
           <Reveal className="max-w-lg">
             <Eyebrow index="01">Efilogic</Eyebrow>
-            <h2 id="home-about" className="t-h2 mt-6 max-w-md"><Signed>{HOME_INTRO.title}</Signed></h2>
+            <h2 id="home-about" className="t-h2 mt-6 max-w-md">{HOME_INTRO.title}</h2>
             {HOME_INTRO.paragraphs.map((paragraph) => <p key={paragraph} className="mt-6 text-[16px] leading-relaxed">{paragraph}</p>)}
             <Link to="/sobre-efilogic" className="link-text mt-8 inline-flex items-center gap-3 text-[14px] font-semibold">Sobre nosotros <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" /></Link>
           </Reveal>
@@ -80,7 +72,7 @@ function Home() {
         <div className="wrap grid items-center gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
             <Eyebrow index="03">Cómo trabajamos</Eyebrow>
-            <h2 id="home-process" className="t-h2 mt-6 max-w-xl"><Signed>Planificamos desde el día de apertura hacia atrás.</Signed></h2>
+            <h2 id="home-process" className="t-h2 mt-6 max-w-xl">Planificamos desde el día de apertura hacia atrás.</h2>
             <p className="mt-6 max-w-sm text-[16px] leading-relaxed">Cada pieza tiene su fecha y cada fecha, su responsable. Fábrica, almacén y montaje siguen el mismo calendario: el de tu hotel.</p>
             <Link to="/como-trabajamos" className="link-text mt-8 inline-flex items-center gap-3 text-[14px] font-semibold">Ver cómo dirigimos un proyecto <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" /></Link>
           </div>
@@ -101,7 +93,7 @@ function Home() {
         <div className="wrap grid gap-16 md:grid-cols-12">
           <div className="md:col-span-4">
             <Eyebrow index="05">Contacto</Eyebrow>
-            <h2 id="contacto-home" className="t-h2 mt-6"><Signed>Hablemos de tu proyecto.</Signed></h2>
+            <h2 id="contacto-home" className="t-h2 mt-6">Hablemos de tu proyecto.</h2>
             <p className="mt-6 max-w-sm text-[16px]">Cuéntanos qué tienes en mente y tu fecha de apertura.</p>
           </div>
           <div className="md:col-span-7 md:col-start-6"><ContactForm /></div>

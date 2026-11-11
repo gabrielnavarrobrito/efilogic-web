@@ -2,29 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { CTA_LABEL } from "@/content/site";
-import globe from "@/assets/efilogic-globe.png";
-
-/** Brand signature: a heading's closing full stop is set in amber. */
-export function Signed({ children }: { children: ReactNode }) {
-  if (typeof children !== "string" || !children.endsWith(".")) return <>{children}</>;
-  return (
-    <>
-      {children.slice(0, -1)}
-      <span className="text-ambar">.</span>
-    </>
-  );
-}
-
-/** The globe from the Efilogic logo, tinted with the current text colour. */
-export function GlobeMark({ className }: { className?: string }) {
-  return (
-    <span
-      aria-hidden
-      className={cn("globe-mark inline-block aspect-square shrink-0", className)}
-      style={{ WebkitMaskImage: `url(${globe})`, maskImage: `url(${globe})` }}
-    />
-  );
-}
 
 export function Eyebrow({ children, index, className }: { children: ReactNode; index?: string | undefined; className?: string }) {
   return (
@@ -55,7 +32,7 @@ export function SectionHeader({
   return (
     <div className={cn("max-w-3xl", className)}>
       {eyebrow && <Eyebrow index={index} className="mb-6">{eyebrow}</Eyebrow>}
-      <H className={as === "h1" ? "t-h1" : "t-h2"}><Signed>{title}</Signed></H>
+      <H className={as === "h1" ? "t-h1" : "t-h2"}>{title}</H>
       {lead && <p className="t-lead mt-6 measure">{lead}</p>}
     </div>
   );
