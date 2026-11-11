@@ -2,19 +2,50 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { CTA_LABEL } from "@/content/site";
+import globe from "@/assets/efilogic-globe.png";
 
-export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
-  return <p className={cn("t-eyebrow", className)}>{children}</p>;
+/** Brand signature: a heading's closing full stop is set in amber. */
+export function Signed({ children }: { children: ReactNode }) {
+  if (typeof children !== "string" || !children.endsWith(".")) return <>{children}</>;
+  return (
+    <>
+      {children.slice(0, -1)}
+      <span className="text-ambar">.</span>
+    </>
+  );
+}
+
+/** The globe from the Efilogic logo, tinted with the current text colour. */
+export function GlobeMark({ className }: { className?: string }) {
+  return (
+    <span
+      aria-hidden
+      className={cn("globe-mark inline-block aspect-square shrink-0", className)}
+      style={{ WebkitMaskImage: `url(${globe})`, maskImage: `url(${globe})` }}
+    />
+  );
+}
+
+export function Eyebrow({ children, index, className }: { children: ReactNode; index?: string | undefined; className?: string }) {
+  return (
+    <p className={cn("t-eyebrow flex items-center gap-3", className)}>
+      {index && <span className="font-medium tabular-nums">{index}</span>}
+      <span aria-hidden className="h-px w-6 shrink-0 bg-ambar" />
+      <span>{children}</span>
+    </p>
+  );
 }
 
 export function SectionHeader({
   eyebrow,
+  index,
   title,
   lead,
   as = "h2",
   className,
 }: {
   eyebrow?: string;
+  index?: string;
   title: ReactNode;
   lead?: ReactNode;
   as?: "h1" | "h2";
@@ -23,8 +54,8 @@ export function SectionHeader({
   const H = as;
   return (
     <div className={cn("max-w-3xl", className)}>
-      {eyebrow && <Eyebrow className="mb-6">{eyebrow}</Eyebrow>}
-      <H className={as === "h1" ? "t-h1" : "t-h2"}>{title}</H>
+      {eyebrow && <Eyebrow index={index} className="mb-6">{eyebrow}</Eyebrow>}
+      <H className={as === "h1" ? "t-h1" : "t-h2"}><Signed>{title}</Signed></H>
       {lead && <p className="t-lead mt-6 measure">{lead}</p>}
     </div>
   );

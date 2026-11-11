@@ -11,3 +11,4 @@
 - [x] Soluciones más compacta; proyectos a ancho completo con nombre y flechas sobre la imagen
 - [x] Cómo trabajamos con imagen a la derecha; secciones más bajas
 - [x] Navegación en minúsculas (solo inicial mayúscula) y botón Contacto naranja en desktop
+- [x] Toque propio: globo del logo, coordenadas, puntos y marcas en ámbar, numeración y progreso del carrusel
