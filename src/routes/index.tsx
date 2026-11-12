@@ -33,7 +33,7 @@ function Home() {
       <section className="section-y bg-blanco" aria-labelledby="home-about">
         <div className="wrap grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
           <Reveal className="max-w-lg">
-            <Eyebrow index="01">Efilogic</Eyebrow>
+            <Eyebrow>Efilogic</Eyebrow>
             <h2 id="home-about" className="t-h2 mt-6 max-w-md">{HOME_INTRO.title}</h2>
             {HOME_INTRO.paragraphs.map((paragraph) => <p key={paragraph} className="mt-6 text-[16px] leading-relaxed">{paragraph}</p>)}
             <Link to="/sobre-efilogic" className="link-text mt-8 inline-flex items-center gap-3 text-[14px] font-semibold">Sobre nosotros <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" /></Link>
@@ -71,7 +71,7 @@ function Home() {
       <section className="section-y bg-blanco" aria-labelledby="home-process">
         <div className="wrap grid items-center gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
-            <Eyebrow index="03">Cómo trabajamos</Eyebrow>
+            <Eyebrow>Cómo trabajamos</Eyebrow>
             <h2 id="home-process" className="t-h2 mt-6 max-w-xl">Planificamos desde el día de apertura hacia atrás.</h2>
             <p className="mt-6 max-w-sm text-[16px] leading-relaxed">Cada pieza tiene su fecha y cada fecha, su responsable. Fábrica, almacén y montaje siguen el mismo calendario: el de tu hotel.</p>
             <Link to="/como-trabajamos" className="link-text mt-8 inline-flex items-center gap-3 text-[14px] font-semibold">Ver cómo dirigimos un proyecto <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" /></Link>
@@ -84,7 +84,7 @@ function Home() {
 
       <section className="section-y bg-crema">
         <div className="wrap grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-4"><SectionHeader eyebrow="Preguntas frecuentes" index="04" title="Resolvemos tus dudas." /></div>
+          <div className="md:col-span-4"><SectionHeader eyebrow="Preguntas frecuentes" title="Resolvemos tus dudas." /></div>
           <div className="md:col-span-7 md:col-start-6"><FaqList items={FAQ} /></div>
         </div>
       </section>
@@ -92,7 +92,7 @@ function Home() {
       <section className="section-y bg-blanco" aria-labelledby="contacto-home">
         <div className="wrap grid gap-16 md:grid-cols-12">
           <div className="md:col-span-4">
-            <Eyebrow index="05">Contacto</Eyebrow>
+            <Eyebrow>Contacto</Eyebrow>
             <h2 id="contacto-home" className="t-h2 mt-6">Hablemos de tu proyecto.</h2>
             <p className="mt-6 max-w-sm text-[16px]">Cuéntanos qué tienes en mente y tu fecha de apertura.</p>
           </div>
@@ -120,7 +120,7 @@ function ProjectsShowcase() {
   return (
     <section className="bg-blanco pb-14 md:pb-20" aria-label="Proyectos destacados">
       <div className="wrap mb-8 flex flex-wrap items-end justify-between gap-6">
-        <SectionHeader eyebrow="Proyectos" index="02" title="Espacios que cobran vida." />
+        <SectionHeader eyebrow="Proyectos" title="Espacios que cobran vida." />
         <Link to="/proyectos" className="link-text inline-flex items-center gap-3 text-[14px] font-medium">Ver proyectos <ArrowUpRight aria-hidden className="h-5 w-5" /></Link>
       </div>
       <div

@@ -3,11 +3,9 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { CTA_LABEL } from "@/content/site";
 
-export function Eyebrow({ children, index, className }: { children: ReactNode; index?: string | undefined; className?: string }) {
+export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <p className={cn("t-eyebrow flex items-center gap-3", className)}>
-      {index && <span className="font-medium tabular-nums">{index}</span>}
-      <span aria-hidden className="h-px w-6 shrink-0 bg-ambar" />
+    <p className={cn("t-eyebrow", className)}>
       <span>{children}</span>
     </p>
   );
@@ -15,14 +13,12 @@ export function Eyebrow({ children, index, className }: { children: ReactNode; i
 
 export function SectionHeader({
   eyebrow,
-  index,
   title,
   lead,
   as = "h2",
   className,
 }: {
   eyebrow?: string;
-  index?: string;
   title: ReactNode;
   lead?: ReactNode;
   as?: "h1" | "h2";
@@ -31,7 +27,7 @@ export function SectionHeader({
   const H = as;
   return (
     <div className={cn("max-w-3xl", className)}>
-      {eyebrow && <Eyebrow index={index} className="mb-6">{eyebrow}</Eyebrow>}
+      {eyebrow && <Eyebrow className="mb-6">{eyebrow}</Eyebrow>}
       <H className={as === "h1" ? "t-h1" : "t-h2"}>{title}</H>
       {lead && <p className="t-lead mt-6 measure">{lead}</p>}
     </div>
