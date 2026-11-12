@@ -39,7 +39,7 @@ export function Header() {
     >
       <div className="wrap flex h-[72px] items-center justify-between gap-4">
         <Link to="/" aria-label="Efilogic, inicio" className="py-2">
-          <Logo variant={transparent ? "white" : "graphite"} className="h-9 md:h-10" />
+          <Logo variant={transparent ? "white" : "graphite"} className="h-10 md:h-11" />
         </Link>
 
         <nav aria-label="Principal" className="hidden lg:block">
