@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ENTITY, PILLARS, STATS } from "@/content/site";
 import { Breadcrumbs, EditorialImage, PageHero, PrimaryCTA, Stat } from "@/components/site/primitives";
+import { SLOTS } from "@/content/images";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/sobre-efilogic")({
@@ -33,7 +34,7 @@ function Page() {
             </p>
           </div>
           <div className="md:col-span-5 md:col-start-8">
-            <EditorialImage alt="Restaurante de hotel terminado con luz natural" ratio="4/5" />
+            <EditorialImage alt="Restaurante de hotel terminado con luz natural" ratio="4/5" slot={SLOTS.sobreEfilogic.restaurante} />
           </div>
         </div>
       </section>

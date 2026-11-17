@@ -1,11 +1,11 @@
-import graphite from "@/assets/efilogic_logo_graphite.png.asset.json";
-import white from "@/assets/efilogic_logo_white.png.asset.json";
+import graphite from "@/assets/efilogic-logo-graphite.png";
+import white from "@/assets/efilogic-logo-white.png";
 import { cn } from "@/lib/utils";
 
 export function Logo({ variant = "graphite", className }: { variant?: "graphite" | "white"; className?: string }) {
   return (
     <img
-      src={variant === "white" ? white.url : graphite.url}
+      src={variant === "white" ? white : graphite}
       alt="efilogic"
       width={1872}
       height={633}

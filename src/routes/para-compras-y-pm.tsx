@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Breadcrumbs, EditorialImage, PageHero, PrimaryCTA, Reveal } from "@/components/site/primitives";
+import { SLOTS } from "@/content/images";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/para-compras-y-pm")({
@@ -53,7 +54,7 @@ function Page() {
       </section>
       <section className="bg-crema section-y">
         <div className="wrap">
-          <EditorialImage alt="Lobby de hotel terminado el día de su apertura" caption="Lobby · Gran Canaria · 2025" ratio="16/7" />
+          <EditorialImage alt="Lobby de hotel terminado el día de su apertura" caption="Lobby · Gran Canaria · 2025" ratio="16/7" slot={SLOTS.paraComprasYPm.lobby} />
         </div>
       </section>
     </>

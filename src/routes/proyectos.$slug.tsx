@@ -1,5 +1,6 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { PROJECTS } from "@/content/site";
+import { SLOTS } from "@/content/images";
 import { Breadcrumbs, EditorialImage, PrimaryCTA, Stat } from "@/components/site/primitives";
 import { seo } from "@/lib/seo";
 
@@ -41,7 +42,7 @@ function Page() {
         </div>
       </section>
       <div className="wrap -mt-2">
-        <EditorialImage alt={`Vista general de ${c.name}`} caption={`${c.name} · ${c.location} · ${c.year}`} ratio="16/8" className="mt-0" />
+        <EditorialImage alt={`Vista general de ${c.name}`} caption={`${c.name} · ${c.location} · ${c.year}`} ratio="16/8" className="mt-0" slot={SLOTS.proyectos(c.slug).hero} />
       </div>
       <section className="bg-blanco section-y">
         <div className="wrap grid gap-16 md:grid-cols-12">
@@ -71,10 +72,10 @@ function Page() {
         <div className="wrap">
           <h2 className="t-h2">Galería</h2>
           <div className="mt-12 grid gap-6 md:grid-cols-12">
-            <EditorialImage className="md:col-span-7" alt={`Habitación de ${c.name}`} ratio="4/3" />
-            <EditorialImage className="md:col-span-5" alt={`Detalle de materiales en ${c.name}`} ratio="4/5" />
-            <EditorialImage className="md:col-span-5" alt={`Zona común de ${c.name}`} ratio="4/5" />
-            <EditorialImage className="md:col-span-7" alt={`Restaurante de ${c.name}`} ratio="4/3" />
+            <EditorialImage className="md:col-span-7" alt={`Habitación de ${c.name}`} ratio="4/3" slot={SLOTS.proyectos(c.slug).habitacion} />
+            <EditorialImage className="md:col-span-5" alt={`Detalle de materiales en ${c.name}`} ratio="4/5" slot={SLOTS.proyectos(c.slug).detalle} />
+            <EditorialImage className="md:col-span-5" alt={`Zona común de ${c.name}`} ratio="4/5" slot={SLOTS.proyectos(c.slug).zonaComun} />
+            <EditorialImage className="md:col-span-7" alt={`Restaurante de ${c.name}`} ratio="4/3" slot={SLOTS.proyectos(c.slug).restaurante} />
           </div>
           <div className="mt-16 flex flex-wrap items-center gap-8">
             <PrimaryCTA />

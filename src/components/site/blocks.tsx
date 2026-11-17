@@ -4,6 +4,7 @@ import { Plus } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { PERFILES, type CaseStudy as CaseT, type Resource } from "@/content/site";
+import { SLOTS } from "@/content/images";
 import { EditorialImage, Eyebrow } from "./primitives";
 import { cn } from "@/lib/utils";
 
@@ -40,6 +41,7 @@ export function CaseStudyBlock({ c, reverse = false, headingLevel = "h3" }: { c:
           alt={`Interior terminado de ${c.name}, ${c.location}`}
           caption={`${c.name} · ${c.location} · ${c.year}`}
           ratio="7/5"
+          slot={SLOTS.proyectos(c.slug).hero}
         />
       </div>
       <div className={cn("md:col-span-5", reverse && "md:order-1")}>
@@ -70,7 +72,7 @@ export function CaseStudyBlock({ c, reverse = false, headingLevel = "h3" }: { c:
 export function ResourceCard({ r }: { r: Resource }) {
   return (
     <Link to="/recursos/$slug" params={{ slug: r.slug }} className="card-edit group flex h-full flex-col bg-blanco">
-      <EditorialImage alt={`Imagen editorial: ${r.title}`} ratio="3/2" />
+      <EditorialImage alt={`Imagen editorial: ${r.title}`} ratio="3/2" slot={SLOTS.recursos(r.slug)} />
       <div className="flex flex-1 flex-col p-8">
         <span className="tag self-start">{r.kind}</span>
         <h3 className="mt-5 text-[21px] font-medium leading-snug">{r.title}</h3>

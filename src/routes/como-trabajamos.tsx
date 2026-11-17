@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PROCESS } from "@/content/site";
+import { SLOTS } from "@/content/images";
 import { Breadcrumbs, EditorialImage, PageHero, PrimaryCTA, ProcessSteps, Reveal } from "@/components/site/primitives";
 import { seo } from "@/lib/seo";
 
@@ -36,7 +37,7 @@ function Page() {
             <Reveal key={p.title}>
               <div className="grid items-center gap-10 md:grid-cols-12">
                 <div className={i % 2 ? "md:col-span-6 md:order-2 md:col-start-7" : "md:col-span-6"}>
-                  <EditorialImage alt={`Fase de ${p.title.toLowerCase()} en un proyecto FF&E hotelero`} ratio="3/2" />
+                  <EditorialImage alt={`Fase de ${p.title.toLowerCase()} en un proyecto FF&E hotelero`} ratio="3/2" slot={SLOTS.comoTrabajamos(p.title)} />
                 </div>
                 <div className={i % 2 ? "md:col-span-5 md:order-1" : "md:col-span-5 md:col-start-8"}>
                   <p className="t-eyebrow">Fase {String(i + 1).padStart(2, "0")}</p>

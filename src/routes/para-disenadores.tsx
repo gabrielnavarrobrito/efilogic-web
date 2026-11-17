@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Breadcrumbs, EditorialImage, PageHero, PrimaryCTA, Reveal } from "@/components/site/primitives";
+import { SLOTS } from "@/content/images";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/para-disenadores")({
@@ -30,7 +31,7 @@ function Page() {
       <section className="bg-blanco section-y">
         <div className="wrap grid gap-16 md:grid-cols-12">
           <div className="md:col-span-6">
-            <EditorialImage alt="Detalle de tapicería y madera en una suite de hotel" caption="Detalle · Madrid · 2024" ratio="4/5" />
+            <EditorialImage alt="Detalle de tapicería y madera en una suite de hotel" caption="Detalle · Madrid · 2024" ratio="4/5" slot={SLOTS.paraDisenadores.detalle} />
           </div>
           <div className="space-y-10 md:col-span-5 md:col-start-8">
             {POINTS.map((p) => (

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ENTITY, FAQ, SERVICES } from "@/content/site";
+import { SLOTS } from "@/content/images";
 import { Breadcrumbs, EditorialImage, PageHero, PrimaryCTA, Reveal } from "@/components/site/primitives";
 import { FaqList } from "@/components/site/blocks";
 import { faqLd, seo } from "@/lib/seo";
@@ -41,7 +42,7 @@ function Page() {
         <section key={s.slug} id={s.slug} className={i % 2 ? "bg-crema section-y" : "bg-blanco section-y"}>
           <div className="wrap grid items-center gap-12 md:grid-cols-12">
             <div className={i % 2 ? "md:col-span-7 md:order-2" : "md:col-span-7"}>
-              <EditorialImage alt={`${s.title} en un hotel terminado`} ratio="7/5" />
+              <EditorialImage alt={`${s.title} en un hotel terminado`} ratio="7/5" slot={SLOTS.servicios(s.slug)} />
             </div>
             <Reveal className={i % 2 ? "md:col-span-5 md:order-1" : "md:col-span-5"}>
               <p className="t-eyebrow">{String(i + 1).padStart(2, "0")}</p>

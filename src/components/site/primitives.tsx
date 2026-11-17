@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { CTA_LABEL } from "@/content/site";
+import { getSlotImage } from "@/content/images";
 
 export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
   return (
@@ -48,17 +49,22 @@ export function EditorialImage({
   ratio = "4/5",
   className,
   src,
+  slot,
 }: {
   alt: string;
   caption?: string;
   ratio?: string;
   className?: string;
+  /** URL directa de la imagen. Tiene prioridad sobre `slot`. */
   src?: string;
+  /** Hueco de foto definido en src/content/images.ts (ver SLOTS). */
+  slot?: string;
 }) {
+  const resolvedSrc = src ?? (slot ? getSlotImage(slot) : undefined);
   return (
     <figure className={cn("relative w-full", className)} style={{ aspectRatio: ratio }}>
-      {src ? (
-        <img src={src} alt={alt} loading="lazy" className="h-full w-full object-cover" />
+      {resolvedSrc ? (
+        <img src={resolvedSrc} alt={alt} loading="lazy" className="h-full w-full object-cover" />
       ) : (
         <div role="img" aria-label={alt} className="placeholder-img flex h-full w-full items-center justify-center">
           <span className="t-eyebrow opacity-60">Imagen de proyecto · sustituir</span>

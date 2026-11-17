@@ -1,5 +1,6 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { RESOURCES } from "@/content/site";
+import { SLOTS } from "@/content/images";
 import { Breadcrumbs, EditorialImage, PrimaryCTA } from "@/components/site/primitives";
 import { seo } from "@/lib/seo";
 
@@ -66,7 +67,7 @@ function Page() {
             </div>
           </div>
           <div className="md:col-span-4 md:col-start-9">
-            <EditorialImage alt={`Imagen editorial: ${r.title}`} ratio="4/5" />
+            <EditorialImage alt={`Imagen editorial: ${r.title}`} ratio="4/5" slot={SLOTS.recursos(r.slug)} />
           </div>
         </div>
       </article>
