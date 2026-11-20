@@ -153,8 +153,8 @@ export type CaseStudy = {
 
 export const PROJECTS: CaseStudy[] = [
   {
-    slug: "hotel-costa-atlantica",
-    name: "Hotel Costa Atlántica",
+    slug: "hd-sensarena",
+    name: "HD Sensarena",
     location: "Gran Canaria",
     year: "2025",
     type: "Resort 5*",
@@ -169,8 +169,8 @@ export const PROJECTS: CaseStudy[] = [
     ],
   },
   {
-    slug: "boutique-hotel-casco-historico",
-    name: "Boutique Hotel Casco Histórico",
+    slug: "sercotel-canteras",
+    name: "Sercotel Canteras",
     location: "Madrid",
     year: "2024",
     type: "Boutique hotel",
@@ -185,8 +185,8 @@ export const PROJECTS: CaseStudy[] = [
     ],
   },
   {
-    slug: "resort-caribe-sur",
-    name: "Resort Caribe Sur",
+    slug: "valetin-somni",
+    name: "Valetin Somni",
     location: "República Dominicana",
     year: "2023",
     type: "Resort todo incluido",
@@ -198,6 +198,22 @@ export const PROJECTS: CaseStudy[] = [
       { value: "380", label: "habitaciones" },
       { value: "2", label: "orígenes consolidados" },
       { value: "6", label: "semanas en obra" },
+    ],
+  },
+  {
+    slug: "melia-trinidad-peninsula",
+    name: "Meliá Trinidad Península",
+    location: "Tenerife",
+    year: "2026",
+    type: "Resort 4*",
+    summary: "Renovación de 180 habitaciones y restaurante principal sin cerrar el hotel, trabajando planta a planta en plena temporada.",
+    reto: "Renovar 180 habitaciones y el restaurante principal manteniendo el hotel abierto, con huéspedes alojados en las plantas contiguas a la obra.",
+    solucion: "Plan de ejecución nocturna por plantas, zonas de acopio aisladas del área de huéspedes y protocolos de silencio y limpieza diaria antes del check-in.",
+    resultado: "Cero quejas de huéspedes por la obra y ocupación media por encima del 90% durante toda la renovación.",
+    figures: [
+      { value: "180", label: "habitaciones" },
+      { value: "90%", label: "ocupación media durante la obra" },
+      { value: "0", label: "cierres de planta" },
     ],
   },
 ];

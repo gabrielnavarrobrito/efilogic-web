@@ -76,7 +76,7 @@ export function ImageFeature({
       <div className={cn("relative aspect-[4/3] lg:aspect-auto lg:min-h-[520px]", reverse && "lg:order-2")}>
         <img src={image} alt={imageAlt} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
       </div>
-      <div className={cn("flex flex-col justify-center bg-crema px-6 py-14 md:px-16 md:py-20", reverse && "lg:order-1")}>
+      <div className={cn("flex flex-col justify-center bg-blanco px-6 py-14 md:px-16 md:py-20", reverse && "lg:order-1")}>
         <SectionTag>{tag}</SectionTag>
         <h2 id={titleId} className="t-h2 mt-6 max-w-md">
           {title}

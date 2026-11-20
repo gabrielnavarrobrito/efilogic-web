@@ -2,8 +2,8 @@
 //
 // Cómo subir una foto:
 // 1. Busca en este archivo el "slot" (hueco) que quieres rellenar, por ejemplo
-//    SLOTS.proyectos("hotel-costa-atlantica").hero
-// 2. Fíjate en la ruta de archivo que indica (p. ej. "proyectos/hotel-costa-atlantica/hero").
+//    SLOTS.proyectos("hd-sensarena").hero
+// 2. Fíjate en la ruta de archivo que indica (p. ej. "proyectos/hd-sensarena/hero").
 // 3. Guarda tu foto en src/assets/images/<esa-ruta>.jpg (también valen .jpeg, .png o .webp).
 // 4. Listo: no hay que tocar ningún componente. Si el archivo no existe todavía,
 //    la web muestra automáticamente un marcador gris en su lugar.

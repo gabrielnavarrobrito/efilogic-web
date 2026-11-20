@@ -5,13 +5,14 @@ import { ENTITY, FAQ, HOME_INTRO, HOME_SOLUTIONS, PROJECTS } from "@/content/sit
 import { Eyebrow, ImageFeature, Reveal, SectionHeader } from "@/components/site/primitives";
 import { ContactForm, FaqList } from "@/components/site/blocks";
 import { faqLd, seo } from "@/lib/seo";
-import heroImage from "@/assets/home-rooftop-sea-view.webp";
+import heroImage from "@/assets/home-beach-restaurant.webp";
 import aboutImage from "@/assets/home-lobby-lounge.webp";
-import solutionsImage from "@/assets/home-beach-restaurant.webp";
+import solutionsImage from "@/assets/home-rooftop-sea-view.webp";
 import processImage from "@/assets/home-bedroom-boho.webp";
-import projectCostaAtlantica from "@/assets/project-costa-atlantica.webp";
-import projectBoutiqueMadrid from "@/assets/project-boutique-madrid.webp";
-import projectResortCaribe from "@/assets/project-resort-caribe.webp";
+import projectHdSensarena from "@/assets/project-costa-atlantica.webp";
+import projectSercotelCanteras from "@/assets/project-boutique-madrid.webp";
+import projectValetinSomni from "@/assets/project-resort-caribe.webp";
+import projectMeliaTrinidad from "@/assets/images/servicios/instalacion-mobiliario-hotelero.webp";
 
 export const Route = createFileRoute("/")({
   head: () => seo({
@@ -27,7 +28,7 @@ function Home() {
   return (
     <>
       <section className="home-hero relative isolate overflow-hidden bg-grafito text-blanco">
-        <img src={heroImage} alt="Terraza de hotel con vistas al mar en Las Palmas de Gran Canaria" width={1376} height={768} fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover" />
+        <img src={heroImage} alt="Restaurante de hotel frente al mar con pérgola de madera y vistas tropicales" width={1376} height={768} fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover" />
         <div aria-hidden className="hero-shade absolute inset-0 -z-10" />
         <div className="wrap flex h-full flex-col justify-between gap-8 pb-12 pt-36 md:pb-14 md:pt-40">
           <h1 className="max-w-[560px] text-[36px] font-semibold leading-[1.15] lg:text-[52px]">Solución a medida para proyectos contract.</h1>
@@ -35,55 +36,58 @@ function Home() {
         </div>
       </section>
 
-      <Reveal>
-        <ImageFeature image={aboutImage} imageAlt="Lounge de hotel con mobiliario contract y luz natural" tag="Efilogic" title={HOME_INTRO.title} titleId="home-about">
-          {HOME_INTRO.paragraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-          <Link to="/sobre-efilogic" className="link-text inline-flex items-center gap-3 text-[14px] font-semibold">
-            Sobre nosotros <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" />
-          </Link>
-        </ImageFeature>
-      </Reveal>
+      <div className="pt-14 md:pt-20">
+        <Reveal>
+          <ImageFeature image={aboutImage} imageAlt="Lounge de hotel con mobiliario contract y luz natural" tag="Efilogic" title={HOME_INTRO.title} titleId="home-about">
+            {HOME_INTRO.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+            <Link to="/sobre-efilogic" className="link-text inline-flex items-center gap-3 text-[14px] font-semibold">
+              Sobre nosotros <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" />
+            </Link>
+          </ImageFeature>
+        </Reveal>
+      </div>
 
-      <section className="bg-blanco pb-14 md:pb-20" aria-labelledby="home-solutions">
+      <section className="bg-blanco pt-14 pb-14 md:pt-20 md:pb-20" aria-labelledby="home-solutions">
         <div className="wrap grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
-          <div className="relative isolate aspect-[5/4] overflow-hidden bg-grafito text-blanco">
-            <img src={solutionsImage} alt="Restaurante de hotel con iluminación cálida y vistas al mar" loading="lazy" width={1536} height={1024} className="absolute inset-0 -z-20 h-full w-full object-cover" />
-            <div aria-hidden className="hero-shade absolute inset-0 -z-10" />
-            <h2 id="home-solutions" className="absolute bottom-8 left-6 right-6 text-center text-[24px] font-semibold leading-snug md:bottom-10 md:text-[28px]">Soluciones a medida<br />para cada proyecto</h2>
-          </div>
-          <ol className="flex flex-col gap-6 md:gap-8">
-            {HOME_SOLUTIONS.map((solution, i) => (
-              <li key={solution.title} className="flex items-baseline gap-4 md:gap-5">
-                <span className="shrink-0 text-[20px] font-light md:text-[24px]">{i + 1}.</span>
-                <Link to="/servicios-ffe" hash={solution.anchor} className="group text-[20px] font-semibold leading-snug md:text-[24px]">
+          <ol className="flex flex-col gap-8 md:gap-10 lg:order-1">
+            {HOME_SOLUTIONS.map((solution) => (
+              <li key={solution.title}>
+                <Link to="/servicios-ffe" hash={solution.anchor} className="group text-[24px] font-semibold leading-snug md:text-[30px]">
                   <span className="link-text">{solution.title}</span>{" "}
-                  <ArrowUpRight aria-hidden className="ml-2 inline h-6 w-6 text-ambar transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 md:h-7 md:w-7" strokeWidth={1.5} />
+                  <ArrowUpRight aria-hidden className="ml-2 inline h-7 w-7 text-ambar transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 md:h-8 md:w-8" strokeWidth={1.5} />
                 </Link>
               </li>
             ))}
           </ol>
+          <div className="relative isolate aspect-[5/4] overflow-hidden bg-grafito text-blanco lg:order-2">
+            <img src={solutionsImage} alt="Terraza de hotel con vistas al mar en Las Palmas de Gran Canaria" loading="lazy" width={1536} height={1024} className="absolute inset-0 -z-20 h-full w-full object-cover" />
+            <div aria-hidden className="hero-shade absolute inset-0 -z-10" />
+            <h2 id="home-solutions" className="absolute bottom-8 left-6 right-6 text-center text-[24px] font-semibold leading-snug md:bottom-10 md:text-[28px]">Soluciones a medida<br />para cada proyecto</h2>
+          </div>
         </div>
       </section>
 
       <ProjectsShowcase />
 
-      <Reveal>
-        <ImageFeature
-          image={processImage}
-          imageAlt="Suite de hotel terminada e instalada, con detalle de cabecero textil"
-          tag="Cómo trabajamos"
-          title="Planificamos desde el día de apertura hacia atrás."
-          titleId="home-process"
-          reverse
-        >
-          <p>Cada pieza tiene su fecha y cada fecha, su responsable. Fábrica, almacén y montaje siguen el mismo calendario: el de tu hotel.</p>
-          <Link to="/como-trabajamos" className="link-text inline-flex items-center gap-3 text-[14px] font-semibold">
-            Ver cómo dirigimos un proyecto <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" />
-          </Link>
-        </ImageFeature>
-      </Reveal>
+      <div className="pb-14 md:pb-20">
+        <Reveal>
+          <ImageFeature
+            image={processImage}
+            imageAlt="Suite de hotel terminada e instalada, con detalle de cabecero textil"
+            tag="Cómo trabajamos"
+            title="Planificamos desde el día de apertura hacia atrás."
+            titleId="home-process"
+            reverse
+          >
+            <p>Cada pieza tiene su fecha y cada fecha, su responsable. Fábrica, almacén y montaje siguen el mismo calendario: el de tu hotel.</p>
+            <Link to="/como-trabajamos" className="link-text inline-flex items-center gap-3 text-[14px] font-semibold">
+              Ver cómo dirigimos un proyecto <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" />
+            </Link>
+          </ImageFeature>
+        </Reveal>
+      </div>
 
       <section className="section-y bg-crema">
         <div className="wrap grid gap-12 md:grid-cols-12">
@@ -106,7 +110,7 @@ function Home() {
   );
 }
 
-const PROJECT_IMAGES = [projectCostaAtlantica, projectBoutiqueMadrid, projectResortCaribe];
+const PROJECT_IMAGES = [projectHdSensarena, projectSercotelCanteras, projectValetinSomni, projectMeliaTrinidad];
 
 const SLIDE_INTERVAL_MS = 6000;
 
@@ -121,11 +125,7 @@ function ProjectsShowcase() {
   }, [index, paused]);
 
   return (
-    <section className="bg-blanco pb-14 md:pb-20" aria-label="Proyectos destacados">
-      <div className="wrap mb-8 flex flex-wrap items-end justify-between gap-6">
-        <SectionHeader eyebrow="Proyectos" title="Espacios que cobran vida." />
-        <Link to="/proyectos" className="link-text inline-flex items-center gap-3 text-[14px] font-medium">Ver proyectos <ArrowUpRight aria-hidden className="h-5 w-5" /></Link>
-      </div>
+    <section className="section-y bg-blanco" aria-label="Proyectos destacados">
       <div
         className="relative aspect-[4/3] w-full overflow-hidden bg-grafito text-blanco md:aspect-[16/7]"
         aria-roledescription="carrusel"

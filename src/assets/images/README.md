@@ -14,8 +14,8 @@ proyecto · sustituir") — así se ve de un vistazo qué falta por subir.
    archivo de código: la foto aparece sola en su sitio, recortada
    automáticamente a la proporción de ese hueco.
 
-Ejemplo: para la foto de portada del proyecto "Hotel Costa Atlántica",
-guarda el archivo en `src/assets/images/proyectos/hotel-costa-atlantica/hero.jpg`.
+Ejemplo: para la foto de portada del proyecto "HD Sensarena",
+guarda el archivo en `src/assets/images/proyectos/hd-sensarena/hero.jpg`.
 
 ## Huecos disponibles
 
@@ -35,8 +35,8 @@ guarda el archivo en `src/assets/images/proyectos/hotel-costa-atlantica/hero.jpg
 - `proyectos/<slug-del-proyecto>/detalle` — foto de detalle de materiales.
 - `proyectos/<slug-del-proyecto>/zona-comun` — foto de zona común.
 - `proyectos/<slug-del-proyecto>/restaurante` — foto de restaurante.
-  Slugs de proyecto actuales: `hotel-costa-atlantica`,
-  `boutique-hotel-casco-historico`, `resort-caribe-sur`.
+  Slugs de proyecto actuales: `hd-sensarena`, `sercotel-canteras`,
+  `valetin-somni`, `melia-trinidad-peninsula`.
 - `recursos/<slug-del-recurso>/portada` — foto de portada de cada recurso
   (se usa tanto en la tarjeta del listado como en el artículo).
   Slugs actuales: `guia-ffe-hotelero`, `calendario-ffe-aperturas`,
