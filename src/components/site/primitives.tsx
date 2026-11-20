@@ -43,6 +43,50 @@ export function PrimaryCTA({ dark = false, className }: { dark?: boolean; classN
   );
 }
 
+/** Etiqueta ámbar que corona un título, como en los bloques de imagen grande. */
+export function SectionTag({ children, className }: { children: ReactNode; className?: string }) {
+  return <span className={cn("inline-block w-fit bg-ambar px-5 py-2.5 text-[14px] font-bold text-grafito", className)}>{children}</span>;
+}
+
+/**
+ * Bloque de imagen grande a sangre + panel de texto (etiqueta ámbar, título,
+ * subtexto). La imagen ocupa la mitad de la sección sin recortes decorativos.
+ */
+export function ImageFeature({
+  image,
+  imageAlt,
+  tag,
+  title,
+  titleId,
+  children,
+  reverse = false,
+  className,
+}: {
+  image: string;
+  imageAlt: string;
+  tag: string;
+  title: ReactNode;
+  titleId?: string;
+  children: ReactNode;
+  reverse?: boolean;
+  className?: string;
+}) {
+  return (
+    <div className={cn("grid lg:grid-cols-2", className)}>
+      <div className={cn("relative aspect-[4/3] lg:aspect-auto lg:min-h-[520px]", reverse && "lg:order-2")}>
+        <img src={image} alt={imageAlt} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+      </div>
+      <div className={cn("flex flex-col justify-center bg-crema px-6 py-14 md:px-16 md:py-20", reverse && "lg:order-1")}>
+        <SectionTag>{tag}</SectionTag>
+        <h2 id={titleId} className="t-h2 mt-6 max-w-md">
+          {title}
+        </h2>
+        <div className="mt-6 space-y-6 text-[16px] leading-relaxed">{children}</div>
+      </div>
+    </div>
+  );
+}
+
 export function EditorialImage({
   alt,
   caption,

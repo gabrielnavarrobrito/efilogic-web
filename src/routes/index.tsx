@@ -2,11 +2,16 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ENTITY, FAQ, HOME_INTRO, HOME_SOLUTIONS, PROJECTS } from "@/content/site";
-import { Eyebrow, Reveal, SectionHeader } from "@/components/site/primitives";
+import { Eyebrow, ImageFeature, Reveal, SectionHeader } from "@/components/site/primitives";
 import { ContactForm, FaqList } from "@/components/site/blocks";
 import { faqLd, seo } from "@/lib/seo";
-import heroSuite from "@/assets/hero-hotel-suite.jpg";
-import hotelLobby from "@/assets/hotel-lobby-detail.jpg";
+import heroImage from "@/assets/home-rooftop-sea-view.webp";
+import aboutImage from "@/assets/home-lobby-lounge.webp";
+import solutionsImage from "@/assets/home-beach-restaurant.webp";
+import processImage from "@/assets/home-bedroom-boho.webp";
+import projectCostaAtlantica from "@/assets/project-costa-atlantica.webp";
+import projectBoutiqueMadrid from "@/assets/project-boutique-madrid.webp";
+import projectResortCaribe from "@/assets/project-resort-caribe.webp";
 
 export const Route = createFileRoute("/")({
   head: () => seo({
@@ -22,7 +27,7 @@ function Home() {
   return (
     <>
       <section className="home-hero relative isolate overflow-hidden bg-grafito text-blanco">
-        <img src={heroSuite} alt="Interior de una suite de hotel con mobiliario a medida" width={1376} height={768} fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover" />
+        <img src={heroImage} alt="Terraza de hotel con vistas al mar en Las Palmas de Gran Canaria" width={1376} height={768} fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover" />
         <div aria-hidden className="hero-shade absolute inset-0 -z-10" />
         <div className="wrap flex h-full flex-col justify-between gap-8 pb-12 pt-36 md:pb-14 md:pt-40">
           <h1 className="max-w-[560px] text-[36px] font-semibold leading-[1.15] lg:text-[52px]">Solución a medida para proyectos contract.</h1>
@@ -30,25 +35,21 @@ function Home() {
         </div>
       </section>
 
-      <section className="section-y bg-blanco" aria-labelledby="home-about">
-        <div className="wrap grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
-          <Reveal className="max-w-lg">
-            <Eyebrow>Efilogic</Eyebrow>
-            <h2 id="home-about" className="t-h2 mt-6 max-w-md">{HOME_INTRO.title}</h2>
-            {HOME_INTRO.paragraphs.map((paragraph) => <p key={paragraph} className="mt-6 text-[16px] leading-relaxed">{paragraph}</p>)}
-            <Link to="/sobre-efilogic" className="link-text mt-8 inline-flex items-center gap-3 text-[14px] font-semibold">Sobre nosotros <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" /></Link>
-          </Reveal>
-          <div className="plan-marks relative isolate aspect-[6/5] w-full" aria-label="Interiores y detalles de mobiliario hotelero">
-            <img src={hotelLobby} alt="Interior hotelero con mobiliario e iluminación contemporáneos" loading="lazy" width={1536} height={1024} className="absolute right-0 top-0 h-[84%] w-[78%] object-cover" />
-            <img src={heroSuite} alt="Detalle de mobiliario a medida en una suite" loading="lazy" width={1376} height={768} className="absolute bottom-0 left-0 h-[58%] w-[56%] border-r-[10px] border-t-[10px] border-blanco object-cover" />
-          </div>
-        </div>
-      </section>
+      <Reveal>
+        <ImageFeature image={aboutImage} imageAlt="Lounge de hotel con mobiliario contract y luz natural" tag="Efilogic" title={HOME_INTRO.title} titleId="home-about">
+          {HOME_INTRO.paragraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+          <Link to="/sobre-efilogic" className="link-text inline-flex items-center gap-3 text-[14px] font-semibold">
+            Sobre nosotros <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" />
+          </Link>
+        </ImageFeature>
+      </Reveal>
 
       <section className="bg-blanco pb-14 md:pb-20" aria-labelledby="home-solutions">
         <div className="wrap grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
           <div className="relative isolate aspect-[5/4] overflow-hidden bg-grafito text-blanco">
-            <img src={hotelLobby} alt="Espacio hotelero con mobiliario contract" loading="lazy" width={1536} height={1024} className="absolute inset-0 -z-20 h-full w-full object-cover" />
+            <img src={solutionsImage} alt="Restaurante de hotel con iluminación cálida y vistas al mar" loading="lazy" width={1536} height={1024} className="absolute inset-0 -z-20 h-full w-full object-cover" />
             <div aria-hidden className="hero-shade absolute inset-0 -z-10" />
             <h2 id="home-solutions" className="absolute bottom-8 left-6 right-6 text-center text-[24px] font-semibold leading-snug md:bottom-10 md:text-[28px]">Soluciones a medida<br />para cada proyecto</h2>
           </div>
@@ -68,19 +69,21 @@ function Home() {
 
       <ProjectsShowcase />
 
-      <section className="section-y bg-blanco" aria-labelledby="home-process">
-        <div className="wrap grid items-center gap-10 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <Eyebrow>Cómo trabajamos</Eyebrow>
-            <h2 id="home-process" className="t-h2 mt-6 max-w-xl">Planificamos desde el día de apertura hacia atrás.</h2>
-            <p className="mt-6 max-w-sm text-[16px] leading-relaxed">Cada pieza tiene su fecha y cada fecha, su responsable. Fábrica, almacén y montaje siguen el mismo calendario: el de tu hotel.</p>
-            <Link to="/como-trabajamos" className="link-text mt-8 inline-flex items-center gap-3 text-[14px] font-semibold">Ver cómo dirigimos un proyecto <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" /></Link>
-          </div>
-          <div className="plan-marks relative md:col-span-6 md:col-start-7">
-            <img src={heroSuite} alt="Suite de hotel terminada e instalada" loading="lazy" width={1376} height={768} className="aspect-[3/2] w-full object-cover" />
-          </div>
-        </div>
-      </section>
+      <Reveal>
+        <ImageFeature
+          image={processImage}
+          imageAlt="Suite de hotel terminada e instalada, con detalle de cabecero textil"
+          tag="Cómo trabajamos"
+          title="Planificamos desde el día de apertura hacia atrás."
+          titleId="home-process"
+          reverse
+        >
+          <p>Cada pieza tiene su fecha y cada fecha, su responsable. Fábrica, almacén y montaje siguen el mismo calendario: el de tu hotel.</p>
+          <Link to="/como-trabajamos" className="link-text inline-flex items-center gap-3 text-[14px] font-semibold">
+            Ver cómo dirigimos un proyecto <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" />
+          </Link>
+        </ImageFeature>
+      </Reveal>
 
       <section className="section-y bg-crema">
         <div className="wrap grid gap-12 md:grid-cols-12">
@@ -103,7 +106,7 @@ function Home() {
   );
 }
 
-const PROJECT_IMAGES = [hotelLobby, heroSuite, hotelLobby];
+const PROJECT_IMAGES = [projectCostaAtlantica, projectBoutiqueMadrid, projectResortCaribe];
 
 const SLIDE_INTERVAL_MS = 6000;
 
