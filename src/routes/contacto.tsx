@@ -34,7 +34,7 @@ function Page() {
           <aside className="md:col-span-4 md:col-start-9">
             <div className="border-t border-grafito pt-6">
               <p className="t-eyebrow">Sede</p>
-              <address className="mt-4 not-italic">Las Palmas de Gran Canaria<br />España</address>
+              <address className="mt-4 not-italic">C. Nicolás Estévanez 53, Local Izquierdo<br />Las Palmas de Gran Canaria, 35007<br />España</address>
             </div>
             <p className="mt-10 text-[16px]">{ENTITY}</p>
           </aside>

@@ -4,6 +4,8 @@ import { Breadcrumbs, EditorialImage, PageHero, PrimaryCTA, Stat } from "@/compo
 import { SLOTS } from "@/content/images";
 import { seo } from "@/lib/seo";
 
+const LEAD = "Llevamos más de 25 años sentados en la mesa de cada proyecto, no detrás de un catálogo.";
+
 export const Route = createFileRoute("/sobre-efilogic")({
   head: () =>
     seo({
@@ -19,22 +21,19 @@ function Page() {
   return (
     <>
       <div className="bg-crema"><Breadcrumbs items={[{ label: "Sobre Efilogic" }]} /></div>
-      <PageHero eyebrow="Sobre Efilogic" title="Director de orquesta FF&E." lead={ENTITY}>
+      <PageHero eyebrow="Sobre Efilogic" title="Partner, no proveedor." lead={LEAD}>
         <PrimaryCTA />
       </PageHero>
       <section className="bg-blanco section-y">
-        <div className="wrap grid gap-16 md:grid-cols-12">
-          <div className="md:col-span-6">
-            <h2 className="t-h2">Partner, no proveedor.</h2>
-            <p className="mt-6 measure">
-              No somos un fabricante ni un catálogo. Somos el equipo que se sienta en la mesa de tu proyecto para que la visión del estudio, el presupuesto de compras y la fecha del operador lleguen intactos a la apertura.
-            </p>
-            <p className="mt-4 measure">
-              Desde Las Palmas de Gran Canaria orquestamos proyectos contract en Europa, América y África, con fabricantes de varios continentes y un mismo método.
-            </p>
-          </div>
-          <div className="md:col-span-5 md:col-start-8">
+        <div className="wrap grid items-center gap-16 md:grid-cols-12">
+          <div className="md:col-span-5">
             <EditorialImage alt="Restaurante de hotel terminado con luz natural" ratio="4/5" slot={SLOTS.sobreEfilogic.restaurante} />
+          </div>
+          <div className="md:col-span-6 md:col-start-7">
+            <h2 className="t-h2">Así trabajamos contigo.</h2>
+            <p className="mt-6 measure">No vendemos mobiliario suelto. Nos implicamos en tu proyecto para que el diseño, el presupuesto y la fecha de apertura lleguen intactos.</p>
+            <p className="mt-4 measure">Desde 2002, en Efilogic conectamos mercados internacionales ofreciendo soluciones integrales de producción, transporte y logística. Nacimos dominando la cadena de suministro global y evolucionamos para dar respuesta a las exigencias reales del equipamiento hotelero y el canal Contract.</p>
+            <p className="mt-4 measure">Nuestra filosofía se basa en un compromiso innegociable: la fiabilidad operativa y la tranquilidad del cliente. Combinamos cercanía en el trato, control directo en cuatro continentes y supervisión en cada fase para acompañar a cadenas hoteleras y gestores de proyectos de principio a fin, garantizando resultados a medida y aperturas sin imprevistos.</p>
           </div>
         </div>
       </section>

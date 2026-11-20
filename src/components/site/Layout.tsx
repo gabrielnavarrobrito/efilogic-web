@@ -1,11 +1,9 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { ChevronDown, Facebook, Instagram, Linkedin, Menu, Search, X, Youtube } from "lucide-react";
+import { ChevronDown, Menu, Search, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
 import { MENU, SOCIALS, SEARCH_PAGES } from "@/content/site";
 import { cn } from "@/lib/utils";
-
-const SOCIAL_ICONS = { linkedin: Linkedin, instagram: Instagram, facebook: Facebook, youtube: Youtube } as const;
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -34,7 +32,7 @@ export function Header() {
       className={cn(
         "top-0 z-50 w-full transition-colors duration-300",
         isHome ? "fixed" : "sticky",
-        transparent ? "bg-transparent text-blanco" : "border-b border-line bg-blanco text-grafito",
+        transparent ? "bg-transparent pt-4 text-blanco md:pt-6" : "border-b border-line bg-blanco text-grafito",
       )}
     >
       <div className="wrap flex h-[72px] items-center justify-between gap-4">
@@ -59,9 +57,9 @@ export function Header() {
                   activeOptions={{ exact: m.to === "/" }}
                 >
                   {m.label}
-                  {m.children && <ChevronDown strokeWidth={1.5} className="h-4 w-4" aria-hidden />}
+                  {m.children && m.label !== "Nosotros" && <ChevronDown strokeWidth={1.5} className="h-4 w-4" aria-hidden />}
                 </Link>
-                {m.children && (
+                {m.children && m.label !== "Nosotros" && (
                   <ul className="invisible absolute left-1/2 top-full w-64 -translate-x-1/2 border border-line bg-blanco py-3 text-grafito opacity-0 transition-opacity duration-300 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                     {m.children.map((c) => (
                       <li key={c.to}>
@@ -134,7 +132,7 @@ export function Header() {
             {MENU.map((m) => (
               <li key={m.label} className="border-b border-line py-2">
                 <Link to={m.to} className="block py-3 text-[18px] font-semibold">{m.label}</Link>
-                {m.children && (
+                {m.children && m.label !== "Nosotros" && (
                   <ul className="pb-2 pl-4">
                     {m.children.map((c) => (
                       <li key={c.to}>
@@ -174,19 +172,16 @@ export function Footer() {
             ))}
           </nav>
         </div>
-        <div className="mt-16 flex flex-col items-start justify-between gap-6 border-t border-line-inverse pt-8 md:flex-row md:items-center">
+        <div className="mt-16 flex flex-col items-start justify-between gap-6 border-t border-ambar pt-8 md:flex-row md:items-center">
           <p className="text-[13px]">© {new Date().getFullYear()} Efilogic</p>
-          <ul className="flex gap-3" aria-label="Redes sociales">
-            {SOCIALS.map((s) => {
-              const Icon = SOCIAL_ICONS[s.key];
-              return (
-                <li key={s.key}>
-                  <a href={s.href} aria-label={s.label} target="_blank" rel="noopener noreferrer" className="flex h-11 w-11 items-center justify-center transition-colors duration-300 hover:text-ambar">
-                    <Icon strokeWidth={1.5} className="h-5 w-5" />
-                  </a>
-                </li>
-              );
-            })}
+          <ul className="flex gap-6" aria-label="Redes sociales">
+            {SOCIALS.map((s) => (
+              <li key={s.key}>
+                <a href={s.href} target="_blank" rel="noopener noreferrer" className="t-eyebrow transition-colors duration-300 hover:text-ambar">
+                  {s.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

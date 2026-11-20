@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ENTITY, FAQ, SERVICES } from "@/content/site";
+import { ENTITY, FAQ, SERVICES, SERVICES_INTRO } from "@/content/site";
 import { SLOTS } from "@/content/images";
 import { Breadcrumbs, EditorialImage, PageHero, PrimaryCTA, Reveal } from "@/components/site/primitives";
 import { FaqList } from "@/components/site/blocks";
@@ -8,8 +8,8 @@ import { faqLd, seo } from "@/lib/seo";
 export const Route = createFileRoute("/servicios-ffe")({
   head: () =>
     seo({
-      title: "Servicios FF&E hotelero · Suministro e instalación | Efilogic",
-      description: "Suministro FF&E, consolidación y custodia e instalación de mobiliario hotelero bajo un único responsable. Equipamiento contract para aperturas.",
+      title: "Gestión integral FF&E · Equipamiento hotelero llave en mano | Efilogic",
+      description: SERVICES_INTRO.lead,
       path: "/servicios-ffe",
       crumbs: [{ name: "Servicios FF&E", path: "/servicios-ffe" }],
       jsonLd: [
@@ -27,36 +27,46 @@ export const Route = createFileRoute("/servicios-ffe")({
   component: Page,
 });
 
+// Tamaños variados: 7+5 llenan la fila, el tercero va de banner ancho.
+const SERVICES_LAYOUT = ["md:col-span-7", "md:col-span-5", "md:col-span-12"];
+const SERVICES_LAYOUT_RATIO = ["4/3", "3/4", "21/9"];
+
 function Page() {
   return (
     <>
       <div className="bg-crema"><Breadcrumbs items={[{ label: "Servicios FF&E" }]} /></div>
       <PageHero
-        eyebrow="Servicios FF&E"
-        title="Suministro, custodia e instalación FF&E."
-        lead="FF&E es todo el equipamiento que convierte una obra terminada en un hotel listo para abrir. Lo orquestamos de principio a fin, sin intermediarios y sin pérdida de diseño."
+        eyebrow={SERVICES_INTRO.eyebrow}
+        title={SERVICES_INTRO.title}
+        lead={SERVICES_INTRO.lead}
       >
         <PrimaryCTA />
       </PageHero>
-      {SERVICES.map((s, i) => (
-        <section key={s.slug} id={s.slug} className={i % 2 ? "bg-crema section-y" : "bg-blanco section-y"}>
-          <div className="wrap grid items-center gap-12 md:grid-cols-12">
-            <div className={i % 2 ? "md:col-span-7 md:order-2" : "md:col-span-7"}>
-              <EditorialImage alt={`${s.title} en un hotel terminado`} ratio="7/5" slot={SLOTS.servicios(s.slug)} />
-            </div>
-            <Reveal className={i % 2 ? "md:col-span-5 md:order-1" : "md:col-span-5"}>
-              <p className="t-eyebrow">{String(i + 1).padStart(2, "0")}</p>
-              <h2 className="t-h2 mt-6">{s.title}</h2>
-              <p className="mt-6">{s.long}</p>
-              <ul className="mt-8 space-y-3">
-                {s.points.map((p) => (
-                  <li key={p} className="border-t border-line-strong pt-3 text-[16px]">{p}</li>
-                ))}
-              </ul>
+      <section className="bg-blanco section-y">
+        <div className="wrap grid gap-x-6 gap-y-14 md:grid-cols-12">
+          {SERVICES.map((s, i) => (
+            <Reveal key={s.slug} className={SERVICES_LAYOUT[i]!}>
+              <div id={s.slug} className="scroll-mt-24">
+                <EditorialImage alt={`${s.title} en un hotel terminado`} ratio={SERVICES_LAYOUT_RATIO[i]!} slot={SLOTS.servicios(s.slug)} />
+                <p className="t-eyebrow mt-5">{String(i + 1).padStart(2, "0")}</p>
+                <h2 className="t-h3 mt-2">{s.title}</h2>
+                <p className="mt-2 text-[15px] leading-relaxed">{s.short}</p>
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {s.points.map((p) => (
+                    <li key={p} className="tag bg-crema">{p}</li>
+                  ))}
+                </ul>
+              </div>
             </Reveal>
-          </div>
-        </section>
-      ))}
+          ))}
+        </div>
+      </section>
+      <section className="bg-crema">
+        <div className="wrap py-16 text-center md:py-20">
+          <p className="t-quote mx-auto max-w-2xl">{SERVICES_INTRO.cierre}</p>
+          <div className="mt-8 flex justify-center"><PrimaryCTA /></div>
+        </div>
+      </section>
       <section className="bg-blanco section-y">
         <div className="wrap grid gap-12 md:grid-cols-12">
           <h2 className="t-h2 md:col-span-4">Preguntas frecuentes</h2>

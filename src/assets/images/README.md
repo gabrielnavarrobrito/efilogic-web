@@ -19,12 +19,12 @@ guarda el archivo en `src/assets/images/proyectos/hd-sensarena/hero.jpg`.
 
 ## Huecos disponibles
 
-- `servicios/<slug-del-servicio>` — foto de cada servicio en **Servicios FF&E**.
-  Slugs actuales: `suministro-ffe`, `consolidacion-y-custodia`,
+- `servicios/<slug-del-servicio>` — foto de cada bloque en **Gestión integral
+  FF&E**. Slugs actuales: `equipamiento-integral`, `fabricacion`,
   `instalacion-mobiliario-hotelero`.
-- `como-trabajamos/<fase>` — foto de cada fase en **Cómo trabajamos**.
-  Fases actuales: `briefing`, `compra`, `fabricacion`, `consolidacion`,
-  `entrega`, `instalacion`.
+- `como-trabajamos/<ancla>` — foto de cada fase en **Cómo trabajamos**.
+  Anclas actuales: `estudio-previo`, `prototipado`, `control-calidad`,
+  `logistica`, `instalacion`.
 - `para-disenadores/detalle` — foto única de la página **Para diseñadores**.
 - `para-compras-y-pm/lobby` — foto única de la página **Para compras y PM**.
 - `sobre-efilogic/restaurante` — foto única de la página **Sobre Efilogic**.

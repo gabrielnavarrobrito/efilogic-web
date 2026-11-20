@@ -29,21 +29,11 @@ export function getSlotImage(path: string): string | undefined {
   return imagesByPath.get(path);
 }
 
-/** Convierte un título ("Fabricación") en un nombre de archivo ("fabricacion"). */
-function slugify(title: string): string {
-  return title
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-}
-
 // Rutas de archivo de cada hueco de foto del sitio, agrupadas por página.
 // Sirven de referencia rápida de "dónde va cada foto".
 export const SLOTS = {
   servicios: (slug: string) => `servicios/${slug}`,
-  comoTrabajamos: (title: string) => `como-trabajamos/${slugify(title)}`,
+  comoTrabajamos: (anchor: string) => `como-trabajamos/${anchor}`,
   paraDisenadores: {
     detalle: "para-disenadores/detalle",
   },

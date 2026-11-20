@@ -58,6 +58,7 @@
   --line-strong: rgba(27, 31, 41, 0.15);
   --line-inverse: rgba(255, 255, 255, 0.18);
   --hero-shade: linear-gradient(180deg, color-mix(in srgb, var(--grafito) 38%, transparent), color-mix(in srgb, var(--grafito) 18%, transparent) 45%, color-mix(in srgb, var(--grafito) 76%, transparent));
+  --hero-shade-soft: linear-gradient(180deg, color-mix(in srgb, var(--grafito) 28%, transparent), color-mix(in srgb, var(--grafito) 12%, transparent) 45%, color-mix(in srgb, var(--grafito) 60%, transparent));
 
   --background: var(--blanco);
   --foreground: var(--grafito);
@@ -168,10 +169,34 @@
   .t-figure { font-size: 4rem; }
 }
 
-.home-hero { height: min(780px, 90svh); min-height: 560px; }
+.home-hero { height: 100svh; min-height: 560px; }
 .hero-shade { background: var(--hero-shade); }
-@media (max-width: 767px) {
-  .home-hero { height: min(640px, 88svh); min-height: 520px; }
+.hero-shade-soft { background: var(--hero-shade-soft); }
+
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: none; }
+}
+.hero-rise {
+  animation: hero-rise 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 150ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise { animation: none; }
+}
+
+/* Revelado lento, línea a línea, como si el titular se fuera escribiendo.
+   Usa el mismo disparador que .reveal (la clase is-visible que añade
+   Reveal al entrar en pantalla), así que no añade ningún observer nuevo. */
+.write-in {
+  display: block;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 900ms cubic-bezier(0.16, 1, 0.3, 1), transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible .write-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .write-in { transition: none; }
 }
 
 /* Brand signatures */
@@ -322,6 +347,11 @@
 /* Image placeholder */
 @utility placeholder-img {
   background-color: var(--arena);
+}
+
+/* Logo de marca a un solo color, sea cual sea el color del archivo original */
+@utility logo-mono {
+  filter: brightness(0);
 }
 
 /* Reveal */

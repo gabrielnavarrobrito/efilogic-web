@@ -13,11 +13,12 @@ export const HOME_INTRO = {
   ],
 };
 
+// to: página de destino. anchor: ancla opcional dentro de esa página.
 export const HOME_SOLUTIONS = [
-  { title: "Mobiliario contract", anchor: "suministro-ffe" },
-  { title: "Logística internacional", anchor: "consolidacion-y-custodia" },
-  { title: "FF&E y equipamiento integral", anchor: "suministro-ffe" },
-  { title: "Equipamiento hotelero", anchor: "instalacion-mobiliario-hotelero" },
+  { title: "Mobiliario contract", to: "/servicios-ffe", anchor: "fabricacion" },
+  { title: "Logística internacional", to: "/como-trabajamos", anchor: "logistica" },
+  { title: "FF&E y equipamiento integral", to: "/servicios-ffe", anchor: undefined },
+  { title: "Equipamiento hotelero", to: "/proyectos", anchor: undefined },
 ] as const;
 
 export const NAV = [
@@ -26,8 +27,7 @@ export const NAV = [
   { to: "/proyectos", label: "Proyectos" },
   { to: "/para-disenadores", label: "Diseñadores" },
   { to: "/para-compras-y-pm", label: "Compras y PM" },
-  { to: "/sobre-efilogic", label: "Sobre Efilogic" },
-  { to: "/recursos", label: "Recursos" },
+  { to: "/sobre-efilogic", label: "Nosotros" },
 ] as const;
 
 type MenuItem = { label: string; to: string; children?: { label: string; to: string }[] };
@@ -62,80 +62,83 @@ export const SEARCH_PAGES = [
 
 // Sustituir "#" por las URLs reales de cada red.
 export const SOCIALS = [
-  { key: "linkedin", label: "LinkedIn", href: "#" },
   { key: "instagram", label: "Instagram", href: "#" },
-  { key: "facebook", label: "Facebook", href: "#" },
-  { key: "youtube", label: "YouTube", href: "#" },
+  { key: "linkedin", label: "LinkedIn", href: "#" },
 ] as const;
 
 export const PILLARS = [
-  {
-    title: "Custodia del diseño",
-    text: "Cada pieza se fabrica, revisa y protege según la especificación original. Lo que diseñas es lo que llega a la habitación.",
-  },
-  {
-    title: "Control total",
-    text: "Un único responsable integra compra, fabricación, consolidación, aduana, entrega e instalación. Sin intermediarios.",
-  },
-  {
-    title: "Cronograma blindado",
-    text: "Planificamos hacia atrás desde la fecha de apertura. Cada hito tiene dueño, fecha y trazabilidad.",
-  },
-  {
-    title: "Trayectoria",
-    text: "Más de 25 años orquestando proyectos contract para hoteles en distintos mercados y con fabricantes de varios continentes.",
-  },
+  { title: "Custodia del diseño", text: "Lo que apruebas es lo que llega a la habitación." },
+  { title: "Control total", text: "Un único responsable, sin intermediarios." },
+  { title: "Cronograma blindado", text: "Planificamos desde tu fecha de apertura." },
+  { title: "Trayectoria", text: "+25 años en proyectos contract internacionales." },
 ];
+
+export const SERVICES_INTRO = {
+  eyebrow: "Gestión integral FF&E",
+  title: "Equipamiento FF&E, llave en mano.",
+  lead: "Aprovisionamiento, fabricación a medida y suministro bajo un único interlocutor.",
+  cierre: "¿Tienes una apertura en marcha? Hablemos de tu partida FF&E.",
+};
 
 export const SERVICES = [
   {
-    slug: "suministro-ffe",
-    title: "Suministro FF&E",
+    slug: "equipamiento-integral",
+    title: "Todo bajo un mismo techo",
     short:
-      "Compra y fabricación bespoke de mobiliario, iluminación, textiles y accesorios contract, fiel a tu especificación.",
-    long: "FF&E (Furniture, Fixtures & Equipment) es todo el equipamiento móvil que convierte una obra terminada en un hotel listo para abrir. Gestionamos la compra y la fabricación de cada pieza —estándar o singular— con fabricantes seleccionados, controles de calidad en origen y aprobación de prototipos.",
-    points: [
-      "Licitación y selección de fabricantes",
-      "Prototipos y habitación modelo",
-      "Control de calidad en fábrica",
-      "Gestión de muestras y acabados",
-    ],
+      "Mobiliario, iluminación, textiles y baños: todo el equipamiento de tu hotel, de un solo proveedor.",
+    long: "Desde 2002 conectamos mercados internacionales para abordar reformas y nuevas aperturas hoteleras de forma integral. No actuamos como simples gestores de compras; seleccionamos materiales preparados para el uso intensivo del sector hospitality, validamos prototipos y garantizamos el cumplimiento normativo y técnico en cada partida.",
+    points: ["Mobiliario", "Iluminación", "Textiles", "Baños y accesorios"],
   },
   {
-    slug: "consolidacion-y-custodia",
-    title: "Consolidación y custodia",
+    slug: "fabricacion",
+    title: "Fabricación a medida",
     short:
-      "Reunimos las piezas de cada origen, las protegemos con embalaje a medida y las custodiamos hasta su instalación.",
-    long: "La consolidación agrupa el equipamiento de múltiples fabricantes en una sola operación controlada. Custodiamos cada pieza con embalaje a medida, inventario por habitación y trazabilidad completa, incluida la gestión aduanera, hasta que llega a su destino final.",
-    points: [
-      "Embalaje a medida por pieza",
-      "Inventario por planta y habitación",
-      "Gestión aduanera integrada",
-      "Trazabilidad de extremo a extremo",
-    ],
+      "Fabricación propia y una red de partners industriales seleccionados en varios continentes.",
+    long: "Combinamos fabricación propia y aprovisionamiento internacional, con una red consolidada de partners industriales en distintos continentes. Validamos prototipos antes de producir en serie, para equilibrar calidad técnica, durabilidad y rentabilidad presupuestaria en cada proyecto.",
+    points: ["Fabricación propia", "Red en varios continentes", "Prototipos validados"],
   },
   {
     slug: "instalacion-mobiliario-hotelero",
-    title: "Instalación de mobiliario hotelero",
+    title: "Instalación en destino",
     short:
-      "Entrega en guante blanco e instalación habitación por habitación, coordinada con la obra y la fecha de apertura.",
-    long: "La instalación de mobiliario hotelero cierra el ciclo: desembalaje, montaje, colocación según planos, retirada de residuos y revisión final con tu equipo. Coordinamos con la constructora para entregar cada planta lista para la apertura.",
-    points: [
-      "Entrega en guante blanco",
-      "Montaje y colocación según planos",
-      "Retirada de embalajes",
-      "Revisión final y lista de remates",
-    ],
+      "Recepción, montaje y supervisión en obra hasta la entrega definitiva, con la lista de remates cerrada antes de la apertura.",
+    long: "Recibimos el equipamiento en destino, coordinamos el montaje y supervisamos cada etapa directamente en el hotel hasta la entrega definitiva. Trabajamos en guante blanco, con secuenciación por plantas y la lista de remates cerrada antes de la llegada del primer huésped.",
+    points: ["Guante blanco", "Montaje por plantas", "Lista de remates"],
   },
 ];
 
+export const PROCESS_INTRO = {
+  title: "De la fábrica a tu última habitación.",
+  lead: "Producción, logística y montaje bajo un mismo método, sin intermediarios.",
+  cierre: "Blindamos los plazos de tu próxima apertura.",
+};
+
 export const PROCESS = [
-  { title: "Briefing", text: "Entendemos tu visión, la especificación y la fecha de apertura." },
-  { title: "Compra", text: "Seleccionamos fabricantes y cerramos condiciones y calidades." },
-  { title: "Fabricación", text: "Prototipos, aprobaciones y control de calidad en origen." },
-  { title: "Consolidación", text: "Reunimos, protegemos y custodiamos cada pieza." },
-  { title: "Entrega", text: "Llegada planificada por planta, coordinada con la obra." },
-  { title: "Instalación", text: "Montaje en guante blanco. Tu visión, instalada." },
+  {
+    title: "Estudio y especificación",
+    anchor: "estudio-previo",
+    text: "Fichas técnicas detalladas para cada pieza, antes de fabricar.",
+  },
+  {
+    title: "Prototipado y fabricación",
+    anchor: "prototipado",
+    text: "Validamos cada prototipo antes de pasar a producción en serie.",
+  },
+  {
+    title: "Control de calidad",
+    anchor: "control-calidad",
+    text: "Pruebas y certificación en fábrica, antes del tránsito.",
+  },
+  {
+    title: "Logística y consolidación",
+    anchor: "logistica",
+    text: "Trazabilidad total con WMS y RFID, al ritmo de la obra.",
+  },
+  {
+    title: "Instalación y montaje",
+    anchor: "instalacion",
+    text: "Montaje y supervisión en el hotel hasta la entrega final.",
+  },
 ];
 
 export type CaseStudy = {
@@ -313,6 +316,19 @@ export const STATS = [
   { value: "+25", label: "años de operativa internacional" },
   { value: "1", label: "único responsable" },
   { value: "0", label: "intermediarios" },
+];
+
+// Cadenas y grupos hoteleros con los que Efilogic ha trabajado.
+// Para añadir una marca más, sigue las instrucciones de
+// src/assets/logos/README.md y añádela aquí con el mismo slug que el archivo.
+// Solo se listan marcas con logo real subido: si no hay logo, no aparecen.
+export const TRUSTED_BRANDS: { slug: string; name: string; suffix?: string }[] = [
+  { slug: "valentin", name: "Valentin", suffix: "Hotels & Resorts" },
+  { slug: "radisson", name: "Radisson" },
+  { slug: "melia", name: "Meliá", suffix: "Hotels & Resorts" },
+  { slug: "dunas", name: "Dunas", suffix: "Hotels & Resorts" },
+  { slug: "hd-hotels", name: "HD", suffix: "hotels" },
+  { slug: "lopesan", name: "Lopesan", suffix: "Hotels & Resorts" },
 ];
 
 export const PERFILES = [

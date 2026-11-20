@@ -5,8 +5,43 @@ import { useState, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { PERFILES, type CaseStudy as CaseT, type Resource } from "@/content/site";
 import { SLOTS } from "@/content/images";
+import { getBrandLogo } from "@/content/logos";
 import { EditorialImage, Eyebrow } from "./primitives";
 import { cn } from "@/lib/utils";
+
+const BRAND_MARK_BOX = "flex h-7 w-12 shrink-0 items-center justify-center sm:h-9 sm:w-20 md:h-10 md:w-28 lg:h-12 lg:w-32";
+
+// Algunos logos traen el trazo más fino o un marco más cuadrado que el resto
+// de wordmarks horizontales, así que a ojo se ven más pequeños aunque midan
+// lo mismo. Este ajuste compensa ese efecto óptico.
+const LOGO_SCALE: Record<string, number> = {
+  melia: 1.15,
+  "hd-hotels": 1.25,
+  lopesan: 1.45,
+};
+
+export function BrandMark({ brand }: { brand: { slug: string; name: string; suffix?: string } }) {
+  const logo = getBrandLogo(brand.slug);
+  if (logo) {
+    const scale = LOGO_SCALE[brand.slug];
+    return (
+      <div className={BRAND_MARK_BOX}>
+        <img
+          src={logo}
+          alt={brand.name}
+          loading="lazy"
+          className="logo-mono h-full w-full object-contain"
+          style={scale ? { transform: `scale(${scale})` } : undefined}
+        />
+      </div>
+    );
+  }
+  return (
+    <div className={BRAND_MARK_BOX}>
+      <p className="whitespace-nowrap text-[12px] font-semibold leading-tight text-grafito sm:text-[16px]">{brand.name}</p>
+    </div>
+  );
+}
 
 export function FaqList({ items }: { items: { q: string; a: string }[] }) {
   return (
