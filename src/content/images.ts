@@ -29,6 +29,18 @@ export function getSlotImage(path: string): string | undefined {
   return imagesByPath.get(path);
 }
 
+/**
+ * Devuelve, ordenadas por nombre de archivo, todas las fotos subidas dentro de
+ * src/assets/images/<folder>/. Sirve para galerías de longitud libre.
+ */
+export function getFolderImages(folder: string): { key: string; url: string }[] {
+  const prefix = `${folder}/`;
+  return [...imagesByPath.entries()]
+    .filter(([key]) => key.startsWith(prefix) && !key.slice(prefix.length).includes("/"))
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([key, url]) => ({ key, url }));
+}
+
 // Rutas de archivo de cada hueco de foto del sitio, agrupadas por página.
 // Sirven de referencia rápida de "dónde va cada foto".
 export const SLOTS = {
@@ -49,6 +61,8 @@ export const SLOTS = {
     detalle: `proyectos/${slug}/detalle`,
     zonaComun: `proyectos/${slug}/zona-comun`,
     restaurante: `proyectos/${slug}/restaurante`,
+    /** Carpeta con fotos adicionales: se muestran todas, en orden de nombre. */
+    galeria: `proyectos/${slug}/galeria`,
   }),
   recursos: (slug: string) => `recursos/${slug}/portada`,
 } as const;

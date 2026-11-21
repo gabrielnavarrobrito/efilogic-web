@@ -35,6 +35,10 @@ guarda el archivo en `src/assets/images/proyectos/hd-sensarena/hero.jpg`.
 - `proyectos/<slug-del-proyecto>/detalle` — foto de detalle de materiales.
 - `proyectos/<slug-del-proyecto>/zona-comun` — foto de zona común.
 - `proyectos/<slug-del-proyecto>/restaurante` — foto de restaurante.
+- `proyectos/<slug-del-proyecto>/galeria/` — carpeta opcional con todas las
+  fotos extra que quieras. Se muestran al final de la galería, ordenadas por
+  nombre (usa `01-`, `02-`…). El nombre sin número se usa como texto
+  alternativo, así que descríbelo: `01-terraza-vistas-mar.webp`.
   Slugs de proyecto actuales: `hd-sensarena`, `sercotel-canteras`,
   `valetin-somni`, `melia-trinidad-peninsula`.
 - `recursos/<slug-del-recurso>/portada` — foto de portada de cada recurso

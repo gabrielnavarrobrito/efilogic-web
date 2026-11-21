@@ -154,6 +154,8 @@ export type CaseStudy = {
   location: string;
   year: string;
   type: string;
+  /** Estado del proyecto, p. ej. "Terminado" o "En curso". */
+  status?: string;
   summary: string;
   reto: string;
   solucion: string;
@@ -184,20 +186,21 @@ export const PROJECTS: CaseStudy[] = [
   {
     slug: "sercotel-canteras",
     name: "Sercotel Canteras",
-    location: "Madrid",
-    year: "2024",
-    type: "Boutique hotel",
+    location: "Las Palmas de Gran Canaria",
+    year: "2023",
+    type: "Hotel 4*",
+    status: "Terminado",
     summary:
-      "Apertura de un edificio protegido con 48 suites y mobiliario singular diseñado por el estudio de interiorismo.",
-    reto: "Instalar piezas singulares de gran formato en un edificio protegido, con accesos limitados y un estudio de interiorismo exigente con cada acabado.",
+      "Renovación integral de 125 habitaciones y suites en primera línea de la playa de Las Canteras, a pocos pasos del Auditorio Alfredo Kraus.",
+    reto: "Dar a un 4 estrellas en primera línea de Las Canteras un lenguaje contemporáneo a la altura de su ubicación: 125 habitaciones y suites y zonas comunes renovadas sin perder la relación con el mar.",
     solucion:
-      "Prototipos validados en fábrica con el estudio, embalaje a medida para cada pieza singular y entrega nocturna planificada por planta.",
+      "Un interior que juega con las formas, los relieves y los grises y azules de la piedra y el mármol. Cabeceros curvos de madera con luz integrada, celosías con óculos y mobiliario de rejilla natural en el restaurante abierto al paseo.",
     resultado:
-      "Cada suite se entregó idéntica al render aprobado. El estudio repitió con nosotros en su siguiente proyecto.",
+      "Un hotel moderno y acogedor, reabierto en 2023, con la mayoría de sus habitaciones mirando directamente al Atlántico.",
     figures: [
-      { value: "48", label: "suites" },
-      { value: "126", label: "piezas singulares" },
-      { value: "1", label: "único responsable" },
+      { value: "125", label: "habitaciones y suites" },
+      { value: "4*", label: "en primera línea de playa" },
+      { value: "2023", label: "año de renovación" },
     ],
   },
   {

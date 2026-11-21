@@ -1,6 +1,6 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { PROJECTS } from "@/content/site";
-import { SLOTS } from "@/content/images";
+import { SLOTS, getFolderImages } from "@/content/images";
 import { Breadcrumbs, EditorialImage, PrimaryCTA, Stat } from "@/components/site/primitives";
 import { seo } from "@/lib/seo";
 
@@ -33,6 +33,7 @@ export const Route = createFileRoute("/proyectos/$slug")({
 
 function Page() {
   const { project: c } = Route.useLoaderData();
+  const extra = getFolderImages(SLOTS.proyectos(c.slug).galeria);
   return (
     <>
       <div className="bg-crema">
@@ -44,7 +45,7 @@ function Page() {
           <h1 className="t-h1 mt-6 max-w-4xl">{c.name}</h1>
           <p className="t-lead mt-6 measure">{c.summary}</p>
           <p className="t-eyebrow mt-8">
-            {c.location} · {c.year}
+            {[c.location, c.year, c.status].filter(Boolean).join(" · ")}
           </p>
         </div>
       </section>
@@ -111,6 +112,19 @@ function Page() {
               ratio="4/3"
               slot={SLOTS.proyectos(c.slug).restaurante}
             />
+            {extra.map((img, i) => (
+              <EditorialImage
+                key={img.key}
+                className={
+                  extra.length % 2 === 1 && i === extra.length - 1
+                    ? "md:col-span-12"
+                    : "md:col-span-6"
+                }
+                alt={`${c.name}: ${altFromFile(img.key)}`}
+                ratio="3/2"
+                src={img.url}
+              />
+            ))}
           </div>
           <div className="mt-16 flex flex-wrap items-center gap-8">
             <PrimaryCTA />
@@ -122,4 +136,12 @@ function Page() {
       </section>
     </>
   );
+}
+
+// "proyectos/x/galeria/01-terraza-vistas-mar" -> "terraza vistas mar"
+function altFromFile(key: string) {
+  return (key.split("/").pop() ?? "")
+    .replace(/^\d+[-_]?/, "")
+    .replace(/[-_]+/g, " ")
+    .trim();
 }
