@@ -1,7 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PROCESS, PROCESS_INTRO } from "@/content/site";
 import { SLOTS } from "@/content/images";
-import { Breadcrumbs, EditorialImage, PageHero, PrimaryCTA, ProcessSteps, Reveal } from "@/components/site/primitives";
+import {
+  Breadcrumbs,
+  EditorialImage,
+  PageHero,
+  PrimaryCTA,
+  ProcessSteps,
+  Reveal,
+} from "@/components/site/primitives";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/como-trabajamos")({
@@ -28,7 +35,9 @@ const PROCESS_LAYOUT = [
 function Page() {
   return (
     <>
-      <div className="bg-crema"><Breadcrumbs items={[{ label: "Cómo trabajamos" }]} /></div>
+      <div className="bg-crema">
+        <Breadcrumbs items={[{ label: "Cómo trabajamos" }]} />
+      </div>
       <PageHero eyebrow="Cómo trabajamos" title={PROCESS_INTRO.title} lead={PROCESS_INTRO.lead}>
         <PrimaryCTA />
       </PageHero>
@@ -42,7 +51,11 @@ function Page() {
           {PROCESS.map((p, i) => (
             <Reveal key={p.title} className={PROCESS_LAYOUT[i]!.span}>
               <div id={p.anchor} className="scroll-mt-24">
-                <EditorialImage alt={`Fase de ${p.title.toLowerCase()} en un proyecto FF&E hotelero`} ratio={PROCESS_LAYOUT[i]!.ratio} slot={SLOTS.comoTrabajamos(p.anchor)} />
+                <EditorialImage
+                  alt={`Fase de ${p.title.toLowerCase()} en un proyecto FF&E hotelero`}
+                  ratio={PROCESS_LAYOUT[i]!.ratio}
+                  slot={SLOTS.comoTrabajamos(p.anchor)}
+                />
                 <p className="t-eyebrow mt-5">Fase {String(i + 1).padStart(2, "0")}</p>
                 <h2 className="t-h3 mt-2">{p.title}</h2>
                 <p className="mt-2 text-[15px] leading-relaxed">{p.text}</p>
@@ -54,7 +67,9 @@ function Page() {
       <section className="bg-blanco">
         <div className="wrap py-16 text-center md:py-20">
           <p className="t-quote mx-auto max-w-2xl">{PROCESS_INTRO.cierre}</p>
-          <div className="mt-8 flex justify-center"><PrimaryCTA /></div>
+          <div className="mt-8 flex justify-center">
+            <PrimaryCTA />
+          </div>
         </div>
       </section>
     </>

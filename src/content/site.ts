@@ -1,5 +1,12 @@
 // Todo el copy editable del sitio vive aquí.
 
+// Dominio público del sitio (sitemap, canonical, Open Graph). Se puede
+// sobrescribir en el build con VITE_SITE_URL.
+export const SITE_URL = (import.meta.env["VITE_SITE_URL"] ?? "https://www.efilogic.com").replace(
+  /\/+$/,
+  "",
+);
+
 export const ENTITY =
   "Efilogic es partner estratégico de FF&E y equipamiento contract para proyectos hoteleros, con sede en Las Palmas de Gran Canaria y más de 25 años de experiencia internacional.";
 
@@ -161,10 +168,13 @@ export const PROJECTS: CaseStudy[] = [
     location: "Gran Canaria",
     year: "2025",
     type: "Resort 5*",
-    summary: "Renovación integral de 214 habitaciones y zonas comunes con piezas bespoke de cuatro países.",
+    summary:
+      "Renovación integral de 214 habitaciones y zonas comunes con piezas bespoke de cuatro países.",
     reto: "Renovar 214 habitaciones en una ventana de cierre de 11 semanas, con piezas de autor de cuatro fabricantes en tres continentes.",
-    solucion: "Plan inverso desde la fecha de reapertura, habitación modelo aprobada en la semana 3 y consolidación única por planta con inventario habitación a habitación.",
-    resultado: "Reapertura en la fecha prevista, sin sustituciones de diseño y con la lista de remates cerrada antes de la llegada del primer huésped.",
+    solucion:
+      "Plan inverso desde la fecha de reapertura, habitación modelo aprobada en la semana 3 y consolidación única por planta con inventario habitación a habitación.",
+    resultado:
+      "Reapertura en la fecha prevista, sin sustituciones de diseño y con la lista de remates cerrada antes de la llegada del primer huésped.",
     figures: [
       { value: "214", label: "habitaciones" },
       { value: "11", label: "semanas" },
@@ -177,10 +187,13 @@ export const PROJECTS: CaseStudy[] = [
     location: "Madrid",
     year: "2024",
     type: "Boutique hotel",
-    summary: "Apertura de un edificio protegido con 48 suites y mobiliario singular diseñado por el estudio de interiorismo.",
+    summary:
+      "Apertura de un edificio protegido con 48 suites y mobiliario singular diseñado por el estudio de interiorismo.",
     reto: "Instalar piezas singulares de gran formato en un edificio protegido, con accesos limitados y un estudio de interiorismo exigente con cada acabado.",
-    solucion: "Prototipos validados en fábrica con el estudio, embalaje a medida para cada pieza singular y entrega nocturna planificada por planta.",
-    resultado: "Cada suite se entregó idéntica al render aprobado. El estudio repitió con nosotros en su siguiente proyecto.",
+    solucion:
+      "Prototipos validados en fábrica con el estudio, embalaje a medida para cada pieza singular y entrega nocturna planificada por planta.",
+    resultado:
+      "Cada suite se entregó idéntica al render aprobado. El estudio repitió con nosotros en su siguiente proyecto.",
     figures: [
       { value: "48", label: "suites" },
       { value: "126", label: "piezas singulares" },
@@ -193,10 +206,13 @@ export const PROJECTS: CaseStudy[] = [
     location: "República Dominicana",
     year: "2023",
     type: "Resort todo incluido",
-    summary: "Equipamiento completo para 380 habitaciones, restauración y spa con fabricación en Europa y Asia.",
+    summary:
+      "Equipamiento completo para 380 habitaciones, restauración y spa con fabricación en Europa y Asia.",
     reto: "Coordinar fabricación en Europa y Asia para 380 habitaciones, restauración y spa, con requisitos aduaneros exigentes en destino.",
-    solucion: "Consolidación en dos orígenes, documentación aduanera preparada desde la compra y equipo de instalación propio en obra durante seis semanas.",
-    resultado: "Apertura con todas las zonas equipadas y trazabilidad completa entregada a la propiedad para su mantenimiento.",
+    solucion:
+      "Consolidación en dos orígenes, documentación aduanera preparada desde la compra y equipo de instalación propio en obra durante seis semanas.",
+    resultado:
+      "Apertura con todas las zonas equipadas y trazabilidad completa entregada a la propiedad para su mantenimiento.",
     figures: [
       { value: "380", label: "habitaciones" },
       { value: "2", label: "orígenes consolidados" },
@@ -209,10 +225,13 @@ export const PROJECTS: CaseStudy[] = [
     location: "Tenerife",
     year: "2026",
     type: "Resort 4*",
-    summary: "Renovación de 180 habitaciones y restaurante principal sin cerrar el hotel, trabajando planta a planta en plena temporada.",
+    summary:
+      "Renovación de 180 habitaciones y restaurante principal sin cerrar el hotel, trabajando planta a planta en plena temporada.",
     reto: "Renovar 180 habitaciones y el restaurante principal manteniendo el hotel abierto, con huéspedes alojados en las plantas contiguas a la obra.",
-    solucion: "Plan de ejecución nocturna por plantas, zonas de acopio aisladas del área de huéspedes y protocolos de silencio y limpieza diaria antes del check-in.",
-    resultado: "Cero quejas de huéspedes por la obra y ocupación media por encima del 90% durante toda la renovación.",
+    solucion:
+      "Plan de ejecución nocturna por plantas, zonas de acopio aisladas del área de huéspedes y protocolos de silencio y limpieza diaria antes del check-in.",
+    resultado:
+      "Cero quejas de huéspedes por la obra y ocupación media por encima del 90% durante toda la renovación.",
     figures: [
       { value: "180", label: "habitaciones" },
       { value: "90%", label: "ocupación media durante la obra" },
@@ -271,7 +290,8 @@ export const RESOURCES: Resource[] = [
     slug: "calendario-ffe-aperturas",
     kind: "Calendario",
     title: "Calendario FF&E para aperturas hoteleras",
-    excerpt: "Cuándo empezar cada fase para llegar a tu apertura con todas las habitaciones listas.",
+    excerpt:
+      "Cuándo empezar cada fase para llegar a tu apertura con todas las habitaciones listas.",
     date: "2026-07-02",
     body: [
       "El calendario FF&E de una apertura se construye hacia atrás. Tu apertura tiene fecha; nuestro plan empieza en ella.",
@@ -283,7 +303,8 @@ export const RESOURCES: Resource[] = [
     slug: "embalaje-a-medida-piezas-singulares",
     kind: "Artículo técnico",
     title: "Embalaje a medida para piezas singulares",
-    excerpt: "Cómo protegemos acabados delicados y piezas de autor desde la fábrica hasta la habitación.",
+    excerpt:
+      "Cómo protegemos acabados delicados y piezas de autor desde la fábrica hasta la habitación.",
     date: "2026-04-20",
     body: [
       "Una pieza singular —un cabecero tapizado a mano, una lámpara de vidrio soplado, una mesa de piedra natural— exige un embalaje diseñado para ella. El embalaje genérico es la primera causa de daños evitables en proyectos contract.",

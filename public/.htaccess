@@ -1,0 +1,84 @@
+# Efilogic — configuración de Apache para Dinahosting
+# Se copia tal cual a la raíz de la web (public_html) con el resto de dist/client.
+
+Options -Indexes -MultiViews
+DirectoryIndex index.html index.php
+AddDefaultCharset utf-8
+ServerSignature Off
+
+# --- HTTPS y dominio canónico (www) ---------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://www.efilogic.com%{REQUEST_URI} [L,R=301]
+
+  RewriteCond %{HTTP_HOST} ^efilogic\.com$ [NC]
+  RewriteRule ^ https://www.efilogic.com%{REQUEST_URI} [L,R=301]
+
+  # Bloquea archivos ocultos (.git, .env…) salvo .well-known (certificados SSL)
+  RewriteRule (^|/)\.(?!well-known/) - [F,L]
+
+  # Bloquea copias de seguridad, configuración y código fuente
+  RewriteRule \.(bak|old|orig|swp|sql|log|ini|env|md|map|lock|ts|tsx)$ - [F,L,NC]
+
+  # Solo existe un PHP público: el formulario de contacto
+  RewriteCond %{REQUEST_URI} \.php$ [NC]
+  RewriteCond %{REQUEST_URI} !^/api/contact\.php$ [NC]
+  RewriteRule ^ - [F,L]
+
+  # Quita la barra final (/proyectos/ -> /proyectos) para no duplicar URLs
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_URI} ^(.+)/$
+  RewriteCond %{DOCUMENT_ROOT}%1/index.html -f
+  RewriteRule ^ %1 [L,R=301]
+
+  # URLs limpias: /proyectos -> /proyectos/index.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
+  RewriteRule ^(.+)$ $1/index.html [L]
+</IfModule>
+
+DirectorySlash Off
+ErrorDocument 403 /404.html
+ErrorDocument 404 /404.html
+
+# --- Cabeceras de seguridad -----------------------------------------------
+# La Content-Security-Policy con hashes va en un <meta> de cada página
+# (scripts/postbuild.mjs). Aquí van las directivas que no admite <meta>.
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" "expr=%{HTTPS} == 'on'"
+  Header always set Content-Security-Policy "frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'"
+  Header always set X-Frame-Options "DENY"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Cross-Origin-Resource-Policy "same-origin"
+  Header always unset X-Powered-By
+  Header unset X-Powered-By
+</IfModule>
+
+# --- Caché ------------------------------------------------------------------
+<IfModule mod_headers.c>
+  # Archivos con hash en el nombre: caché de un año
+  <If "%{REQUEST_URI} =~ m#^/assets/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  # HTML: siempre revalidar para que los cambios se vean al publicar
+  <FilesMatch "\.(html|xml)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+
+# --- Compresión -------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/xml application/javascript application/json image/svg+xml
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType application/javascript .js .mjs
+  AddType font/woff2 .woff2
+  AddType image/webp .webp
+</IfModule>

@@ -1,15 +1,15 @@
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { Link } from "@tanstack/react-router";
 import { Plus } from "lucide-react";
-import { useState, type FormEvent } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { useRef, useState, type FormEvent } from "react";
 import { PERFILES, type CaseStudy as CaseT, type Resource } from "@/content/site";
 import { SLOTS } from "@/content/images";
 import { getBrandLogo } from "@/content/logos";
 import { EditorialImage, Eyebrow } from "./primitives";
 import { cn } from "@/lib/utils";
 
-const BRAND_MARK_BOX = "flex h-7 w-12 shrink-0 items-center justify-center sm:h-9 sm:w-20 md:h-10 md:w-28 lg:h-12 lg:w-32";
+const BRAND_MARK_BOX =
+  "flex h-7 w-12 shrink-0 items-center justify-center sm:h-9 sm:w-20 md:h-10 md:w-28 lg:h-12 lg:w-32";
 
 // Algunos logos traen el trazo más fino o un marco más cuadrado que el resto
 // de wordmarks horizontales, así que a ojo se ven más pequeños aunque midan
@@ -38,7 +38,9 @@ export function BrandMark({ brand }: { brand: { slug: string; name: string; suff
   }
   return (
     <div className={BRAND_MARK_BOX}>
-      <p className="whitespace-nowrap text-[12px] font-semibold leading-tight text-grafito sm:text-[16px]">{brand.name}</p>
+      <p className="whitespace-nowrap text-[12px] font-semibold leading-tight text-grafito sm:text-[16px]">
+        {brand.name}
+      </p>
     </div>
   );
 }
@@ -67,7 +69,15 @@ export function FaqList({ items }: { items: { q: string; a: string }[] }) {
   );
 }
 
-export function CaseStudyBlock({ c, reverse = false, headingLevel = "h3" }: { c: CaseT; reverse?: boolean; headingLevel?: "h2" | "h3" }) {
+export function CaseStudyBlock({
+  c,
+  reverse = false,
+  headingLevel = "h3",
+}: {
+  c: CaseT;
+  reverse?: boolean;
+  headingLevel?: "h2" | "h3";
+}) {
   const H = headingLevel;
   return (
     <article className="grid items-center gap-10 md:grid-cols-12 md:gap-12">
@@ -96,7 +106,11 @@ export function CaseStudyBlock({ c, reverse = false, headingLevel = "h3" }: { c:
             </div>
           ))}
         </dl>
-        <Link to="/proyectos/$slug" params={{ slug: c.slug }} className="link-text mt-8 inline-block text-[15px] font-medium">
+        <Link
+          to="/proyectos/$slug"
+          params={{ slug: c.slug }}
+          className="link-text mt-8 inline-block text-[15px] font-medium"
+        >
           Ver el caso completo
         </Link>
       </div>
@@ -106,8 +120,16 @@ export function CaseStudyBlock({ c, reverse = false, headingLevel = "h3" }: { c:
 
 export function ResourceCard({ r }: { r: Resource }) {
   return (
-    <Link to="/recursos/$slug" params={{ slug: r.slug }} className="card-edit group flex h-full flex-col bg-blanco">
-      <EditorialImage alt={`Imagen editorial: ${r.title}`} ratio="3/2" slot={SLOTS.recursos(r.slug)} />
+    <Link
+      to="/recursos/$slug"
+      params={{ slug: r.slug }}
+      className="card-edit group flex h-full flex-col bg-blanco"
+    >
+      <EditorialImage
+        alt={`Imagen editorial: ${r.title}`}
+        ratio="3/2"
+        slot={SLOTS.recursos(r.slug)}
+      />
       <div className="flex flex-1 flex-col p-8">
         <span className="tag self-start">{r.kind}</span>
         <h3 className="mt-5 text-[21px] font-medium leading-snug">{r.title}</h3>
@@ -122,10 +144,13 @@ export function ResourceCard({ r }: { r: Resource }) {
 
 type Errors = Partial<Record<"nombre" | "email" | "empresa" | "perfil" | "descripcion", string>>;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const CONTACT_ENDPOINT = "/api/contact.php";
 
 export function ContactForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  // Marca de tiempo para descartar envíos automáticos instantáneos (ver public/api/contact.php).
+  const startedAt = useRef(Date.now());
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -147,9 +172,21 @@ export function ContactForm() {
     if (Object.keys(errs).length) return;
 
     setStatus("sending");
-    // Punto de integración: aquí puede conectarse un CRM o un aviso por email.
-    const { error } = await supabase.from("contact_submissions").insert(data);
-    setStatus(error ? "error" : "sent");
+    try {
+      const res = await fetch(CONTACT_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({
+          ...data,
+          website: String(fd.get("website") ?? ""),
+          elapsed: Date.now() - startedAt.current,
+        }),
+      });
+      setStatus(res.ok ? "sent" : "error");
+    } catch {
+      setStatus("error");
+    }
   }
 
   if (status === "sent") {
@@ -157,17 +194,24 @@ export function ContactForm() {
       <div role="status" className="border border-grafito p-10">
         <Eyebrow>Solicitud recibida</Eyebrow>
         <p className="t-h3 mt-4">Gracias. Tu proyecto ya está en buenas manos.</p>
-        <p className="mt-4 measure">Te responderemos personalmente en un plazo de dos días laborables para conocer tu visión y tu fecha de apertura.</p>
+        <p className="mt-4 measure">
+          Te responderemos personalmente en un plazo de dos días laborables para conocer tu visión y
+          tu fecha de apertura.
+        </p>
       </div>
     );
   }
 
   const field = (name: keyof Errors, label: string, input: React.ReactNode) => (
     <div>
-      <label htmlFor={name} className="t-eyebrow block">{label}</label>
+      <label htmlFor={name} className="t-eyebrow block">
+        {label}
+      </label>
       {input}
       {errors[name] && (
-        <p id={`${name}-err`} className="mt-2 text-[14px] font-medium text-destructive">{errors[name]}</p>
+        <p id={`${name}-err`} className="mt-2 text-[14px] font-medium text-destructive">
+          {errors[name]}
+        </p>
       )}
     </div>
   );
@@ -178,16 +222,65 @@ export function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} noValidate className="grid gap-10 md:grid-cols-2">
-      {field("nombre", "Nombre", <input id="nombre" name="nombre" autoComplete="name" maxLength={120} className="field" {...aria("nombre")} />)}
-      {field("email", "Email profesional", <input id="email" name="email" type="email" autoComplete="email" maxLength={255} className="field" {...aria("email")} />)}
-      {field("empresa", "Empresa / estudio", <input id="empresa" name="empresa" autoComplete="organization" maxLength={160} className="field" {...aria("empresa")} />)}
+      {/* Campo trampa anti-spam: invisible para personas, los bots suelen rellenarlo. */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+        <label htmlFor="website">No rellenar</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+      {field(
+        "nombre",
+        "Nombre",
+        <input
+          id="nombre"
+          name="nombre"
+          autoComplete="name"
+          maxLength={120}
+          className="field"
+          {...aria("nombre")}
+        />,
+      )}
+      {field(
+        "email",
+        "Email profesional",
+        <input
+          id="email"
+          name="email"
+          type="email"
+          autoComplete="email"
+          maxLength={255}
+          className="field"
+          {...aria("email")}
+        />,
+      )}
+      {field(
+        "empresa",
+        "Empresa / estudio",
+        <input
+          id="empresa"
+          name="empresa"
+          autoComplete="organization"
+          maxLength={160}
+          className="field"
+          {...aria("empresa")}
+        />,
+      )}
       {field(
         "perfil",
         "Perfil",
-        <select id="perfil" name="perfil" defaultValue="" className="field cursor-pointer" {...aria("perfil")}>
-          <option value="" disabled>Selecciona</option>
+        <select
+          id="perfil"
+          name="perfil"
+          defaultValue=""
+          className="field cursor-pointer"
+          {...aria("perfil")}
+        >
+          <option value="" disabled>
+            Selecciona
+          </option>
           {PERFILES.map((p) => (
-            <option key={p.value} value={p.value}>{p.label}</option>
+            <option key={p.value} value={p.value}>
+              {p.label}
+            </option>
           ))}
         </select>,
       )}
@@ -195,7 +288,15 @@ export function ContactForm() {
         {field(
           "descripcion",
           "Descripción del proyecto",
-          <textarea id="descripcion" name="descripcion" rows={5} maxLength={3000} className="field resize-y" placeholder="Hotel, número de habitaciones, ubicación y fecha de apertura prevista" {...aria("descripcion")} />,
+          <textarea
+            id="descripcion"
+            name="descripcion"
+            rows={5}
+            maxLength={3000}
+            className="field resize-y"
+            placeholder="Hotel, número de habitaciones, ubicación y fecha de apertura prevista"
+            {...aria("descripcion")}
+          />,
         )}
       </div>
       <div className="flex flex-col items-start gap-4 md:col-span-2">

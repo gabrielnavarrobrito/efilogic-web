@@ -1,4 +1,6 @@
-import { ENTITY } from "@/content/site";
+import { ENTITY, SITE_URL } from "@/content/site";
+
+const abs = (path: string) => `${SITE_URL}${path}`;
 
 type Crumb = { name: string; path: string };
 
@@ -26,7 +28,7 @@ export function seo({
         "@type": "ListItem",
         position: i + 1,
         name: c.name,
-        item: c.path,
+        item: abs(c.path),
       })),
     });
   }
@@ -37,12 +39,12 @@ export function seo({
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: type },
-      { property: "og:url", content: path },
+      { property: "og:url", content: abs(path) },
       { name: "twitter:title", content: title },
       { name: "twitter:description", content: description },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: path }],
+    links: [{ rel: "canonical", href: abs(path) }],
     scripts: scripts.map((s) => ({ type: "application/ld+json", children: JSON.stringify(s) })),
   };
 }
@@ -51,6 +53,7 @@ export const ORGANIZATION_LD = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Efilogic",
+  url: SITE_URL,
   description: ENTITY,
   address: {
     "@type": "PostalAddress",

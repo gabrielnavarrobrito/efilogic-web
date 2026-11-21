@@ -48,7 +48,9 @@ patrón de ruta (usa su `slug` tal cual está en ese archivo).
 
 ## Fotos de marca (logo, portada de inicio)
 
-El logo y las fotos de la portada de inicio no están aquí: viven directamente
-en `src/assets/` (fuera de esta carpeta) porque son activos de marca fijos,
-no huecos de contenido que cambien por proyecto. Para sustituirlas, cambia
-directamente esos archivos y mantén el mismo nombre.
+El logo y las fotos fijas de la portada no están aquí:
+
+- `src/assets/brand/` — logotipos de Efilogic.
+- `src/assets/home/` — fotos de la portada de inicio.
+
+Para sustituirlas, cambia esos archivos manteniendo el mismo nombre.

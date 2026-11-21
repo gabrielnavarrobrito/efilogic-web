@@ -1,32 +1,19 @@
-<!-- LOVABLE:BEGIN -->
-> [!IMPORTANT]
-> This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
-> published git history — force pushing, or rebasing/amending/squashing commits
-> that are already pushed — as it rewrites history on Lovable's side and the
-> user will likely lose their project history.
->
-> Commits you push to the connected branch sync back to Lovable and show up in
-> the editor, so keep the branch in a working state.
+# Efilogic web — instrucciones del proyecto
 
-## What Lovable manages
+Sitio corporativo de Efilogic. TanStack Start + React + Tailwind, exportado como
+HTML estático y publicado en Dinahosting (Apache + PHP). No depende de Lovable
+ni de ningún backend externo salvo Resend para el envío del formulario.
 
-Rules outside this block are the project's own. Change the pieces below in
-Lovable, not by hand. With the [Lovable MCP](https://mcp.lovable.dev)
-connected, `send_message` asks Lovable to do it; otherwise ask the user to
-use the editor.
+## Reglas
 
-- **Database.** Do not add or edit `supabase/migrations/` or `drizzle/`.
-  Ask Lovable to change the schema.
-- **Generated files.** Do not edit a file whose header says it is automatically
-  generated.
-- **AI gateway.** Keep model calls on Lovable's gateway, and keep
-  `LOVABLE_API_KEY` out of browser code.
-- **Connectors.** Lovable provides native connectors. `list_connectors` shows
-  which are enabled; `add_connector` only returns the dashboard link. When a
-  connector is enabled, calls go through the connector gateway and need
-  `LOVABLE_API_KEY`. When Lovable does not provide one, users can bring their
-  own key and store it in Secrets.
-- **Secrets.** Lovable manages them. Do not put secret values in the repo.
-<!-- LOVABLE:END -->
-
-- Keep the home page as unframed editorial sections using bundled photographic assets; this prevents fabricated project imagery and keeps presentation separate from shared content.
+- Mantén la portada como secciones editoriales sin marco que usan fotos
+  incluidas en el repositorio (`src/assets/home/`). No uses imágenes inventadas
+  de proyectos.
+- Todo el texto editable vive en `src/content/site.ts`; las fotos por hueco en
+  `src/assets/images/` (ver su README).
+- No añadas scripts, fuentes ni imágenes de terceros (CDN, Google Fonts,
+  analítica…) sin actualizar la CSP de `scripts/postbuild.mjs`.
+- Nunca subas secretos al repositorio. La clave de Resend vive en
+  `efilogic-config.php` fuera de `public_html` (ver `docs/DEPLOY.md`).
+- `src/routeTree.gen.ts` se genera solo; no lo edites a mano.
+- Antes de publicar: `npm run lint && npm test && npm run build`.

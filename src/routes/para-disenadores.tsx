@@ -1,10 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Breadcrumbs, EditorialImage, PageHero, PrimaryCTA, Reveal } from "@/components/site/primitives";
+import {
+  Breadcrumbs,
+  EditorialImage,
+  PageHero,
+  PrimaryCTA,
+  Reveal,
+} from "@/components/site/primitives";
 import { SLOTS } from "@/content/images";
 import { seo } from "@/lib/seo";
 
 const TITLE = "Fidelidad técnica, sin sorpresas en obra.";
-const LEAD = "Desarrollo técnico, fabricación a medida y montaje final, fieles a tu especificación.";
+const LEAD =
+  "Desarrollo técnico, fabricación a medida y montaje final, fieles a tu especificación.";
 const CIERRE = "¿Buscas un partner operativo para tu próximo proyecto?";
 
 export const Route = createFileRoute("/para-disenadores")({
@@ -28,14 +35,21 @@ const POINTS = [
 function Page() {
   return (
     <>
-      <div className="bg-crema"><Breadcrumbs items={[{ label: "Para diseñadores" }]} /></div>
+      <div className="bg-crema">
+        <Breadcrumbs items={[{ label: "Para diseñadores" }]} />
+      </div>
       <PageHero eyebrow="Arquitectura e interiorismo" title={TITLE} lead={LEAD}>
         <PrimaryCTA />
       </PageHero>
       <section className="bg-blanco section-y">
         <div className="wrap grid items-center gap-16 md:grid-cols-12">
           <div className="md:col-span-7">
-            <EditorialImage alt="Detalle de tapicería y madera en una suite de hotel" caption="Detalle · Madrid · 2024" ratio="4/5" slot={SLOTS.paraDisenadores.detalle} />
+            <EditorialImage
+              alt="Detalle de tapicería y madera en una suite de hotel"
+              caption="Detalle · Madrid · 2024"
+              ratio="4/5"
+              slot={SLOTS.paraDisenadores.detalle}
+            />
           </div>
           <div className="grid gap-8 sm:grid-cols-2 md:col-span-5">
             {POINTS.map((p) => (
@@ -52,7 +66,9 @@ function Page() {
       <section className="bg-crema">
         <div className="wrap py-24 text-center md:py-32">
           <p className="t-quote mx-auto max-w-3xl">{CIERRE}</p>
-          <div className="mt-10 flex justify-center"><PrimaryCTA /></div>
+          <div className="mt-10 flex justify-center">
+            <PrimaryCTA />
+          </div>
         </div>
       </section>
     </>

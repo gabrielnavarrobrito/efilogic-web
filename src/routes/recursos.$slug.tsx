@@ -34,7 +34,12 @@ export const Route = createFileRoute("/recursos/$slug")({
             },
           ],
         })
-      : { meta: [{ title: "Recurso no disponible | Efilogic" }, { name: "robots", content: "noindex" }] },
+      : {
+          meta: [
+            { title: "Recurso no disponible | Efilogic" },
+            { name: "robots", content: "noindex" },
+          ],
+        },
   component: Page,
 });
 
@@ -52,22 +57,36 @@ function Page() {
             <h1 className="t-h1 mt-6 max-w-4xl">{r.title}</h1>
             <p className="t-lead mt-6 measure">{r.excerpt}</p>
             <p className="t-eyebrow mt-8">
-              <time dateTime={r.date}>{new Date(r.date).toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" })}</time>
+              <time dateTime={r.date}>
+                {new Date(r.date).toLocaleDateString("es-ES", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </time>
             </p>
           </div>
         </header>
         <div className="wrap section-y grid gap-16 md:grid-cols-12">
           <div className="space-y-6 md:col-span-7">
             {r.body.map((p, i) => (
-              <p key={i} className={i === 0 ? "t-lead" : ""}>{p}</p>
+              <p key={i} className={i === 0 ? "t-lead" : ""}>
+                {p}
+              </p>
             ))}
             <div className="flex flex-wrap items-center gap-8 pt-10">
               <PrimaryCTA />
-              <Link to="/recursos" className="link-text font-medium">Más recursos</Link>
+              <Link to="/recursos" className="link-text font-medium">
+                Más recursos
+              </Link>
             </div>
           </div>
           <div className="md:col-span-4 md:col-start-9">
-            <EditorialImage alt={`Imagen editorial: ${r.title}`} ratio="4/5" slot={SLOTS.recursos(r.slug)} />
+            <EditorialImage
+              alt={`Imagen editorial: ${r.title}`}
+              ratio="4/5"
+              slot={SLOTS.recursos(r.slug)}
+            />
           </div>
         </div>
       </article>

@@ -8,7 +8,8 @@ export const Route = createFileRoute("/proyectos/")({
   head: () =>
     seo({
       title: "Proyectos FF&E hoteleros · Casos | Efilogic",
-      description: "Casos de FF&E para aperturas y renovaciones hoteleras: reto, solución y resultado de cada proyecto contract.",
+      description:
+        "Casos de FF&E para aperturas y renovaciones hoteleras: reto, solución y resultado de cada proyecto contract.",
       path: "/proyectos",
       crumbs: [{ name: "Proyectos", path: "/proyectos" }],
     }),
@@ -18,7 +19,9 @@ export const Route = createFileRoute("/proyectos/")({
 function Page() {
   return (
     <>
-      <div className="bg-crema"><Breadcrumbs items={[{ label: "Proyectos" }]} /></div>
+      <div className="bg-crema">
+        <Breadcrumbs items={[{ label: "Proyectos" }]} />
+      </div>
       <PageHero
         eyebrow="Proyectos"
         title="Hoteles abiertos en fecha, idénticos a su diseño."

@@ -37,7 +37,10 @@ export function SectionHeader({
 
 export function PrimaryCTA({ dark = false, className }: { dark?: boolean; className?: string }) {
   return (
-    <Link to="/contacto" className={cn("btn", dark ? "btn-primary-dark" : "btn-primary", className)}>
+    <Link
+      to="/contacto"
+      className={cn("btn", dark ? "btn-primary-dark" : "btn-primary", className)}
+    >
       {CTA_LABEL}
     </Link>
   );
@@ -45,7 +48,16 @@ export function PrimaryCTA({ dark = false, className }: { dark?: boolean; classN
 
 /** Etiqueta ámbar que corona un título, como en los bloques de imagen grande. */
 export function SectionTag({ children, className }: { children: ReactNode; className?: string }) {
-  return <span className={cn("inline-block w-fit bg-ambar px-5 py-2.5 text-[14px] font-bold text-grafito", className)}>{children}</span>;
+  return (
+    <span
+      className={cn(
+        "inline-block w-fit bg-ambar px-5 py-2.5 text-[14px] font-bold text-grafito",
+        className,
+      )}
+    >
+      {children}
+    </span>
+  );
 }
 
 /**
@@ -73,10 +85,25 @@ export function ImageFeature({
 }) {
   return (
     <div className={cn("grid lg:grid-cols-2", className)}>
-      <div className={cn("relative aspect-[4/3] lg:aspect-auto lg:min-h-[520px]", reverse && "lg:order-2")}>
-        <img src={image} alt={imageAlt} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+      <div
+        className={cn(
+          "relative aspect-[4/3] lg:aspect-auto lg:min-h-[520px]",
+          reverse && "lg:order-2",
+        )}
+      >
+        <img
+          src={image}
+          alt={imageAlt}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
       </div>
-      <div className={cn("flex flex-col justify-center bg-blanco px-6 py-14 md:px-16 md:py-20", reverse && "lg:order-1")}>
+      <div
+        className={cn(
+          "flex flex-col justify-center bg-blanco px-6 py-14 md:px-16 md:py-20",
+          reverse && "lg:order-1",
+        )}
+      >
         <SectionTag>{tag}</SectionTag>
         <h2 id={titleId} className="t-h2 mt-6 max-w-md">
           {title}
@@ -110,7 +137,11 @@ export function EditorialImage({
       {resolvedSrc ? (
         <img src={resolvedSrc} alt={alt} loading="lazy" className="h-full w-full object-cover" />
       ) : (
-        <div role="img" aria-label={alt} className="placeholder-img flex h-full w-full items-center justify-center">
+        <div
+          role="img"
+          aria-label={alt}
+          className="placeholder-img flex h-full w-full items-center justify-center"
+        >
           <span className="t-eyebrow opacity-60">Imagen de proyecto · sustituir</span>
         </div>
       )}
@@ -152,7 +183,10 @@ export function Reveal({ children, className }: { children: ReactNode; className
 export function ProcessSteps({ steps }: { steps: { title: string; text: string }[] }) {
   return (
     <ol className="relative grid gap-10 md:grid-cols-6 md:gap-6">
-      <span aria-hidden className="absolute left-0 right-0 top-6 hidden h-px bg-line-strong md:block" />
+      <span
+        aria-hidden
+        className="absolute left-0 right-0 top-6 hidden h-px bg-line-strong md:block"
+      />
       {steps.map((s, i) => {
         const last = i === steps.length - 1;
         return (
@@ -160,7 +194,9 @@ export function ProcessSteps({ steps }: { steps: { title: string; text: string }
             <span
               className={cn(
                 "relative z-10 flex h-12 w-12 shrink-0 items-center justify-center border text-[15px] font-semibold",
-                last ? "border-ambar bg-ambar text-grafito" : "border-grafito bg-blanco text-grafito",
+                last
+                  ? "border-ambar bg-ambar text-grafito"
+                  : "border-grafito bg-blanco text-grafito",
               )}
             >
               {String(i + 1).padStart(2, "0")}
@@ -176,7 +212,15 @@ export function ProcessSteps({ steps }: { steps: { title: string; text: string }
   );
 }
 
-export function Stat({ value, label, inverse = false }: { value: string; label: string; inverse?: boolean }) {
+export function Stat({
+  value,
+  label,
+  inverse = false,
+}: {
+  value: string;
+  label: string;
+  inverse?: boolean;
+}) {
   return (
     <div className={cn("border-t pt-6", inverse ? "border-line-inverse" : "border-line-strong")}>
       <p className="t-figure">{value}</p>
@@ -213,13 +257,17 @@ export function Breadcrumbs({ items }: { items: { label: string; to?: string }[]
     <nav aria-label="Ruta de navegación" className="wrap pt-8">
       <ol className="t-eyebrow flex flex-wrap gap-2">
         <li>
-          <Link to="/" className="link-text">Inicio</Link>
+          <Link to="/" className="link-text">
+            Inicio
+          </Link>
         </li>
         {items.map((it) => (
           <li key={it.label} className="flex gap-2">
             <span aria-hidden>/</span>
             {it.to ? (
-              <a href={it.to} className="link-text">{it.label}</a>
+              <a href={it.to} className="link-text">
+                {it.label}
+              </a>
             ) : (
               <span aria-current="page">{it.label}</span>
             )}

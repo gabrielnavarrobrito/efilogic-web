@@ -1,5 +1,7 @@
+// Carga los tipos de TanStack Start (rutas con handlers de servidor).
+import type {} from "@tanstack/react-start";
 import { createFileRoute } from "@tanstack/react-router";
-import { PROJECTS, RESOURCES } from "@/content/site";
+import { PROJECTS, RESOURCES, SITE_URL } from "@/content/site";
 
 const STATIC = [
   "/",
@@ -16,8 +18,8 @@ const STATIC = [
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
-      GET: ({ request }) => {
-        const origin = new URL(request.url).origin;
+      GET: () => {
+        const origin = SITE_URL;
         const paths = [
           ...STATIC,
           ...PROJECTS.map((p) => `/proyectos/${p.slug}`),
