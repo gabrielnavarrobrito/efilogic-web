@@ -62,7 +62,7 @@ export const SEARCH_PAGES = [
 
 // Sustituir "#" por las URLs reales de cada red.
 export const SOCIALS = [
-  { key: "instagram", label: "Instagram", href: "#" },
+  { key: "instagram", label: "Instagram", href: "https://www.instagram.com/efilogiccontract/" },
   { key: "linkedin", label: "LinkedIn", href: "#" },
 ] as const;
 
