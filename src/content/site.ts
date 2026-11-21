@@ -162,6 +162,11 @@ export type CaseStudy = {
   solucion: string;
   resultado: string;
   figures: { value: string; label: string }[];
+  /**
+   * Texto alternativo de las fotos de galeria/, por nombre de archivo sin
+   * extensión. Si falta, se usa el propio nombre (sin tildes).
+   */
+  photoAlts?: Record<string, string>;
 };
 
 /** "Ubicación · año" del proyecto, omitiendo lo que no se conozca. */
@@ -229,6 +234,30 @@ export const PROJECTS: CaseStudy[] = [
       { value: "2", label: "orígenes consolidados" },
       { value: "6", label: "semanas en obra" },
     ],
+  },
+  {
+    slug: "arguineguin-park",
+    name: "Arguineguín Park",
+    location: "Mogán, Gran Canaria",
+    type: "Complejo turístico",
+    status: "Terminado",
+    summary:
+      "263 viviendas vacacionales en 14 edificios, a diez minutos a pie de la playa de Arguineguín, equipadas por completo: del colchón a la luminaria y del salón a la terraza.",
+    reto: "Amueblar de una sola vez 263 viviendas de dos y tres dormitorios, todas exteriores con terraza y cocina, repartidas en 14 edificios alrededor de jardines y piscinas. Un volumen de complejo turístico con el detalle de una casa, en un plazo muy ajustado.",
+    solucion:
+      "Junto a la propiedad y la decoradora del proyecto, combinamos piezas de catálogo con mobiliario diseñado y fabricado en exclusiva para las viviendas. Un único flujo reunió a más de 10 proveedores de 3 países: mobiliario interior y exterior, luminarias, sofás, alfombras, colchones, somieres, textil y ropa de cama.",
+    resultado:
+      "Más de 12.000 artículos ubicados e instalados con precisión, vivienda a vivienda, y un complejo listo para recibir a sus primeros huéspedes.",
+    figures: [
+      { value: "263", label: "viviendas en 14 edificios" },
+      { value: "+12.000", label: "artículos suministrados e instalados" },
+      { value: "+10", label: "proveedores de 3 países en un único flujo" },
+    ],
+    photoAlts: {
+      "01-salon-con-cocina-abierta": "salón con cocina abierta",
+      "02-salon-con-terraza": "salón con salida a la terraza",
+      "04-pasillo-con-azulejo-hidraulico": "pasillo con azulejo hidráulico",
+    },
   },
   {
     slug: "hd-sensarena",

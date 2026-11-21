@@ -49,7 +49,7 @@ function Page() {
     }),
     ...getFolderImages(slots.galeria).map((img) => ({
       src: img.url,
-      alt: `${c.name}: ${altFromFile(img.key)}`,
+      alt: `${c.name}: ${c.photoAlts?.[img.key.split("/").pop() ?? ""] ?? altFromFile(img.key)}`,
     })),
   ];
   return (
