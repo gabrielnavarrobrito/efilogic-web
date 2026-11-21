@@ -152,7 +152,8 @@ export type CaseStudy = {
   slug: string;
   name: string;
   location: string;
-  year: string;
+  /** Año de apertura o renovación (opcional). */
+  year?: string;
   type: string;
   /** Estado del proyecto, p. ej. "Terminado" o "En curso". */
   status?: string;
@@ -163,24 +164,31 @@ export type CaseStudy = {
   figures: { value: string; label: string }[];
 };
 
+/** "Ubicación · año" del proyecto, omitiendo lo que no se conozca. */
+export function projectMeta(c: Pick<CaseStudy, "location" | "year">) {
+  return [c.location, c.year].filter(Boolean).join(" · ");
+}
+
 export const PROJECTS: CaseStudy[] = [
   {
-    slug: "hd-sensarena",
-    name: "HD Sensarena",
-    location: "Gran Canaria",
-    year: "2025",
-    type: "Resort 5*",
+    slug: "melia-trinidad-peninsula",
+    name: "Meliá Trinidad Península",
+    location: "Sancti Spíritus, Cuba",
+    type: "Hotel 5*",
+    status: "Terminado",
     summary:
-      "Renovación integral de 214 habitaciones y zonas comunes con piezas bespoke de cuatro países.",
-    reto: "Renovar 214 habitaciones en una ventana de cierre de 11 semanas, con piezas de autor de cuatro fabricantes en tres continentes.",
+      "Un 5 estrellas frente al Caribe, con la sierra del Escambray al fondo: habitaciones, restaurantes, bares, espacios para eventos y zonas de bienestar con mobiliario e interiorismo de Efilogic.",
+    reto: "Equipar un hotel de 5 estrellas junto al mar para huéspedes muy distintos: familias, viajeros que recorren la isla, bodas, lunas de miel y eventos profesionales. Cada espacio debía sentirse acogedor sin perder elegancia.",
     solucion:
-      "Plan inverso desde la fecha de reapertura, habitación modelo aprobada en la semana 3 y consolidación única por planta con inventario habitación a habitación.",
+      "Mobiliario seleccionado pieza a pieza para las habitaciones y, junto al equipo del hotel, restaurantes y bares diseñados para ser elegantes y funcionales. Los espacios para celebraciones, las piscinas de borde infinito y las áreas de bienestar siguen el mismo criterio.",
     resultado:
-      "Reapertura en la fecha prevista, sin sustituciones de diseño y con la lista de remates cerrada antes de la llegada del primer huésped.",
+      "Un hotel en el que la misma intención de diseño recorre cada espacio, de la habitación al restaurante abierto al mar.",
     figures: [
-      { value: "214", label: "habitaciones" },
-      { value: "11", label: "semanas" },
-      { value: "0", label: "sustituciones de diseño" },
+      { value: "5*", label: "frente al mar Caribe" },
+      {
+        value: "5",
+        label: "tipos de espacio equipados: habitaciones, restauración, bares, eventos y bienestar",
+      },
     ],
   },
   {
@@ -223,22 +231,22 @@ export const PROJECTS: CaseStudy[] = [
     ],
   },
   {
-    slug: "melia-trinidad-peninsula",
-    name: "Meliá Trinidad Península",
-    location: "Tenerife",
-    year: "2026",
-    type: "Resort 4*",
+    slug: "hd-sensarena",
+    name: "HD Sensarena",
+    location: "Gran Canaria",
+    year: "2025",
+    type: "Resort 5*",
     summary:
-      "Renovación de 180 habitaciones y restaurante principal sin cerrar el hotel, trabajando planta a planta en plena temporada.",
-    reto: "Renovar 180 habitaciones y el restaurante principal manteniendo el hotel abierto, con huéspedes alojados en las plantas contiguas a la obra.",
+      "Renovación integral de 214 habitaciones y zonas comunes con piezas bespoke de cuatro países.",
+    reto: "Renovar 214 habitaciones en una ventana de cierre de 11 semanas, con piezas de autor de cuatro fabricantes en tres continentes.",
     solucion:
-      "Plan de ejecución nocturna por plantas, zonas de acopio aisladas del área de huéspedes y protocolos de silencio y limpieza diaria antes del check-in.",
+      "Plan inverso desde la fecha de reapertura, habitación modelo aprobada en la semana 3 y consolidación única por planta con inventario habitación a habitación.",
     resultado:
-      "Cero quejas de huéspedes por la obra y ocupación media por encima del 90% durante toda la renovación.",
+      "Reapertura en la fecha prevista, sin sustituciones de diseño y con la lista de remates cerrada antes de la llegada del primer huésped.",
     figures: [
-      { value: "180", label: "habitaciones" },
-      { value: "90%", label: "ocupación media durante la obra" },
-      { value: "0", label: "cierres de planta" },
+      { value: "214", label: "habitaciones" },
+      { value: "11", label: "semanas" },
+      { value: "0", label: "sustituciones de diseño" },
     ],
   },
 ];

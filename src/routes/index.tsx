@@ -1,7 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
-import { ENTITY, HOME_INTRO, HOME_SOLUTIONS, PROJECTS, TRUSTED_BRANDS } from "@/content/site";
+import {
+  ENTITY,
+  HOME_INTRO,
+  HOME_SOLUTIONS,
+  PROJECTS,
+  TRUSTED_BRANDS,
+  projectMeta,
+} from "@/content/site";
 import { Eyebrow, ImageFeature, Reveal } from "@/components/site/primitives";
 import { BrandMark, ContactForm } from "@/components/site/blocks";
 import { seo } from "@/lib/seo";
@@ -11,7 +18,7 @@ import solutionsImage from "@/assets/home/rooftop-sea-view.webp";
 import processImage from "@/assets/home/bedroom-boho.webp";
 import projectSercotelCanteras from "@/assets/home/proyecto-sercotel-canteras.webp";
 import projectValetinSomni from "@/assets/home/proyecto-valetin-somni.webp";
-import projectMeliaTrinidad from "@/assets/images/servicios/instalacion-mobiliario-hotelero.webp";
+import projectMeliaTrinidad from "@/assets/home/proyecto-melia-trinidad-peninsula.jpg";
 
 export const Route = createFileRoute("/")({
   head: () =>
@@ -253,7 +260,7 @@ function ProjectsShowcase() {
                   {project.name}
                 </h3>
                 <p className="mt-2 text-[15px] text-blanco/80 md:text-[17px]">
-                  {project.location} · {project.year}
+                  {projectMeta(project)}
                 </p>
               </div>
               <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12">

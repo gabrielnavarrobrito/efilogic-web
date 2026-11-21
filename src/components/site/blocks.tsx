@@ -2,7 +2,7 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { Link } from "@tanstack/react-router";
 import { Plus } from "lucide-react";
 import { useRef, useState, type FormEvent } from "react";
-import { PERFILES, type CaseStudy as CaseT, type Resource } from "@/content/site";
+import { PERFILES, projectMeta, type CaseStudy as CaseT, type Resource } from "@/content/site";
 import { SLOTS } from "@/content/images";
 import { getBrandLogo } from "@/content/logos";
 import { EditorialImage, Eyebrow } from "./primitives";
@@ -84,7 +84,7 @@ export function CaseStudyBlock({
       <div className={cn("md:col-span-7", reverse && "md:order-2")}>
         <EditorialImage
           alt={`Interior terminado de ${c.name}, ${c.location}`}
-          caption={`${c.name} · ${c.location} · ${c.year}`}
+          caption={`${c.name} · ${projectMeta(c)}`}
           ratio="7/5"
           slot={SLOTS.proyectos(c.slug).hero}
         />

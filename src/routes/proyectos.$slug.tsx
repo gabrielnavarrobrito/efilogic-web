@@ -1,6 +1,13 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
-import { PROJECTS } from "@/content/site";
-import { SLOTS, getFolderImages } from "@/content/images";
+import { PROJECTS, projectMeta } from "@/content/site";
+import { SLOTS, getFolderImages, getSlotImage } from "@/content/images";
+
+const FIXED = [
+  { key: "habitacion", label: "Habitación" },
+  { key: "detalle", label: "Detalle de materiales" },
+  { key: "zonaComun", label: "Zona común" },
+  { key: "restaurante", label: "Restaurante" },
+] as const;
 import { Breadcrumbs, EditorialImage, PrimaryCTA, Stat } from "@/components/site/primitives";
 import { seo } from "@/lib/seo";
 
@@ -33,7 +40,18 @@ export const Route = createFileRoute("/proyectos/$slug")({
 
 function Page() {
   const { project: c } = Route.useLoaderData();
-  const extra = getFolderImages(SLOTS.proyectos(c.slug).galeria);
+  const slots = SLOTS.proyectos(c.slug);
+  // Galería: primero los huecos fijos que tengan foto, después la carpeta galeria/.
+  const gallery = [
+    ...FIXED.flatMap((f) => {
+      const src = getSlotImage(slots[f.key]);
+      return src ? [{ src, alt: `${f.label} de ${c.name}` }] : [];
+    }),
+    ...getFolderImages(slots.galeria).map((img) => ({
+      src: img.url,
+      alt: `${c.name}: ${altFromFile(img.key)}`,
+    })),
+  ];
   return (
     <>
       <div className="bg-crema">
@@ -52,7 +70,7 @@ function Page() {
       <div className="wrap -mt-2">
         <EditorialImage
           alt={`Vista general de ${c.name}`}
-          caption={`${c.name} · ${c.location} · ${c.year}`}
+          caption={`${c.name} · ${projectMeta(c)}`}
           ratio="16/8"
           className="mt-0"
           slot={SLOTS.proyectos(c.slug).hero}
@@ -87,45 +105,28 @@ function Page() {
       <section className="bg-crema section-y">
         <div className="wrap">
           <h2 className="t-h2">Galería</h2>
-          <div className="mt-12 grid gap-6 md:grid-cols-12">
-            <EditorialImage
-              className="md:col-span-7"
-              alt={`Habitación de ${c.name}`}
-              ratio="4/3"
-              slot={SLOTS.proyectos(c.slug).habitacion}
-            />
-            <EditorialImage
-              className="md:col-span-5"
-              alt={`Detalle de materiales en ${c.name}`}
-              ratio="4/5"
-              slot={SLOTS.proyectos(c.slug).detalle}
-            />
-            <EditorialImage
-              className="md:col-span-5"
-              alt={`Zona común de ${c.name}`}
-              ratio="4/5"
-              slot={SLOTS.proyectos(c.slug).zonaComun}
-            />
-            <EditorialImage
-              className="md:col-span-7"
-              alt={`Restaurante de ${c.name}`}
-              ratio="4/3"
-              slot={SLOTS.proyectos(c.slug).restaurante}
-            />
-            {extra.map((img, i) => (
-              <EditorialImage
-                key={img.key}
-                className={
-                  extra.length % 2 === 1 && i === extra.length - 1
-                    ? "md:col-span-12"
-                    : "md:col-span-6"
-                }
-                alt={`${c.name}: ${altFromFile(img.key)}`}
-                ratio="3/2"
-                src={img.url}
-              />
-            ))}
-          </div>
+          {gallery.length ? (
+            <div className="mt-12 gap-6 md:columns-2">
+              {gallery.map((img) => (
+                <figure key={img.src} className="mb-6 break-inside-avoid">
+                  <img src={img.src} alt={img.alt} loading="lazy" className="w-full" />
+                </figure>
+              ))}
+            </div>
+          ) : (
+            // Sin fotos todavía: huecos de referencia para saber qué subir.
+            <div className="mt-12 grid gap-6 md:grid-cols-12">
+              {FIXED.map((f, i) => (
+                <EditorialImage
+                  key={f.key}
+                  className={i % 3 === 0 ? "md:col-span-7" : "md:col-span-5"}
+                  alt={`${f.label} de ${c.name}`}
+                  ratio={i % 3 === 0 ? "4/3" : "4/5"}
+                  slot={slots[f.key]}
+                />
+              ))}
+            </div>
+          )}
           <div className="mt-16 flex flex-wrap items-center gap-8">
             <PrimaryCTA />
             <Link to="/proyectos" className="link-text font-medium">
