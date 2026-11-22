@@ -1,7 +1,7 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { RESOURCES } from "@/content/site";
 import { SLOTS } from "@/content/images";
-import { Breadcrumbs, EditorialImage, PrimaryCTA } from "@/components/site/primitives";
+import { EditorialImage, PageHero, PrimaryCTA } from "@/components/site/primitives";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/recursos/$slug")({
@@ -47,26 +47,11 @@ function Page() {
   const { resource: r } = Route.useLoaderData();
   return (
     <>
-      <div className="bg-crema">
-        <Breadcrumbs items={[{ label: "Recursos", to: "/recursos" }, { label: r.title }]} />
-      </div>
       <article>
-        <header className="bg-crema">
-          <div className="wrap pt-16 pb-20 md:pt-24">
-            <span className="tag bg-blanco">{r.kind}</span>
-            <h1 className="t-h1 mt-6 max-w-4xl">{r.title}</h1>
-            <p className="t-lead mt-6 measure">{r.excerpt}</p>
-            <p className="t-eyebrow mt-8">
-              <time dateTime={r.date}>
-                {new Date(r.date).toLocaleDateString("es-ES", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-              </time>
-            </p>
-          </div>
-        </header>
+        <PageHero
+          crumbs={[{ label: "Recursos", to: "/recursos" }, { label: r.title }]}
+          title={r.title}
+        />
         <div className="wrap section-y grid gap-16 md:grid-cols-12">
           <div className="space-y-6 md:col-span-7">
             {r.body.map((p, i) => (

@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PROCESS, PROCESS_INTRO } from "@/content/site";
 import { SLOTS } from "@/content/images";
 import {
-  Breadcrumbs,
   EditorialImage,
   PageHero,
   PrimaryCTA,
@@ -35,12 +34,7 @@ const PROCESS_LAYOUT = [
 function Page() {
   return (
     <>
-      <div className="bg-crema">
-        <Breadcrumbs items={[{ label: "Cómo trabajamos" }]} />
-      </div>
-      <PageHero eyebrow="Cómo trabajamos" title={PROCESS_INTRO.title} lead={PROCESS_INTRO.lead}>
-        <PrimaryCTA />
-      </PageHero>
+      <PageHero crumbs={[{ label: "Cómo trabajamos" }]} title={PROCESS_INTRO.title} />
       <section className="bg-blanco section-y">
         <div className="wrap">
           <ProcessSteps steps={PROCESS} />

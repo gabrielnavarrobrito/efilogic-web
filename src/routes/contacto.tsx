@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ENTITY } from "@/content/site";
-import { Breadcrumbs, Eyebrow } from "@/components/site/primitives";
+import { PageHero } from "@/components/site/primitives";
 import { ContactForm } from "@/components/site/blocks";
 import { seo } from "@/lib/seo";
 
@@ -19,18 +19,7 @@ export const Route = createFileRoute("/contacto")({
 function Page() {
   return (
     <>
-      <div className="bg-crema">
-        <Breadcrumbs items={[{ label: "Contacto" }]} />
-      </div>
-      <section className="bg-crema">
-        <div className="wrap pt-16 pb-20 md:pt-24">
-          <Eyebrow>Contacto</Eyebrow>
-          <h1 className="t-h1 mt-6 max-w-4xl">Hablemos de tu proyecto.</h1>
-          <p className="t-lead mt-6 measure">
-            Tu apertura tiene fecha. Cuéntanos tu visión y empezamos el plan desde ella.
-          </p>
-        </div>
-      </section>
+      <PageHero crumbs={[{ label: "Contacto" }]} title="Hablemos de tu proyecto." />
       <section className="bg-blanco section-y">
         <div className="wrap grid gap-16 md:grid-cols-12">
           <div className="md:col-span-7">

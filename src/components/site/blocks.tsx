@@ -20,12 +20,23 @@ const LOGO_SCALE: Record<string, number> = {
   lopesan: 1.45,
 };
 
-export function BrandMark({ brand }: { brand: { slug: string; name: string; suffix?: string } }) {
+// Tamaño para la cinta de logos, donde no hace falta encajarlos todos en una fila.
+const BRAND_MARK_BOX_MARQUEE =
+  "flex h-10 w-28 shrink-0 items-center justify-center md:h-12 md:w-32";
+
+export function BrandMark({
+  brand,
+  marquee = false,
+}: {
+  brand: { slug: string; name: string; suffix?: string };
+  marquee?: boolean;
+}) {
+  const box = marquee ? BRAND_MARK_BOX_MARQUEE : BRAND_MARK_BOX;
   const logo = getBrandLogo(brand.slug);
   if (logo) {
     const scale = LOGO_SCALE[brand.slug];
     return (
-      <div className={BRAND_MARK_BOX}>
+      <div className={box}>
         <img
           src={logo}
           alt={brand.name}
@@ -37,7 +48,7 @@ export function BrandMark({ brand }: { brand: { slug: string; name: string; suff
     );
   }
   return (
-    <div className={BRAND_MARK_BOX}>
+    <div className={box}>
       <p className="whitespace-nowrap text-[12px] font-semibold leading-tight text-grafito sm:text-[16px]">
         {brand.name}
       </p>

@@ -8,7 +8,7 @@ const FIXED = [
   { key: "zonaComun", label: "Zona común" },
   { key: "restaurante", label: "Restaurante" },
 ] as const;
-import { Breadcrumbs, EditorialImage, PrimaryCTA, Stat } from "@/components/site/primitives";
+import { EditorialImage, PageHero, PrimaryCTA, Stat } from "@/components/site/primitives";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/proyectos/$slug")({
@@ -54,19 +54,10 @@ function Page() {
   ];
   return (
     <>
-      <div className="bg-crema">
-        <Breadcrumbs items={[{ label: "Proyectos", to: "/proyectos" }, { label: c.name }]} />
-      </div>
-      <section className="bg-crema">
-        <div className="wrap pt-16 pb-20 md:pt-24">
-          <span className="tag bg-blanco">{c.type}</span>
-          <h1 className="t-h1 mt-6 max-w-4xl">{c.name}</h1>
-          <p className="t-lead mt-6 measure">{c.summary}</p>
-          <p className="t-eyebrow mt-8">
-            {[c.location, c.year, c.status].filter(Boolean).join(" · ")}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        crumbs={[{ label: "Proyectos", to: "/proyectos" }, { label: c.name }]}
+        title={c.name}
+      />
       <div className="wrap -mt-2">
         <EditorialImage
           alt={`Vista general de ${c.name}`}
@@ -85,12 +76,9 @@ function Page() {
                 ["Solución", c.solucion],
                 ["Resultado", c.resultado],
               ] as const
-            ).map(([k, v], i) => (
+            ).map(([k, v]) => (
               <div key={k} className="border-t border-grafito pt-6">
-                <p className="t-eyebrow">
-                  {String(i + 1).padStart(2, "0")} · {k}
-                </p>
-                <h2 className="t-h3 mt-4">{k}</h2>
+                <h2 className="t-h3">{k}</h2>
                 <p className="mt-4 measure">{v}</p>
               </div>
             ))}

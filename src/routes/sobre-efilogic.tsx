@@ -1,12 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ENTITY, PILLARS, STATS } from "@/content/site";
-import {
-  Breadcrumbs,
-  EditorialImage,
-  PageHero,
-  PrimaryCTA,
-  Stat,
-} from "@/components/site/primitives";
+import { EditorialImage, PageHero, PrimaryCTA, Stat } from "@/components/site/primitives";
 import { SLOTS } from "@/content/images";
 import { seo } from "@/lib/seo";
 
@@ -27,12 +21,7 @@ export const Route = createFileRoute("/sobre-efilogic")({
 function Page() {
   return (
     <>
-      <div className="bg-crema">
-        <Breadcrumbs items={[{ label: "Sobre Efilogic" }]} />
-      </div>
-      <PageHero eyebrow="Sobre Efilogic" title="Partner, no proveedor." lead={LEAD}>
-        <PrimaryCTA />
-      </PageHero>
+      <PageHero crumbs={[{ label: "Sobre Efilogic" }]} title="Partner, no proveedor." />
       <section className="bg-blanco section-y">
         <div className="wrap grid items-center gap-16 md:grid-cols-12">
           <div className="md:col-span-5">

@@ -1,11 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  Breadcrumbs,
-  EditorialImage,
-  PageHero,
-  PrimaryCTA,
-  Reveal,
-} from "@/components/site/primitives";
+import { EditorialImage, PageHero, PrimaryCTA, Reveal } from "@/components/site/primitives";
 import { SLOTS } from "@/content/images";
 import { seo } from "@/lib/seo";
 
@@ -31,12 +25,7 @@ const PM = ["Cronogramas sin desviaciones", "Trazabilidad e incidencias en tiemp
 function Page() {
   return (
     <>
-      <div className="bg-crema">
-        <Breadcrumbs items={[{ label: "Para compras y PM" }]} />
-      </div>
-      <PageHero eyebrow="Compras · Project management · Expansión" title={TITLE} lead={LEAD}>
-        <PrimaryCTA />
-      </PageHero>
+      <PageHero crumbs={[{ label: "Para compras y PM" }]} title={TITLE} />
       <section className="bg-blanco section-y">
         <div className="wrap grid items-center gap-12 md:grid-cols-12">
           <div className="md:col-span-5">

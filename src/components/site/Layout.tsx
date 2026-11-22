@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { ChevronDown, Menu, Search, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FocusEvent } from "react";
 import { Logo } from "./Logo";
 import { MENU, SOCIALS, SEARCH_PAGES } from "@/content/site";
 import { cn } from "@/lib/utils";
@@ -10,6 +10,8 @@ export function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [scrolled, setScrolled] = useState(false);
+  // Desplegable de escritorio abierto: el header toma su mismo color.
+  const [megaOpen, setMegaOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isHome = pathname === "/";
 
@@ -22,9 +24,10 @@ export function Header() {
   useEffect(() => {
     setOpen(false);
     setSearchOpen(false);
+    setMegaOpen(false);
   }, [pathname]);
 
-  const transparent = isHome && !scrolled && !open && !searchOpen;
+  const transparent = isHome && !scrolled && !open && !searchOpen && !megaOpen;
   const results = SEARCH_PAGES.filter((p) =>
     p.label.toLowerCase().includes(query.trim().toLowerCase()),
   );
@@ -34,20 +37,35 @@ export function Header() {
       className={cn(
         "top-0 z-50 w-full transition-colors duration-300",
         isHome ? "fixed" : "sticky",
-        transparent
-          ? "bg-transparent pt-4 text-blanco md:pt-6"
-          : "border-b border-line bg-blanco text-grafito",
+        megaOpen
+          ? cn("bg-grafito text-blanco", isHome && !scrolled && "pt-4 md:pt-6")
+          : transparent
+            ? "bg-transparent pt-4 text-blanco md:pt-6"
+            : "bg-blanco text-grafito",
       )}
     >
       <div className="wrap flex h-[72px] items-center justify-between gap-4">
         <Link to="/" aria-label="Efilogic, inicio" className="py-2">
-          <Logo variant={transparent ? "white" : "graphite"} className="h-10 md:h-11" />
+          <Logo variant={transparent || megaOpen ? "white" : "graphite"} className="h-10 md:h-11" />
         </Link>
 
         <nav aria-label="Principal" className="hidden lg:block">
           <ul className="flex items-center gap-8">
             {MENU.map((m) => (
-              <li key={m.label} className="group relative">
+              <li
+                key={m.label}
+                className="group"
+                {...(m.children && m.label !== "Nosotros"
+                  ? {
+                      onMouseEnter: () => setMegaOpen(true),
+                      onMouseLeave: () => setMegaOpen(false),
+                      onFocus: () => setMegaOpen(true),
+                      onBlur: (e: FocusEvent<HTMLLIElement>) => {
+                        if (!e.currentTarget.contains(e.relatedTarget)) setMegaOpen(false);
+                      },
+                    }
+                  : {})}
+              >
                 {m.label === "Contacto" ? (
                   <Link
                     to={m.to}
@@ -59,7 +77,7 @@ export function Header() {
                   <>
                     <Link
                       to={m.to}
-                      className="flex items-center gap-1.5 py-6 text-[14px] font-semibold capitalize"
+                      className="flex items-center gap-1.5 py-6 text-[14px] font-semibold capitalize decoration-ambar decoration-2 underline-offset-8 hover:underline group-hover:underline"
                       activeProps={{
                         className: "underline decoration-ambar decoration-2 underline-offset-8",
                       }}
@@ -71,18 +89,25 @@ export function Header() {
                       )}
                     </Link>
                     {m.children && m.label !== "Nosotros" && (
-                      <ul className="invisible absolute left-1/2 top-full w-64 -translate-x-1/2 border border-line bg-blanco py-3 text-grafito opacity-0 transition-opacity duration-300 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                        {m.children.map((c) => (
-                          <li key={c.to}>
-                            <Link
-                              to={c.to}
-                              className="block px-6 py-3 text-[15px] font-medium hover:bg-crema"
-                            >
-                              {c.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
+                      <div className="invisible absolute inset-x-0 top-full bg-grafito text-blanco opacity-0 transition-opacity duration-300 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                        <div className="wrap flex gap-16 py-12">
+                          <p className="w-48 shrink-0 border-r border-line-inverse pr-10 text-[15px] font-semibold">
+                            {m.label}
+                          </p>
+                          <ul className="grid flex-1 grid-cols-2 gap-x-16 gap-y-5 xl:grid-cols-4">
+                            {m.children.map((c) => (
+                              <li key={c.to}>
+                                <Link
+                                  to={c.to}
+                                  className="text-[17px] font-medium decoration-ambar decoration-2 underline-offset-8 hover:underline"
+                                >
+                                  {c.label}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
                     )}
                   </>
                 )}

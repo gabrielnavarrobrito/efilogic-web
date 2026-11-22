@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { FAQ, RESOURCES } from "@/content/site";
-import { Breadcrumbs, PageHero } from "@/components/site/primitives";
+import { PageHero } from "@/components/site/primitives";
 import { FaqList, ResourceCard } from "@/components/site/blocks";
 import { faqLd, seo } from "@/lib/seo";
 
@@ -20,14 +20,7 @@ export const Route = createFileRoute("/recursos/")({
 function Page() {
   return (
     <>
-      <div className="bg-crema">
-        <Breadcrumbs items={[{ label: "Recursos" }]} />
-      </div>
-      <PageHero
-        eyebrow="Recursos"
-        title="Conocimiento para tu próxima apertura."
-        lead="Definiciones claras, procesos paso a paso y aprendizajes de más de 25 años en proyectos FF&E hoteleros."
-      />
+      <PageHero crumbs={[{ label: "Recursos" }]} title="Conocimiento para tu próxima apertura." />
       <section className="bg-blanco section-y">
         <div className="wrap grid gap-6 md:grid-cols-3">
           {RESOURCES.map((r) => (

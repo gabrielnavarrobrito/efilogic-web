@@ -100,7 +100,7 @@
     border-color: var(--color-border);
     border-radius: 0 !important;
   }
-  .slider-dot {
+  .slider-arrow {
     border-radius: 9999px !important;
   }
   html {
@@ -191,9 +191,51 @@
   }
 }
 
+/* En móvil el hero es más compacto para que asome la siguiente sección. */
 .home-hero {
-  height: 100svh;
-  min-height: 560px;
+  height: 72svh;
+  min-height: 460px;
+}
+@media (min-width: 768px) {
+  .home-hero {
+    height: 100svh;
+    min-height: 560px;
+  }
+}
+/* Cinta de logos: avanza hacia la derecha sin fin. La pista tiene
+   la lista dos veces; se desplaza de -50% a 0 y vuelve a empezar. */
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.marquee-track {
+  animation: marquee-right 28s linear infinite;
+}
+@media (min-width: 768px) {
+  .marquee-track {
+    animation-duration: 45s;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Sombra ligera para los proyectos del carrusel: solo arriba (título) y
+   abajo (botón), dejando la foto limpia en el centro. */
+.carousel-shade {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--grafito) 30%, transparent),
+    transparent 35%,
+    transparent 60%,
+    color-mix(in srgb, var(--grafito) 40%, transparent)
+  );
 }
 .hero-shade {
   background: var(--hero-shade);

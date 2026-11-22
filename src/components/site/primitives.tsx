@@ -72,6 +72,7 @@ export function ImageFeature({
   titleId,
   children,
   reverse = false,
+  imageBelowOnMobile = false,
   className,
 }: {
   image: string;
@@ -81,6 +82,8 @@ export function ImageFeature({
   titleId?: string;
   children: ReactNode;
   reverse?: boolean;
+  /** En móvil, la foto va debajo del texto. */
+  imageBelowOnMobile?: boolean;
   className?: string;
 }) {
   return (
@@ -88,6 +91,7 @@ export function ImageFeature({
       <div
         className={cn(
           "relative aspect-[4/3] lg:aspect-auto lg:min-h-[520px]",
+          imageBelowOnMobile && "order-2 lg:order-none",
           reverse && "lg:order-2",
         )}
       >
@@ -229,24 +233,19 @@ export function Stat({
   );
 }
 
+/** Cabecera de página interior: ruta de navegación y título, sobre blanco. */
 export function PageHero({
-  eyebrow,
+  crumbs,
   title,
-  lead,
-  tone = "crema",
-  children,
 }: {
-  eyebrow: string;
+  crumbs: { label: string; to?: string }[];
   title: ReactNode;
-  lead: ReactNode;
-  tone?: "crema" | "blanco";
-  children?: ReactNode;
 }) {
   return (
-    <section className={tone === "crema" ? "bg-crema" : "bg-blanco"}>
-      <div className="wrap pt-20 pb-20 md:pt-32 md:pb-28">
-        <SectionHeader as="h1" eyebrow={eyebrow} title={title} lead={lead} className="max-w-4xl" />
-        {children && <div className="mt-10">{children}</div>}
+    <section className="bg-blanco">
+      <Breadcrumbs items={crumbs} />
+      <div className="wrap pt-8 pb-12 md:pt-14 md:pb-16">
+        <h1 className="t-h1 max-w-4xl">{title}</h1>
       </div>
     </section>
   );

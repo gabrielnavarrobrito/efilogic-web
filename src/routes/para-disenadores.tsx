@@ -1,11 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  Breadcrumbs,
-  EditorialImage,
-  PageHero,
-  PrimaryCTA,
-  Reveal,
-} from "@/components/site/primitives";
+import { EditorialImage, PageHero, PrimaryCTA, Reveal } from "@/components/site/primitives";
 import { SLOTS } from "@/content/images";
 import { seo } from "@/lib/seo";
 
@@ -35,12 +29,7 @@ const POINTS = [
 function Page() {
   return (
     <>
-      <div className="bg-crema">
-        <Breadcrumbs items={[{ label: "Para diseñadores" }]} />
-      </div>
-      <PageHero eyebrow="Arquitectura e interiorismo" title={TITLE} lead={LEAD}>
-        <PrimaryCTA />
-      </PageHero>
+      <PageHero crumbs={[{ label: "Para diseñadores" }]} title={TITLE} />
       <section className="bg-blanco section-y">
         <div className="wrap grid items-center gap-16 md:grid-cols-12">
           <div className="md:col-span-7">

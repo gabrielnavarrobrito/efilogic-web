@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   ENTITY,
@@ -12,10 +12,10 @@ import {
 import { Eyebrow, ImageFeature, Reveal } from "@/components/site/primitives";
 import { BrandMark, ContactForm } from "@/components/site/blocks";
 import { seo } from "@/lib/seo";
-import heroImage from "@/assets/home/beach-restaurant.webp";
+import heroImage from "@/assets/images/proyectos/melia-trinidad-peninsula/galeria/07-restaurante-de-playa.webp";
 import aboutImage from "@/assets/home/lobby-lounge.webp";
 import solutionsImage from "@/assets/home/rooftop-sea-view.webp";
-import processImage from "@/assets/home/bedroom-boho.webp";
+import processImage from "@/assets/images/proyectos/sercotel-canteras/habitacion.webp";
 import projectSercotelCanteras from "@/assets/home/proyecto-sercotel-canteras.webp";
 import projectValetinSomni from "@/assets/home/proyecto-valetin-somni.webp";
 import projectMeliaTrinidad from "@/assets/home/proyecto-melia-trinidad-peninsula.jpg";
@@ -36,14 +36,14 @@ function Home() {
       <section className="home-hero relative isolate overflow-hidden bg-grafito text-blanco">
         <img
           src={heroImage}
-          alt="Restaurante de hotel frente al mar con pérgola de madera y vistas tropicales"
-          width={1376}
-          height={768}
+          alt="Restaurante de playa del Meliá Trinidad Península, con celosías de madera abiertas al mar Caribe"
+          width={1672}
+          height={941}
           fetchPriority="high"
           className="absolute inset-0 -z-20 h-full w-full object-cover"
         />
         <div aria-hidden className="hero-shade-soft absolute inset-0 -z-10" />
-        <div className="wrap flex h-full flex-col justify-between pb-16 pt-40 md:pb-20 md:pt-48">
+        <div className="wrap flex h-full flex-col justify-between pb-10 pt-28 md:pb-20 md:pt-48">
           <h1 className="hero-rise max-w-[480px] text-[28px] font-semibold leading-[1.18] lg:text-[40px]">
             Hacemos realidad tu proyecto hotelero.
           </h1>
@@ -66,6 +66,7 @@ function Home() {
             tag="Efilogic"
             title={HOME_INTRO.title}
             titleId="home-about"
+            imageBelowOnMobile
           >
             {HOME_INTRO.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
@@ -104,7 +105,7 @@ function Home() {
                 </li>
               ))}
             </ol>
-            <div className="relative isolate aspect-[5/4] overflow-hidden bg-grafito text-blanco lg:order-2">
+            <div className="relative isolate order-first aspect-[5/4] overflow-hidden bg-grafito text-blanco lg:order-2">
               <img
                 src={solutionsImage}
                 alt="Terraza de hotel con vistas al mar en Las Palmas de Gran Canaria"
@@ -135,7 +136,7 @@ function Home() {
         <Reveal>
           <ImageFeature
             image={processImage}
-            imageAlt="Suite de hotel terminada e instalada, con detalle de cabecero textil"
+            imageAlt="Habitación del Sercotel Canteras terminada, con cabecero de madera retroiluminado"
             tag="Cómo trabajamos"
             title="Planificamos desde el día de apertura hacia atrás."
             titleId="home-process"
@@ -158,14 +159,23 @@ function Home() {
 
       <Reveal>
         <section className="section-y bg-arena text-grafito" aria-labelledby="home-trusted">
-          <div className="wrap flex flex-col items-center gap-10">
+          <div className="wrap flex flex-col items-center">
             <h2 id="home-trusted" className="t-h2 write-in text-center">
               La confianza de los líderes del sector
             </h2>
-            <ul className="flex w-full flex-nowrap items-center justify-center gap-x-2 sm:gap-x-5 md:gap-x-8 lg:gap-x-14">
-              {TRUSTED_BRANDS.map((brand) => (
-                <li key={brand.slug} className="flex shrink-0 items-center">
-                  <BrandMark brand={brand} />
+          </div>
+          {/* Cinta en bucle infinito hacia la derecha. La lista se repite
+              para que el salto al reiniciar no se note. El py deja aire para
+              los logos que se escalan y que, si no, se recortarían arriba. */}
+          <div className="mt-10 w-full overflow-hidden py-4">
+            <ul className="marquee-track flex w-max items-center">
+              {MARQUEE_BRANDS.map((brand, i) => (
+                <li
+                  key={`${brand.slug}-${i}`}
+                  className="flex shrink-0 items-center px-5 md:px-10 lg:px-14"
+                  aria-hidden={i >= TRUSTED_BRANDS.length}
+                >
+                  <BrandMark brand={brand} marquee />
                 </li>
               ))}
             </ul>
@@ -195,6 +205,10 @@ function Home() {
   );
 }
 
+// Logos de la cinta: la lista 4 veces. La animación recorre la mitad de la
+// pista, así que esa mitad (2 listas) debe ser más ancha que la pantalla.
+const MARQUEE_BRANDS = [...TRUSTED_BRANDS, ...TRUSTED_BRANDS, ...TRUSTED_BRANDS, ...TRUSTED_BRANDS];
+
 // Proyectos del carrusel de la portada: no son necesariamente todos los de
 // PROJECTS (p. ej. HD Sensarena queda fuera), ni en el mismo orden.
 const CAROUSEL_PROJECTS = ["melia-trinidad-peninsula", "sercotel-canteras", "valetin-somni"].map(
@@ -222,6 +236,10 @@ function ProjectsShowcase() {
     );
     return () => window.clearTimeout(id);
   }, [index, paused]);
+
+  const count = CAROUSEL_PROJECTS.length;
+  const prev = () => setIndex((i) => (i - 1 + count) % count);
+  const next = () => setIndex((i) => (i + 1) % count);
 
   return (
     <section className="section-y bg-blanco" aria-label="Proyectos destacados">
@@ -254,7 +272,7 @@ function ProjectsShowcase() {
                 height={1024}
                 className="absolute inset-0 -z-20 h-full w-full object-cover"
               />
-              <div aria-hidden className="hero-shade absolute inset-0 -z-10" />
+              <div aria-hidden className="carousel-shade absolute inset-0 -z-10" />
               <div className="absolute left-0 top-0 p-6 md:p-12">
                 <h3 className="text-[26px] font-semibold leading-snug md:text-[38px]">
                   {project.name}
@@ -284,29 +302,54 @@ function ProjectsShowcase() {
             animationPlayState: paused ? "paused" : "running",
           }}
         />
-        <div className="absolute bottom-6 right-4 flex items-center md:bottom-12 md:right-10">
-          <span className="mr-3 text-[13px] font-medium tabular-nums tracking-[0.08em]" aria-hidden>
-            {String(index + 1).padStart(2, "0")}{" "}
-            <span className="text-blanco/50">
-              / {String(CAROUSEL_PROJECTS.length).padStart(2, "0")}
-            </span>
-          </span>
-          {CAROUSEL_PROJECTS.map(({ project }, i) => (
-            <button
-              key={project.slug}
-              type="button"
-              onClick={() => setIndex(i)}
-              aria-label={`Ver ${project.name}`}
-              aria-current={i === index}
-              className="group flex h-10 w-8 cursor-pointer items-center justify-center"
-            >
-              <span
-                className={`slider-dot block h-2.5 w-2.5 border border-blanco transition-colors duration-300 ${i === index ? "bg-blanco" : "bg-transparent group-hover:bg-blanco/60"}`}
-              />
-            </button>
-          ))}
-        </div>
+        <CarouselArrows
+          onPrev={prev}
+          onNext={next}
+          tone="light"
+          className="absolute bottom-12 right-10 hidden md:flex"
+        />
+      </div>
+      <CarouselArrows
+        onPrev={prev}
+        onNext={next}
+        tone="dark"
+        className="wrap mt-6 flex justify-center md:hidden"
+      />
+      <div className="mt-8 flex justify-center md:mt-10">
+        <Link
+          to="/proyectos"
+          className="link-text inline-flex items-center gap-3 text-[14px] font-semibold"
+        >
+          Ver más proyectos <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" />
+        </Link>
       </div>
     </section>
+  );
+}
+
+function CarouselArrows({
+  onPrev,
+  onNext,
+  tone,
+  className,
+}: {
+  onPrev: () => void;
+  onNext: () => void;
+  /** light: sobre la foto (gris claro → blanco). dark: sobre fondo blanco, en móvil. */
+  tone: "light" | "dark";
+  className?: string;
+}) {
+  const button = `slider-arrow flex h-11 w-11 cursor-pointer items-center justify-center border border-current transition-colors duration-300 ${
+    tone === "light" ? "text-blanco/70 hover:text-blanco" : "text-grafito/45 hover:text-grafito"
+  }`;
+  return (
+    <div className={`items-center gap-3 ${className ?? ""}`}>
+      <button type="button" onClick={onPrev} aria-label="Proyecto anterior" className={button}>
+        <ArrowLeft aria-hidden className="h-5 w-5" strokeWidth={1.25} />
+      </button>
+      <button type="button" onClick={onNext} aria-label="Proyecto siguiente" className={button}>
+        <ArrowRight aria-hidden className="h-5 w-5" strokeWidth={1.25} />
+      </button>
+    </div>
   );
 }

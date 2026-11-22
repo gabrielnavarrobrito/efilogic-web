@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PROJECTS } from "@/content/site";
-import { Breadcrumbs, PageHero, Reveal } from "@/components/site/primitives";
+import { PageHero, Reveal } from "@/components/site/primitives";
 import { CaseStudyBlock } from "@/components/site/blocks";
 import { seo } from "@/lib/seo";
 
@@ -19,13 +19,9 @@ export const Route = createFileRoute("/proyectos/")({
 function Page() {
   return (
     <>
-      <div className="bg-crema">
-        <Breadcrumbs items={[{ label: "Proyectos" }]} />
-      </div>
       <PageHero
-        eyebrow="Proyectos"
+        crumbs={[{ label: "Proyectos" }]}
         title="Hoteles abiertos en fecha, idénticos a su diseño."
-        lead="Cada caso sigue la misma estructura: el reto del proyecto, cómo lo orquestamos y el resultado el día de la apertura."
       />
       <section className="bg-blanco section-y">
         <div className="wrap space-y-28">

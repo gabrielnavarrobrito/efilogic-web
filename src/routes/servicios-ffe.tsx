@@ -1,13 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ENTITY, FAQ, SERVICES, SERVICES_INTRO } from "@/content/site";
 import { SLOTS } from "@/content/images";
-import {
-  Breadcrumbs,
-  EditorialImage,
-  PageHero,
-  PrimaryCTA,
-  Reveal,
-} from "@/components/site/primitives";
+import { EditorialImage, PageHero, PrimaryCTA, Reveal } from "@/components/site/primitives";
 import { FaqList } from "@/components/site/blocks";
 import { faqLd, seo } from "@/lib/seo";
 
@@ -40,16 +34,7 @@ const SERVICES_LAYOUT_RATIO = ["4/3", "3/4", "21/9"];
 function Page() {
   return (
     <>
-      <div className="bg-crema">
-        <Breadcrumbs items={[{ label: "Servicios FF&E" }]} />
-      </div>
-      <PageHero
-        eyebrow={SERVICES_INTRO.eyebrow}
-        title={SERVICES_INTRO.title}
-        lead={SERVICES_INTRO.lead}
-      >
-        <PrimaryCTA />
-      </PageHero>
+      <PageHero crumbs={[{ label: "Servicios FF&E" }]} title={SERVICES_INTRO.title} />
       <section className="bg-blanco section-y">
         <div className="wrap grid gap-x-6 gap-y-14 md:grid-cols-12">
           {SERVICES.map((s, i) => (
