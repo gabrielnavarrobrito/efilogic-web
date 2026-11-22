@@ -43,6 +43,7 @@ function Home() {
           className="absolute inset-0 -z-20 h-full w-full object-cover"
         />
         <div aria-hidden className="hero-shade-soft absolute inset-0 -z-10" />
+        <div aria-hidden className="hero-vignette absolute inset-0 -z-10" />
         <div className="wrap flex h-full flex-col justify-between pb-10 pt-28 md:pb-20 md:pt-48">
           <h1 className="hero-rise max-w-[480px] text-[28px] font-semibold leading-[1.18] lg:text-[40px]">
             Hacemos realidad tu proyecto hotelero.
@@ -73,9 +74,10 @@ function Home() {
             ))}
             <Link
               to="/sobre-efilogic"
-              className="link-text inline-flex items-center gap-3 text-[14px] font-semibold"
+              className="draw-group inline-flex items-center gap-3 text-[14px] font-semibold"
             >
-              Sobre nosotros <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" />
+              <span className="link-text">Sobre nosotros</span>{" "}
+              <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" />
             </Link>
           </ImageFeature>
         </Reveal>
@@ -93,7 +95,7 @@ function Home() {
                   <Link
                     to={solution.to}
                     {...(solution.anchor ? { hash: solution.anchor } : {})}
-                    className="group text-[24px] font-semibold leading-snug md:text-[30px]"
+                    className="group draw-group text-[24px] font-semibold leading-snug md:text-[30px]"
                   >
                     <span className="link-text">{solution.title}</span>{" "}
                     <ArrowUpRight
@@ -148,9 +150,9 @@ function Home() {
             </p>
             <Link
               to="/como-trabajamos"
-              className="link-text inline-flex items-center gap-3 text-[14px] font-semibold"
+              className="draw-group inline-flex items-center gap-3 text-[14px] font-semibold"
             >
-              Ver cómo dirigimos un proyecto{" "}
+              <span className="link-text">Ver cómo dirigimos un proyecto</span>{" "}
               <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" />
             </Link>
           </ImageFeature>
@@ -318,9 +320,10 @@ function ProjectsShowcase() {
       <div className="mt-8 flex justify-center md:mt-10">
         <Link
           to="/proyectos"
-          className="link-text inline-flex items-center gap-3 text-[14px] font-semibold"
+          className="draw-group inline-flex items-center gap-3 text-[14px] font-semibold"
         >
-          Ver más proyectos <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" />
+          <span className="link-text">Ver más proyectos</span>{" "}
+          <ArrowUpRight aria-hidden className="h-5 w-5 text-ambar" />
         </Link>
       </div>
     </section>

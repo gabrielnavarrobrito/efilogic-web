@@ -27,6 +27,11 @@ export function Header() {
     setMegaOpen(false);
   }, [pathname]);
 
+  const closeMega = () => {
+    setMegaOpen(false);
+    (document.activeElement as HTMLElement | null)?.blur();
+  };
+
   const transparent = isHome && !scrolled && !open && !searchOpen && !megaOpen;
   const results = SEARCH_PAGES.filter((p) =>
     p.label.toLowerCase().includes(query.trim().toLowerCase()),
@@ -77,19 +82,31 @@ export function Header() {
                   <>
                     <Link
                       to={m.to}
-                      className="flex items-center gap-1.5 py-6 text-[14px] font-semibold capitalize decoration-ambar decoration-2 underline-offset-8 hover:underline group-hover:underline"
-                      activeProps={{
-                        className: "underline decoration-ambar decoration-2 underline-offset-8",
-                      }}
+                      onClick={closeMega}
+                      className="flex items-center gap-1.5 py-6 text-[14px] font-semibold capitalize"
                       activeOptions={{ exact: m.to === "/" }}
                     >
-                      {m.label}
+                      <span
+                        className={cn(
+                          "draw-line",
+                          m.children && m.label !== "Nosotros" && megaOpen && "is-drawn",
+                        )}
+                      >
+                        {m.label}
+                      </span>
                       {m.children && m.label !== "Nosotros" && (
                         <ChevronDown strokeWidth={1.5} className="h-4 w-4" aria-hidden />
                       )}
                     </Link>
                     {m.children && m.label !== "Nosotros" && (
-                      <div className="invisible absolute inset-x-0 top-full bg-grafito text-blanco opacity-0 transition-opacity duration-300 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                      // Visibilidad por estado (no por :hover) para poder cerrarlo al
+                      // pulsar un enlace aunque el ratón siga encima.
+                      <div
+                        className={cn(
+                          "absolute inset-x-0 top-full bg-grafito text-blanco transition-opacity duration-300",
+                          megaOpen ? "visible opacity-100" : "invisible opacity-0",
+                        )}
+                      >
                         <div className="wrap flex gap-16 py-12">
                           <p className="w-48 shrink-0 border-r border-line-inverse pr-10 text-[15px] font-semibold">
                             {m.label}
@@ -99,7 +116,8 @@ export function Header() {
                               <li key={c.to}>
                                 <Link
                                   to={c.to}
-                                  className="text-[17px] font-medium decoration-ambar decoration-2 underline-offset-8 hover:underline"
+                                  onClick={closeMega}
+                                  className="draw-line text-[17px] font-medium"
                                 >
                                   {c.label}
                                 </Link>
@@ -157,7 +175,7 @@ export function Header() {
       </div>
 
       {searchOpen && (
-        <div className="border-t border-line bg-blanco text-grafito">
+        <div className="bg-blanco text-grafito">
           <div className="wrap py-8">
             <label htmlFor="buscar" className="t-eyebrow">
               Buscar en Efilogic
@@ -237,10 +255,7 @@ export function Footer() {
                 <ul className="space-y-3 text-[15px]">
                   {m.children?.map((c) => (
                     <li key={c.to}>
-                      <Link
-                        to={c.to}
-                        className="hover:underline hover:decoration-ambar hover:underline-offset-4"
-                      >
+                      <Link to={c.to} className="draw-line">
                         {c.label}
                       </Link>
                     </li>
@@ -251,7 +266,7 @@ export function Footer() {
           </nav>
         </div>
         <div className="mt-16 flex flex-col items-start justify-between gap-6 border-t border-ambar pt-8 md:flex-row md:items-center">
-          <p className="text-[13px]">© {new Date().getFullYear()} Efilogic</p>
+          <p className="text-[13px]">© 2027 Efilogic</p>
           <ul className="flex gap-6" aria-label="Redes sociales">
             {SOCIALS.map((s) => (
               <li key={s.key}>

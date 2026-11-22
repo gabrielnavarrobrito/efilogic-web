@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PROJECTS } from "@/content/site";
 import { PageHero, Reveal } from "@/components/site/primitives";
-import { CaseStudyBlock } from "@/components/site/blocks";
+import { ProjectCard } from "@/components/site/blocks";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/proyectos/")({
@@ -23,14 +23,16 @@ function Page() {
         crumbs={[{ label: "Proyectos" }]}
         title="Hoteles abiertos en fecha, idénticos a su diseño."
       />
-      <section className="bg-blanco section-y">
-        <div className="wrap space-y-28">
-          {PROJECTS.map((c, i) => (
-            <Reveal key={c.slug}>
-              <CaseStudyBlock c={c} reverse={i % 2 === 1} headingLevel="h2" />
-            </Reveal>
+      <section className="bg-blanco pb-20 md:pb-28">
+        <ul className="wrap grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-16">
+          {PROJECTS.map((c) => (
+            <li key={c.slug}>
+              <Reveal>
+                <ProjectCard c={c} />
+              </Reveal>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
     </>
   );

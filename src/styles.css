@@ -243,6 +243,14 @@
 .hero-shade-soft {
   background: var(--hero-shade-soft);
 }
+/* Viñeteado negro sutil en los bordes del hero para ayudar a leer el texto. */
+.hero-vignette {
+  background: radial-gradient(
+    ellipse 120% 100% at 50% 50%,
+    transparent 45%,
+    rgb(0 0 0 / 0.38) 100%
+  );
+}
 
 @keyframes hero-rise {
   from {
@@ -390,15 +398,57 @@
     color: var(--blanco);
   }
 }
+/* Subrayados al pasar el ratón: el trazo ámbar se dibuja de izquierda a
+   derecha. Se pinta con un degradado de fondo (text-decoration no se puede
+   animar así). También se activa al pasar por encima de un .group padre y en
+   el enlace de la página actual (data-status="active" de TanStack Router).
+   Para activarlo desde un contenedor, ponle la clase draw-group. */
+@utility draw-line {
+  text-decoration: none;
+  background-image: linear-gradient(var(--ambar), var(--ambar));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  padding-bottom: 4px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-size 450ms cubic-bezier(0.16, 1, 0.3, 1);
+  &:hover,
+  &.is-drawn,
+  .draw-group:hover &,
+  [data-status="active"] & {
+    background-size: 100% 2px;
+  }
+}
+
+/* Enlace de texto: línea fina en reposo y trazo ámbar que se dibuja encima. */
 @utility link-text {
   color: inherit;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-  transition: text-decoration-color 250ms ease-out;
-  &:hover {
-    text-decoration-color: var(--ambar);
-    text-decoration-thickness: 2px;
+  text-decoration: none;
+  background-image:
+    linear-gradient(var(--ambar), var(--ambar)), linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position:
+    0 100%,
+    0 calc(100% - 0.5px);
+  background-size:
+    0% 2px,
+    100% 1px;
+  padding-bottom: 3px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-size 450ms cubic-bezier(0.16, 1, 0.3, 1);
+  &:hover,
+  .draw-group:hover & {
+    background-size:
+      100% 2px,
+      100% 1px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .draw-line,
+  .link-text {
+    transition: none;
   }
 }
 

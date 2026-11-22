@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { Plus } from "lucide-react";
 import { useRef, useState, type FormEvent } from "react";
 import { PERFILES, projectMeta, type CaseStudy as CaseT, type Resource } from "@/content/site";
-import { SLOTS } from "@/content/images";
+import { SLOTS, getSlotImage } from "@/content/images";
 import { getBrandLogo } from "@/content/logos";
 import { EditorialImage, Eyebrow } from "./primitives";
 import { cn } from "@/lib/utils";
@@ -80,52 +80,36 @@ export function FaqList({ items }: { items: { q: string; a: string }[] }) {
   );
 }
 
-export function CaseStudyBlock({
-  c,
-  reverse = false,
-  headingLevel = "h3",
-}: {
-  c: CaseT;
-  reverse?: boolean;
-  headingLevel?: "h2" | "h3";
-}) {
-  const H = headingLevel;
+/** Tarjeta de proyecto para la rejilla de /proyectos: foto, nombre y lugar. */
+export function ProjectCard({ c }: { c: CaseT }) {
+  const src = getSlotImage(SLOTS.proyectos(c.slug).hero);
   return (
-    <article className="grid items-center gap-10 md:grid-cols-12 md:gap-12">
-      <div className={cn("md:col-span-7", reverse && "md:order-2")}>
-        <EditorialImage
-          alt={`Interior terminado de ${c.name}, ${c.location}`}
-          caption={`${c.name} · ${projectMeta(c)}`}
-          ratio="7/5"
-          slot={SLOTS.proyectos(c.slug).hero}
+    <Link to="/proyectos/$slug" params={{ slug: c.slug }} className="group draw-group block">
+      <div className="relative aspect-[3/2] overflow-hidden bg-crema">
+        {src ? (
+          <img
+            src={src}
+            alt={`Interior terminado de ${c.name}, ${c.location}`}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+          />
+        ) : (
+          <div className="placeholder-img flex h-full w-full items-center justify-center">
+            <span className="t-eyebrow opacity-60">Imagen de proyecto · sustituir</span>
+          </div>
+        )}
+        <span
+          aria-hidden
+          className="absolute bottom-0 left-0 h-[3px] w-full origin-left scale-x-0 bg-ambar transition-transform duration-500 ease-out group-hover:scale-x-100"
         />
       </div>
-      <div className={cn("md:col-span-5", reverse && "md:order-1")}>
-        <span className="tag bg-blanco">{c.type}</span>
-        <H className="t-h3 mt-5">{c.name}</H>
-        <dl className="mt-8 space-y-6">
-          {(
-            [
-              ["Reto", c.reto],
-              ["Solución", c.solucion],
-              ["Resultado", c.resultado],
-            ] as const
-          ).map(([k, v]) => (
-            <div key={k} className="border-t border-line-strong pt-4">
-              <dt className="t-eyebrow">{k}</dt>
-              <dd className="mt-2 text-[16px] leading-relaxed">{v}</dd>
-            </div>
-          ))}
-        </dl>
-        <Link
-          to="/proyectos/$slug"
-          params={{ slug: c.slug }}
-          className="link-text mt-8 inline-block text-[15px] font-medium"
-        >
-          Ver el caso completo
-        </Link>
-      </div>
-    </article>
+      <h2 className="mt-6 text-[22px] font-semibold leading-snug md:text-[26px]">
+        <span className="draw-line">{c.name}</span>
+      </h2>
+      <p className="mt-1.5 text-[15px] text-grafito/60 md:text-[16px]">
+        {[c.location, c.type].filter(Boolean).join(" · ")}
+      </p>
+    </Link>
   );
 }
 
@@ -134,7 +118,7 @@ export function ResourceCard({ r }: { r: Resource }) {
     <Link
       to="/recursos/$slug"
       params={{ slug: r.slug }}
-      className="card-edit group flex h-full flex-col bg-blanco"
+      className="card-edit group draw-group flex h-full flex-col bg-blanco"
     >
       <EditorialImage
         alt={`Imagen editorial: ${r.title}`}
@@ -145,8 +129,8 @@ export function ResourceCard({ r }: { r: Resource }) {
         <span className="tag self-start">{r.kind}</span>
         <h3 className="mt-5 text-[21px] font-medium leading-snug">{r.title}</h3>
         <p className="mt-3 text-[16px] leading-relaxed">{r.excerpt}</p>
-        <span className="mt-auto pt-6 text-[14px] font-semibold underline underline-offset-4 group-hover:decoration-ambar group-hover:decoration-2">
-          Leer
+        <span className="mt-auto pt-6 text-[14px] font-semibold">
+          <span className="link-text">Leer</span>
         </span>
       </div>
     </Link>
