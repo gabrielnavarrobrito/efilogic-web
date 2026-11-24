@@ -67,6 +67,152 @@ export const SEARCH_PAGES = [
   { label: "Contacto", to: "/contacto" },
 ];
 
+// Datos de contacto de la sede (pie de página).
+export const SEDE = {
+  phone: "928 26 62 01",
+  phoneHref: "tel:+34928266201",
+  email: "efilogic@efilogic.com",
+};
+
+// Datos legales del titular de la web.
+export const LEGAL_ENTITY = {
+  name: "Efilogic S.L.",
+  nif: "B35719772",
+  address: "C. Nicolás Estévanez 53, Local Izquierdo, 35007 Las Palmas de Gran Canaria, España",
+};
+
+export const LEGAL_LINKS = [
+  { label: "Aviso legal", to: "/aviso-legal" },
+  { label: "Política de privacidad", to: "/politica-de-privacidad" },
+  { label: "Política de cookies", to: "/politica-de-cookies" },
+] as const;
+
+export type LegalSection = { title: string; paragraphs: string[] };
+
+const TITULAR = `${LEGAL_ENTITY.name}, con NIF ${LEGAL_ENTITY.nif} y domicilio en ${LEGAL_ENTITY.address}. Teléfono ${SEDE.phone}, email ${SEDE.email}.`;
+
+export const LEGAL_PAGES: Record<
+  "aviso-legal" | "politica-de-privacidad" | "politica-de-cookies",
+  { title: string; description: string; updated: string; sections: LegalSection[] }
+> = {
+  "aviso-legal": {
+    title: "Aviso legal",
+    description:
+      "Información legal sobre el titular y las condiciones de uso de la web de Efilogic.",
+    updated: "2026-11-22",
+    sections: [
+      {
+        title: "Titular de la web",
+        paragraphs: [
+          `En cumplimiento de la Ley 34/2002, de servicios de la sociedad de la información y de comercio electrónico (LSSI-CE), el titular de efilogic.com es ${TITULAR}`,
+        ],
+      },
+      {
+        title: "Condiciones de uso",
+        paragraphs: [
+          "El acceso a esta web es libre y gratuito. Quien la utiliza se compromete a hacerlo de forma lícita y a no dañar su funcionamiento ni el de los sistemas que la alojan.",
+          "La información publicada describe los servicios de Efilogic con carácter informativo. No constituye una oferta vinculante; cada proyecto se rige por su propuesta y contrato.",
+        ],
+      },
+      {
+        title: "Propiedad intelectual e industrial",
+        paragraphs: [
+          "Los textos, el diseño, el logotipo y el resto de contenidos de esta web pertenecen a Efilogic o se usan con autorización de sus titulares. No se pueden reproducir, distribuir ni transformar sin permiso expreso.",
+          "Las marcas hoteleras que aparecen en la web pertenecen a sus respectivos titulares y se citan solo para identificar proyectos en los que Efilogic ha participado.",
+        ],
+      },
+      {
+        title: "Responsabilidad",
+        paragraphs: [
+          "Efilogic cuida que la información sea correcta y esté actualizada, pero no responde de errores puntuales ni de las interrupciones del servicio por causas técnicas ajenas a su control.",
+          "Los enlaces a webs de terceros, como las redes sociales, se ofrecen por comodidad. Efilogic no controla ni responde de su contenido.",
+        ],
+      },
+      {
+        title: "Legislación aplicable",
+        paragraphs: [
+          "Esta web se rige por la legislación española. Para cualquier controversia, las partes se someten a los juzgados y tribunales de Las Palmas de Gran Canaria, salvo que la ley disponga otro fuero.",
+        ],
+      },
+    ],
+  },
+  "politica-de-privacidad": {
+    title: "Política de privacidad",
+    description: "Cómo trata Efilogic los datos personales que envías a través de su web.",
+    updated: "2026-11-22",
+    sections: [
+      {
+        title: "Responsable del tratamiento",
+        paragraphs: [TITULAR],
+      },
+      {
+        title: "Qué datos tratamos",
+        paragraphs: [
+          "Solo los que nos envías en el formulario de contacto: nombre, email profesional, empresa o estudio, perfil profesional y la descripción de tu proyecto.",
+          "Para proteger el formulario frente a envíos abusivos guardamos durante una hora una huella cifrada de tu dirección IP, que no permite identificarte.",
+        ],
+      },
+      {
+        title: "Para qué los usamos",
+        paragraphs: [
+          "Para responder a tu solicitud y, si lo pides, preparar una propuesta para tu proyecto. No los usamos para enviarte publicidad ni elaboramos perfiles con ellos.",
+        ],
+      },
+      {
+        title: "Base legal",
+        paragraphs: [
+          "Tu consentimiento al enviar el formulario y la aplicación de medidas precontractuales a petición tuya (art. 6.1.a y 6.1.b del Reglamento General de Protección de Datos).",
+        ],
+      },
+      {
+        title: "Cuánto tiempo los conservamos",
+        paragraphs: [
+          "Mientras dure la conversación sobre tu proyecto y, después, el tiempo necesario para atender posibles responsabilidades legales. Si no llega a haber relación comercial, los eliminamos en un plazo máximo de 12 meses.",
+        ],
+      },
+      {
+        title: "Con quién los compartimos",
+        paragraphs: [
+          "No cedemos tus datos a terceros. Para que la web funcione intervienen dos proveedores que actúan como encargados del tratamiento: Dinahosting (alojamiento de la web, en España) y Resend (envío del email con tu solicitud). Resend puede tratar datos fuera del Espacio Económico Europeo con las garantías previstas en el RGPD, como las cláusulas contractuales tipo de la Comisión Europea.",
+        ],
+      },
+      {
+        title: "Tus derechos",
+        paragraphs: [
+          `Puedes pedir acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad de tus datos, y retirar tu consentimiento, escribiendo a ${SEDE.email}.`,
+          "Si consideras que no hemos atendido bien tu petición, puedes reclamar ante la Agencia Española de Protección de Datos (www.aepd.es).",
+        ],
+      },
+    ],
+  },
+  "politica-de-cookies": {
+    title: "Política de cookies",
+    description: "Uso de cookies en la web de Efilogic.",
+    updated: "2026-11-22",
+    sections: [
+      {
+        title: "Esta web no usa cookies",
+        paragraphs: [
+          "La web de Efilogic no instala cookies propias ni de terceros: no usa analítica, publicidad, vídeos incrustados ni botones de redes sociales que rastreen tu visita. Por eso no te mostramos un aviso para aceptarlas.",
+          "Las tipografías e imágenes se sirven desde nuestro propio servidor, sin contactar con servicios externos.",
+        ],
+      },
+      {
+        title: "Enlaces a otras webs",
+        paragraphs: [
+          "Si sigues un enlace a Instagram, LinkedIn u otra web, esa web puede instalar sus propias cookies según su política, que te recomendamos consultar.",
+        ],
+      },
+      {
+        title: "Cambios",
+        paragraphs: [
+          "Si en el futuro incorporamos alguna herramienta que use cookies, actualizaremos esta política y te pediremos el consentimiento cuando sea necesario.",
+        ],
+      },
+    ],
+  },
+};
+
 // Sustituir "#" por las URLs reales de cada red.
 export const SOCIALS = [
   { key: "instagram", label: "Instagram", href: "https://www.instagram.com/efilogiccontract/" },

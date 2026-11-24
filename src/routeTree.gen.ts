@@ -11,10 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as R404RouteImport } from './routes/404'
+import { Route as AvisoLegalRouteImport } from './routes/aviso-legal'
 import { Route as ComoTrabajamosRouteImport } from './routes/como-trabajamos'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as ParaComprasYPmRouteImport } from './routes/para-compras-y-pm'
 import { Route as ParaDisenadoresRouteImport } from './routes/para-disenadores'
+import { Route as PoliticaDeCookiesRouteImport } from './routes/politica-de-cookies'
+import { Route as PoliticaDePrivacidadRouteImport } from './routes/politica-de-privacidad'
 import { Route as ServiciosFfeRouteImport } from './routes/servicios-ffe'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SobreEfilogicRouteImport } from './routes/sobre-efilogic'
@@ -31,6 +34,11 @@ const IndexRoute = IndexRouteImport.update({
 const R404Route = R404RouteImport.update({
   id: '/404',
   path: '/404',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AvisoLegalRoute = AvisoLegalRouteImport.update({
+  id: '/aviso-legal',
+  path: '/aviso-legal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComoTrabajamosRoute = ComoTrabajamosRouteImport.update({
@@ -51,6 +59,16 @@ const ParaComprasYPmRoute = ParaComprasYPmRouteImport.update({
 const ParaDisenadoresRoute = ParaDisenadoresRouteImport.update({
   id: '/para-disenadores',
   path: '/para-disenadores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliticaDeCookiesRoute = PoliticaDeCookiesRouteImport.update({
+  id: '/politica-de-cookies',
+  path: '/politica-de-cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliticaDePrivacidadRoute = PoliticaDePrivacidadRouteImport.update({
+  id: '/politica-de-privacidad',
+  path: '/politica-de-privacidad',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServiciosFfeRoute = ServiciosFfeRouteImport.update({
@@ -92,10 +110,13 @@ const RecursosSlugRoute = RecursosSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/aviso-legal': typeof AvisoLegalRoute
   '/como-trabajamos': typeof ComoTrabajamosRoute
   '/contacto': typeof ContactoRoute
   '/para-compras-y-pm': typeof ParaComprasYPmRoute
   '/para-disenadores': typeof ParaDisenadoresRoute
+  '/politica-de-cookies': typeof PoliticaDeCookiesRoute
+  '/politica-de-privacidad': typeof PoliticaDePrivacidadRoute
   '/servicios-ffe': typeof ServiciosFfeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-efilogic': typeof SobreEfilogicRoute
@@ -107,10 +128,13 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/aviso-legal': typeof AvisoLegalRoute
   '/como-trabajamos': typeof ComoTrabajamosRoute
   '/contacto': typeof ContactoRoute
   '/para-compras-y-pm': typeof ParaComprasYPmRoute
   '/para-disenadores': typeof ParaDisenadoresRoute
+  '/politica-de-cookies': typeof PoliticaDeCookiesRoute
+  '/politica-de-privacidad': typeof PoliticaDePrivacidadRoute
   '/servicios-ffe': typeof ServiciosFfeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-efilogic': typeof SobreEfilogicRoute
@@ -123,10 +147,13 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/aviso-legal': typeof AvisoLegalRoute
   '/como-trabajamos': typeof ComoTrabajamosRoute
   '/contacto': typeof ContactoRoute
   '/para-compras-y-pm': typeof ParaComprasYPmRoute
   '/para-disenadores': typeof ParaDisenadoresRoute
+  '/politica-de-cookies': typeof PoliticaDeCookiesRoute
+  '/politica-de-privacidad': typeof PoliticaDePrivacidadRoute
   '/servicios-ffe': typeof ServiciosFfeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-efilogic': typeof SobreEfilogicRoute
@@ -140,10 +167,13 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/404'
+    | '/aviso-legal'
     | '/como-trabajamos'
     | '/contacto'
     | '/para-compras-y-pm'
     | '/para-disenadores'
+    | '/politica-de-cookies'
+    | '/politica-de-privacidad'
     | '/servicios-ffe'
     | '/sitemap.xml'
     | '/sobre-efilogic'
@@ -155,10 +185,13 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/404'
+    | '/aviso-legal'
     | '/como-trabajamos'
     | '/contacto'
     | '/para-compras-y-pm'
     | '/para-disenadores'
+    | '/politica-de-cookies'
+    | '/politica-de-privacidad'
     | '/servicios-ffe'
     | '/sitemap.xml'
     | '/sobre-efilogic'
@@ -170,10 +203,13 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/404'
+    | '/aviso-legal'
     | '/como-trabajamos'
     | '/contacto'
     | '/para-compras-y-pm'
     | '/para-disenadores'
+    | '/politica-de-cookies'
+    | '/politica-de-privacidad'
     | '/servicios-ffe'
     | '/sitemap.xml'
     | '/sobre-efilogic'
@@ -186,10 +222,13 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
+  AvisoLegalRoute: typeof AvisoLegalRoute
   ComoTrabajamosRoute: typeof ComoTrabajamosRoute
   ContactoRoute: typeof ContactoRoute
   ParaComprasYPmRoute: typeof ParaComprasYPmRoute
   ParaDisenadoresRoute: typeof ParaDisenadoresRoute
+  PoliticaDeCookiesRoute: typeof PoliticaDeCookiesRoute
+  PoliticaDePrivacidadRoute: typeof PoliticaDePrivacidadRoute
   ServiciosFfeRoute: typeof ServiciosFfeRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreEfilogicRoute: typeof SobreEfilogicRoute
@@ -213,6 +252,13 @@ declare module '@tanstack/react-router' {
       path: '/404'
       fullPath: '/404'
       preLoaderRoute: typeof R404RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aviso-legal': {
+      id: '/aviso-legal'
+      path: '/aviso-legal'
+      fullPath: '/aviso-legal'
+      preLoaderRoute: typeof AvisoLegalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/como-trabajamos': {
@@ -241,6 +287,20 @@ declare module '@tanstack/react-router' {
       path: '/para-disenadores'
       fullPath: '/para-disenadores'
       preLoaderRoute: typeof ParaDisenadoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politica-de-cookies': {
+      id: '/politica-de-cookies'
+      path: '/politica-de-cookies'
+      fullPath: '/politica-de-cookies'
+      preLoaderRoute: typeof PoliticaDeCookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politica-de-privacidad': {
+      id: '/politica-de-privacidad'
+      path: '/politica-de-privacidad'
+      fullPath: '/politica-de-privacidad'
+      preLoaderRoute: typeof PoliticaDePrivacidadRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/servicios-ffe': {
@@ -298,10 +358,13 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
+  AvisoLegalRoute: AvisoLegalRoute,
   ComoTrabajamosRoute: ComoTrabajamosRoute,
   ContactoRoute: ContactoRoute,
   ParaComprasYPmRoute: ParaComprasYPmRoute,
   ParaDisenadoresRoute: ParaDisenadoresRoute,
+  PoliticaDeCookiesRoute: PoliticaDeCookiesRoute,
+  PoliticaDePrivacidadRoute: PoliticaDePrivacidadRoute,
   ServiciosFfeRoute: ServiciosFfeRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreEfilogicRoute: SobreEfilogicRoute,
@@ -315,11 +378,10 @@ export const routeTree = rootRouteImport
   ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
+import type { createStart } from '@tanstack/react-start'
 declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
   }
 }

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ENTITY } from "@/content/site";
+import { ENTITY, SEDE } from "@/content/site";
 import { PageHero } from "@/components/site/primitives";
 import { ContactForm } from "@/components/site/blocks";
 import { seo } from "@/lib/seo";
@@ -26,16 +26,30 @@ function Page() {
             <ContactForm />
           </div>
           <aside className="md:col-span-4 md:col-start-9">
-            <div className="border-t border-grafito pt-6">
-              <p className="t-eyebrow">Sede</p>
-              <address className="mt-4 not-italic">
-                C. Nicolás Estévanez 53, Local Izquierdo
-                <br />
-                Las Palmas de Gran Canaria, 35007
-                <br />
-                España
-              </address>
-            </div>
+            <address className="space-y-8 not-italic">
+              <div className="border-t border-grafito pt-6">
+                <p className="t-eyebrow">Sede Gran Canaria</p>
+                <p className="mt-4">
+                  C. Nicolás Estévanez 53, Local Izquierdo
+                  <br />
+                  35007 Las Palmas de Gran Canaria
+                  <br />
+                  España
+                </p>
+              </div>
+              <div className="border-t border-grafito pt-6">
+                <p className="t-eyebrow">Teléfono</p>
+                <a href={SEDE.phoneHref} className="link-text mt-4 inline-block">
+                  {SEDE.phone}
+                </a>
+              </div>
+              <div className="border-t border-grafito pt-6">
+                <p className="t-eyebrow">Email</p>
+                <a href={`mailto:${SEDE.email}`} className="link-text mt-4 inline-block">
+                  {SEDE.email}
+                </a>
+              </div>
+            </address>
             <p className="mt-10 text-[16px]">{ENTITY}</p>
           </aside>
         </div>

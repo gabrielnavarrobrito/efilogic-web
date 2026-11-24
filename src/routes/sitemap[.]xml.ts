@@ -13,6 +13,9 @@ const STATIC = [
   "/sobre-efilogic",
   "/recursos",
   "/contacto",
+  "/aviso-legal",
+  "/politica-de-privacidad",
+  "/politica-de-cookies",
 ];
 
 export const Route = createFileRoute("/sitemap.xml")({

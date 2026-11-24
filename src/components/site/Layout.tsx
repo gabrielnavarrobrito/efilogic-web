@@ -2,7 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { ChevronDown, Menu, Search, X } from "lucide-react";
 import { useEffect, useState, type FocusEvent } from "react";
 import { Logo } from "./Logo";
-import { MENU, SOCIALS, SEARCH_PAGES } from "@/content/site";
+import { LEGAL_LINKS, MENU, SEDE, SOCIALS, SEARCH_PAGES } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -239,16 +239,13 @@ export function Footer() {
     <footer className="relative isolate overflow-hidden bg-grafito text-blanco">
       <div className="wrap py-20 md:py-24">
         <div className="grid gap-14 md:grid-cols-12">
-          <div className="md:col-span-5">
+          <div className="md:col-span-4">
             <Logo variant="white" className="h-10 md:h-12" />
             <p className="mt-8 max-w-sm text-[15px] leading-relaxed">
               FF&E y equipamiento contract para proyectos hoteleros.
             </p>
           </div>
-          <nav
-            aria-label="Pie de página"
-            className="grid grid-cols-2 gap-10 md:col-span-5 md:col-start-7"
-          >
+          <nav aria-label="Pie de página" className="grid grid-cols-2 gap-10 md:col-span-5">
             {MENU.filter((m) => m.children).map((m) => (
               <div key={m.label}>
                 <p className="t-eyebrow mb-5">{m.label}</p>
@@ -264,25 +261,81 @@ export function Footer() {
               </div>
             ))}
           </nav>
+          <address className="text-[15px] not-italic md:col-span-3">
+            <p className="t-eyebrow mb-5">Sede Gran Canaria</p>
+            <p className="leading-relaxed">
+              C. Nicolás Estévanez 53, Local Izquierdo
+              <br />
+              35007 Las Palmas de Gran Canaria
+            </p>
+            <p className="mt-4">
+              T.{" "}
+              <a href={SEDE.phoneHref} className="draw-line">
+                {SEDE.phone}
+              </a>
+            </p>
+            <p className="mt-3">
+              <a href={`mailto:${SEDE.email}`} className="draw-line">
+                {SEDE.email}
+              </a>
+            </p>
+            <ul className="mt-8 flex gap-5" aria-label="Redes sociales">
+              {SOCIALS.map((s) => (
+                <li key={s.key}>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.label}
+                    className="block text-blanco transition-colors duration-300 hover:text-ambar"
+                  >
+                    <SocialIcon name={s.key} />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </address>
         </div>
         <div className="mt-16 flex flex-col items-start justify-between gap-6 border-t border-ambar pt-8 md:flex-row md:items-center">
-          <p className="text-[13px]">© 2027 Efilogic</p>
-          <ul className="flex gap-6" aria-label="Redes sociales">
-            {SOCIALS.map((s) => (
-              <li key={s.key}>
-                <a
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="t-eyebrow transition-colors duration-300 hover:text-ambar"
-                >
-                  {s.label}
-                </a>
+          <p className="text-[13px]">© 2027 Efilogic. Todos los derechos reservados.</p>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-[13px]" aria-label="Información legal">
+            {LEGAL_LINKS.map((l) => (
+              <li key={l.to}>
+                <Link to={l.to} className="draw-line">
+                  {l.label}
+                </Link>
               </li>
             ))}
           </ul>
         </div>
       </div>
     </footer>
+  );
+}
+
+/** Iconos de redes en línea (sin cargar nada de terceros). */
+function SocialIcon({ name }: { name: "instagram" | "linkedin" }) {
+  if (name === "instagram")
+    return (
+      <svg viewBox="0 0 24 24" className="h-[22px] w-[22px]" aria-hidden fill="none">
+        <rect
+          x="2.75"
+          y="2.75"
+          width="18.5"
+          height="18.5"
+          rx="5.25"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+        <circle cx="12" cy="12" r="4.25" stroke="currentColor" strokeWidth="2" />
+        <circle cx="17.6" cy="6.4" r="1.25" fill="currentColor" />
+      </svg>
+    );
+  return (
+    <svg viewBox="0 0 24 24" className="h-[20px] w-[20px]" aria-hidden fill="currentColor">
+      <rect x="1.5" y="8.25" width="4.6" height="14.25" />
+      <circle cx="3.8" cy="4" r="2.6" />
+      <path d="M9 8.25h4.4v2.1c.65-1.2 2.2-2.45 4.55-2.45 4.6 0 5.55 2.95 5.55 6.8v7.8h-4.6v-6.9c0-1.65-.05-3.75-2.3-3.75-2.3 0-2.65 1.8-2.65 3.65v7H9z" />
+    </svg>
   );
 }
